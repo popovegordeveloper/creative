@@ -14,7 +14,7 @@
                             <li><a href="" class="modal-header-link">Сообщения</a></li>
                             <li><a href="" class="modal-header-link">Избранное</a></li>
                             <li><a href="" class="modal-header-link">Найстройки</a></li>
-                            <li><a href="" class="modal-header-link">Выйти</a></li>
+                            <li><a href="{{ route('logout') }}" class="modal-header-link">Выйти</a></li>
                         </ul>
                     </li>
                 @else

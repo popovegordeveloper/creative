@@ -14,4 +14,14 @@ use Zizaco\Entrust\EntrustRole;
 class Role extends EntrustRole
 {
     protected $fillable = ['name', 'display_name', 'description'];
+
+    /**
+     * Многие ко многим с пользователями
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }

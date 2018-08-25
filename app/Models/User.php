@@ -48,4 +48,15 @@ class User extends Authenticatable
         return false;
     }
 
+    /*
+    * Роли пользователя
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    }
+
+
 }
