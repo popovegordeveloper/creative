@@ -35,4 +35,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Check user admin
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        if ($this->hasRole('Admin')) {
+            return true;
+        }
+        return false;
+    }
+
 }
