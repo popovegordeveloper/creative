@@ -1,0 +1,29 @@
+{
+  "name": "new_project",
+  "description": "New Project",
+  "main": "WapSter",
+  "authors": [
+    "WapSter"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/src/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "normalize-scss": "normalize.scss#^7.0.0",
+    "masonry-layout": "masonry#^4.2.1",
+    "owl.carousel": "OwlCarousel2#^2.3.4",
+    "flexslider": "FlexSlider#^2.7.1",
+    "nouislider": "^11.1.0",
+    "jquery.form-styler": "^2.0.2",
+    "jquery.nicescroll": "^3.7.5"
+  }
+}
