@@ -6,23 +6,24 @@ use AdminColumn;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
 use SleepingOwl\Admin\Section;
 
 use SleepingOwl\Admin\Form\FormElements;
 
-class Users extends Section implements Initializable
+class Categories extends Section implements Initializable
 {
     public function initialize()
     {
-        $this->title = 'Пользователи';
+        $this->title = 'Категории товаров';
         $this->icon = 'fa fa-user-o';
     }
 
     public function isCreatable()
     {
-        return false;
+        return true;
     }
 
     public function onDisplay()
@@ -31,12 +32,9 @@ class Users extends Section implements Initializable
             ->setApply(function ($query) { $query->orderBy('created_at', 'desc'); })
             ->setColumns([
                 AdminColumn::text('id', 'ID'),
-                \AdminColumn::text('name', 'Имя'),
-                \AdminColumn::text('patronymic', 'Отчество'),
-                \AdminColumn::text('surname', 'Фамилия'),
-                \AdminColumn::link('email', 'Email'),
-                \AdminColumn::lists('roles.display_name', 'Роли'),
-                \AdminColumnEditable::checkbox('is_activate', 'Да', 'Нет', 'Активирован'),
+                \AdminColumn::text('name', 'Название'),
+                \AdminColumn::text('parent.name', 'Родительская категория'),
+                \AdminColumnEditable::checkbox('is_active', 'Да', 'Нет', 'Активна?'),
             ])
             ->setDisplaySearch(true)
             ->paginate(25);
@@ -52,13 +50,10 @@ class Users extends Section implements Initializable
                         AdminFormElement::text('name', 'Имя'),
                     ])
                     ->addColumn([
-                        AdminFormElement::text('patronymic', 'Отчество')
+                        AdminFormElement::select('parent_category_id', 'Родительская категория')->setModelForOptions(Category::class)->setDisplay('name')
                     ])
                     ->addColumn([
-                        AdminFormElement::text('surname', 'Фамилия')
-                    ])
-                    ->addColumn([
-                        AdminFormElement::text('email', 'Email')
+                        AdminFormElement::checkbox('is_active', 'Активна')
                     ]),
             ])
         );

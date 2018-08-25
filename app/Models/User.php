@@ -13,6 +13,29 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User withRole($role)
  * @mixin \Eloquent
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $surname
+ * @property string|null $patronymic
+ * @property string $email
+ * @property string $password
+ * @property int $is_activate
+ * @property string|null $remember_token
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIsActivate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePatronymic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereSurname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
+ * @property string|null $activation_hash
+ * @property-read mixed $activate_link
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereActivationHash($value)
  */
 class User extends Authenticatable
 {
@@ -24,7 +47,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'surname', 'patronymic', 'is_activate', 'activation_hash'
     ];
 
     /**
@@ -57,6 +80,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
-
 
 }

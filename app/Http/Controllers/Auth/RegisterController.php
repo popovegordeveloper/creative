@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\UserActivate;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -65,9 +66,12 @@ class RegisterController extends Controller
         $user =  User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'activation_hash' => str_random(),
         ]);
 
         $user->roles()->attach(3);
+
+        \Mail::to($user->email)->send(new UserActivate($user));
 
         return $user;
     }
