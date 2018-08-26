@@ -2,12 +2,11 @@
 
 namespace App\Admin\Models;
 
-use AdminColumn;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use SleepingOwl\Admin\Contracts\Initializable;
 use SleepingOwl\Admin\Section;
 
@@ -18,7 +17,14 @@ class Categories extends Section implements Initializable
     public function initialize()
     {
         $this->title = 'Категории товаров';
-        $this->icon = 'fa fa-user-o';
+        $this->icon = 'fa fa-align-center';
+        $this->created(function($config, \Illuminate\Database\Eloquent\Model $model) {
+            /** @var $model \App\Models\Category */
+            if(strlen($model->slug) < 1)
+                $model->slug = Str::slug($model->name);
+                $model->save();
+        });
+
     }
 
     public function isCreatable()
@@ -28,16 +34,7 @@ class Categories extends Section implements Initializable
 
     public function onDisplay()
     {
-        return AdminDisplay::datatables()
-            ->setApply(function ($query) { $query->orderBy('created_at', 'desc'); })
-            ->setColumns([
-                AdminColumn::text('id', 'ID'),
-                \AdminColumn::text('name', 'Название'),
-                \AdminColumn::text('parent.name', 'Родительская категория'),
-                \AdminColumnEditable::checkbox('is_active', 'Да', 'Нет', 'Активна?'),
-            ])
-            ->setDisplaySearch(true)
-            ->paginate(25);
+        return AdminDisplay::tree()->setValue('name');
     }
 
     public function onEdit($id)
@@ -50,7 +47,7 @@ class Categories extends Section implements Initializable
                         AdminFormElement::text('name', 'Имя'),
                     ])
                     ->addColumn([
-                        AdminFormElement::select('parent_category_id', 'Родительская категория')->setModelForOptions(Category::class)->setDisplay('name')
+                        AdminFormElement::text('slug', 'Slug'),
                     ])
                     ->addColumn([
                         AdminFormElement::checkbox('is_active', 'Активна')

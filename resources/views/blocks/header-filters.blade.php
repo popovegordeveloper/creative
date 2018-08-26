@@ -3,15 +3,9 @@
 
         <div class="filter__tags">
             <ul class="tags">
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Украшения на шею</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Броши</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Серьги</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Кольца</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Украшения на шею</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Украшения на шею</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Броши</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Серьги</span></a></li>
-                <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">Украшения на шею</span></a></li>
+                @foreach($sub_categories as $sub_category)
+                    <li class="tags__item"><a href="" class="tags__link"><span class="tags__text">{{ $sub_category->name }}</span></a></li>
+                @endforeach
             </ul>
         </div>
         <div class="filter__filter">

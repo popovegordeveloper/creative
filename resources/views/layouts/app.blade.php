@@ -35,7 +35,9 @@
             @include('blocks.header-toolbar')
             @include('blocks.header-middle-container')
             @include('blocks.header-categories-container')
-            @include('blocks.header-filters')
+            @if(request('category'))
+                @include('blocks.header-filters')
+            @endif
         </div>
     </header>
 

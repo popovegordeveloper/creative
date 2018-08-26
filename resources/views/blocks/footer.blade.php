@@ -10,7 +10,7 @@
         <div class="footer__menu">
             <ul class="menu">
                 <li class="menu__item"><span class="menu__title">О нас</span></li>
-                <li class="menu__item"><a href="" class="menu__link">Что такое Creative Expo?</a></li>
+                <li class="menu__item"><a href="{{ route('about') }}" class="menu__link">Что такое Creative Expo?</a></li>
                 <li class="menu__item"><a href="" class="menu__link">Наш блог</a></li>
                 <li class="menu__item"><a href="" class="menu__link">Вакансии</a></li>
             </ul>
