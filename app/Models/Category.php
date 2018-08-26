@@ -37,6 +37,7 @@ use Baum\Node;
  * @method static \Illuminate\Database\Eloquent\Builder|\Baum\Node withoutRoot()
  * @method static \Illuminate\Database\Eloquent\Builder|\Baum\Node withoutSelf()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category disabled()
  */
 class Category extends Node
 {
@@ -54,6 +55,16 @@ class Category extends Node
     public function scopeActive($query)
     {
         return $query->whereIsActive(true);
+    }
+
+    /**
+     * Неактивные категории
+     * @param $query
+     * @return mixed
+     */
+    public function scopeDisabled($query)
+    {
+        return $query->whereIsActive(false);
     }
 
 }

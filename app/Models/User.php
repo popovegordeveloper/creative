@@ -36,6 +36,8 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property string|null $activation_hash
  * @property-read mixed $activate_link
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereActivationHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User activated()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User unactivated()
  */
 class User extends Authenticatable
 {
@@ -79,6 +81,26 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    }
+
+    /**
+     * Активированные пользователи
+     * @param $query
+     * @return mixed
+     */
+    public function scopeActivated($query)
+    {
+        return $query->whereIsActivate(true);
+    }
+
+    /**
+     * Неактивированные пользователи
+     * @param $query
+     * @return mixed
+     */
+    public function scopeUnactivated($query)
+    {
+        return $query->whereIsActivate(false);
     }
 
 }

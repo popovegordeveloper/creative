@@ -3,9 +3,11 @@
 namespace App\Admin\Models;
 
 use AdminColumn;
+use AdminColumnEditable;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
 use SleepingOwl\Admin\Section;
@@ -27,19 +29,37 @@ class Users extends Section implements Initializable
 
     public function onDisplay()
     {
-        return AdminDisplay::datatables()
-            ->setApply(function ($query) { $query->orderBy('created_at', 'desc'); })
-            ->setColumns([
-                AdminColumn::text('id', 'ID'),
-                \AdminColumn::text('name', 'Имя'),
-                \AdminColumn::text('patronymic', 'Отчество'),
-                \AdminColumn::text('surname', 'Фамилия'),
-                \AdminColumn::link('email', 'Email'),
-                \AdminColumn::lists('roles.display_name', 'Роли'),
-                \AdminColumnEditable::checkbox('is_activate', 'Да', 'Нет', 'Активирован'),
-            ])
-            ->setDisplaySearch(true)
-            ->paginate(25);
+        $columns = [
+            AdminColumn::text('id', 'ID'),
+            \AdminColumn::text('name', 'Имя'),
+            \AdminColumn::text('patronymic', 'Отчество'),
+            \AdminColumn::text('surname', 'Фамилия'),
+            \AdminColumn::link('email', 'Email'),
+            \AdminColumn::lists('roles.display_name', 'Роли'),
+            \AdminColumnEditable::checkbox('is_activate', 'Да', 'Нет', 'Подтвержден'),
+        ];
+
+        $all_users =  AdminDisplay::table()->setModelClass(User::class)->setApply(function($query) {
+            $query->latest();
+        })->paginate(10)->setColumns($columns);
+
+        $activated_users =  AdminDisplay::table()->setApply(function($query) {
+            $query->latest();
+        })->paginate(10)->getScopes()->set('activated') ->setColumns($columns);
+
+        $unactivated_users = AdminDisplay::table()->setApply(function($query) {
+            $query->latest();
+        })->paginate(10)->getScopes()->set('unactivated') ->setColumns($columns);
+
+        $tabs = AdminDisplay::tabbed();
+
+        $tabs->setElements([
+            AdminDisplay::tab($all_users)->setLabel('Все пользователи')->setBadge(User::count()),
+            AdminDisplay::tab($activated_users)->setLabel('Подтвержденные пользователи')->setBadge(User::activated()->count()),
+            AdminDisplay::tab($unactivated_users)->setLabel('Неподтвержденные пользователи')->setBadge(User::unactivated()->count())
+        ]);
+
+       return $tabs;
     }
 
     public function onEdit($id)
@@ -59,6 +79,9 @@ class Users extends Section implements Initializable
                     ])
                     ->addColumn([
                         AdminFormElement::text('email', 'Email')
+                    ])
+                    ->addColumn([
+                        AdminFormElement::checkbox('is_activate', 'Подтвержден')
                     ]),
             ])
         );
