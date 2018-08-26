@@ -3,8 +3,7 @@
 @section('title') Что такое Creative Expo? @endsection
 
 @section('content')
-    <div class="cn">
-        <div class="container">
+
             <div class="content-box">
                 <div class="content-box__title center">Что такое Creative Expo?</div>
                 <div class="head-about"><strong>Creative Expo</strong> - креативный проект для тех, кто отличается.</div>
@@ -71,6 +70,4 @@
                     <a href="" class="button article__option-button">Написать нам</a>
                 </article>
             </div>
-        </div>
-    </div>
 @endsection

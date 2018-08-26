@@ -25,7 +25,7 @@
 </head>
 
 @php
-    $body_class = Route::currentRouteName() == 'home' ? 'main-page' : 'hide-filter';
+    $body_class = Route::currentRouteName() == 'catalog' ? 'main-page' : 'hide-filter';
 @endphp
 
 <body class="{{ $body_class }}">
@@ -35,7 +35,7 @@
             @include('blocks.header-toolbar')
             @include('blocks.header-middle-container')
             @include('blocks.header-categories-container')
-            @if(request('category'))
+            @if(request('slug_category'))
                 @include('blocks.header-filters')
             @endif
         </div>

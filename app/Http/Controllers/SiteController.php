@@ -9,13 +9,10 @@ class SiteController extends Controller
 {
     /**
      * Главная страница
-     * @param null $category
-     * @param CategoryService $categoryService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($category = null, CategoryService $categoryService)
+    public function index()
     {
-        $categoryService->getSubCategories($category);
         return view('pages.index');
     }
 
@@ -36,6 +33,19 @@ class SiteController extends Controller
     public function about()
     {
         return view('pages.about');
+    }
+
+    /**
+     * Каталог
+     * @param $slug_category
+     * @param CategoryService $categoryService
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function catalog($slug_category = null, CategoryService $categoryService)
+    {
+        if (!$slug_category) return redirect('/');
+        $categoryService->getSubCategories($slug_category);
+        return view('pages.catalog');
     }
 
 }

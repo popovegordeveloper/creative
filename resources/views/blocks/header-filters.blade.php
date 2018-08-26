@@ -1,6 +1,5 @@
 <div class="filter">
     <div class="filter__wrapper container">
-
         <div class="filter__tags">
             <ul class="tags">
                 @foreach($sub_categories as $sub_category)

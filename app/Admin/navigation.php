@@ -7,5 +7,5 @@ return [
     (new Page(\App\Models\Category::class))->addBadge(function (){return \App\Models\Category::count();}),
 
 
-    (new Page())->setTitle('.env')->setIcon('fa fa-exclamation-triangle')->setUrl(route('admin.env.editor')),
+    (new Page())->setTitle('Настроки приложения (.env)')->setIcon('fa fa-exclamation-triangle')->setUrl(route('admin.env.editor')),
 ];
