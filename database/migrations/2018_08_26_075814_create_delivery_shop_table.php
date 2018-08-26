@@ -23,6 +23,9 @@ class CreateDeliveryShopTable extends Migration
             $table->foreign('delivery_id')->references('id')->on('deliveries')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            $table->float('price');
+            $table->text('address')->nullable();
+
             $table->timestamps();
         });
     }

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Admin\Models\Categories;
+use App\Admin\Models\Deliveries;
 use App\Admin\Models\Users;
 use App\Models\Category;
+use App\Models\Delivery;
 use App\Models\User;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 
@@ -17,6 +19,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     protected $sections = [
         User::class => Users::class,
         Category::class => Categories::class,
+        Delivery::class => Deliveries::class,
     ];
 
     /**
