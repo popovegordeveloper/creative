@@ -33,7 +33,7 @@
                             <div class="sb-i">
                                 <div class="sb-i__body">
                                     <div class="sb-i__img-w">
-                                        <img src="img/sb-i.png" alt="" class="sb-i__img">
+                                        <img src="{{ asset('img/sb-i.png') }}" alt="" class="sb-i__img">
                                         <a href="" class="sb-i__close"></a>
                                     </div>
                                     <div class="sb-i__nb">
@@ -49,7 +49,7 @@
                             <div class="sb-i">
                                 <div class="sb-i__body">
                                     <div class="sb-i__img-w">
-                                        <img src="img/sb-i.png" alt="" class="sb-i__img">
+                                        <img src="{{ asset('img/sb-i.png') }}" alt="" class="sb-i__img">
                                         <a href="" class="sb-i__close"></a>
                                     </div>
                                     <div class="sb-i__nb">
@@ -65,7 +65,7 @@
                             <div class="sb-i">
                                 <div class="sb-i__body">
                                     <div class="sb-i__img-w">
-                                        <img src="img/sb-i.png" alt="" class="sb-i__img">
+                                        <img src="{{ asset('img/sb-i.png') }}" alt="" class="sb-i__img">
                                         <a href="" class="sb-i__close"></a>
                                     </div>
                                     <div class="sb-i__nb">

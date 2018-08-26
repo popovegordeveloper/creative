@@ -3,7 +3,7 @@
         <div class="footer__logo">
             <div class="logo-f">
                 <a href="" class="logo-f__link">
-                    <img src="img/logo-vert.svg" alt="" class="logo-f__img">
+                    <img src="{{ asset('img/logo-vert.svg') }}" alt="" class="logo-f__img">
                 </a>
             </div>
         </div>

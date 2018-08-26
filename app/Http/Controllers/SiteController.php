@@ -43,7 +43,6 @@ class SiteController extends Controller
      */
     public function catalog($slug_category = null, CategoryService $categoryService)
     {
-        if (!$slug_category) return redirect('/');
         $categoryService->getSubCategories($slug_category);
         return view('pages.catalog');
     }
