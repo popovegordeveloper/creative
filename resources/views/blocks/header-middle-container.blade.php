@@ -9,7 +9,9 @@
         <div class="header__razdel"><span></span></div>
         <ul class="create-shop">
             <li class="create-shop__item"><a href="" class="create-shop__link">Распродажа</a></li>
-            <li class="create-shop__item"><a href="" class="create-shop__link create-shop__link_button">Создать магазин</a></li>
+            @auth
+                <li class="create-shop__item"><a href="" class="create-shop__link create-shop__link_button">Создать магазин</a></li>
+            @endauth
         </ul>
     </div>
 </div>

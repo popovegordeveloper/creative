@@ -38,6 +38,9 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereActivationHash($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User activated()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User unactivated()
+ * @property string|null $username
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
+ * @property-read \App\Models\UserSocialAccount $account
  */
 class User extends Authenticatable
 {
@@ -102,5 +105,29 @@ class User extends Authenticatable
     {
         return $query->whereIsActivate(false);
     }
+
+    /**
+     * Новый пользователь из соцсети
+     * @param $providerUser
+     * @return $this|\Illuminate\Database\Eloquent\Model
+     */
+    public static function createBySocialProvider($providerUser)
+    {
+        return self::create([
+            'email' => $providerUser->getEmail(),
+        ]);
+    }
+
+    /**
+     * Аккаун соц сети
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function account()
+    {
+        return $this->hasOne(UserSocialAccount::class);
+    }
+
+
 
 }

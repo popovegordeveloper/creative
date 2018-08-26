@@ -13,3 +13,9 @@
 - php artisan ide-helper:generate 
 - php artisan ide-helper:models
 - php artisan sleepingowl:ide:generate
+
+## Add to .env
+
+- FACEBOOK_KEY=265524840636828
+- FACEBOOK_SECRET=b90aa1cd10018a3ee61ef032efbf7a92
+- FACEBOOK_REDIRECT_URI=http://creative/social_login/callback/facebook

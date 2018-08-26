@@ -161,7 +161,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
-        SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class
+        SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
     /*

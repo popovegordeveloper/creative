@@ -10,8 +10,10 @@
         "baum/baum": "^1.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
+        "laravel/socialite": "^3.1",
         "laravel/tinker": "^1.0",
         "laravelrus/sleepingowl": "4.*@dev",
+        "socialiteproviders/manager": "^3.3",
         "vladislavtkachenko/extend-owl-admin": "^1.0",
         "zizaco/entrust": "^1.9"
     },
