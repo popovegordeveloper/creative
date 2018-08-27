@@ -85,4 +85,13 @@ class Product extends Model
         return $this->belongsToMany(Delivery::class, 'delivery_product', 'product_id', 'delivery_id');
     }
 
+    /**
+     * Цена с учетом скидки
+     * @return float
+     */
+    public function getCostAttribute()
+    {
+        return $this->price - $this->sale_price;
+    }
+
 }

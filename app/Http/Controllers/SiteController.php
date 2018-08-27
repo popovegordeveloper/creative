@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\CategoryService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -39,12 +40,14 @@ class SiteController extends Controller
      * Каталог
      * @param $slug_category
      * @param CategoryService $categoryService
+     * @param ProductService $productService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function catalog($slug_category = null, CategoryService $categoryService)
+    public function catalog($slug_category = null, CategoryService $categoryService, ProductService $productService)
     {
         $categoryService->getSubCategories($slug_category);
-        return view('pages.catalog');
+        $products = $productService->getProducts($slug_category);
+        return view('pages.catalog', compact('products'));
     }
 
 }
