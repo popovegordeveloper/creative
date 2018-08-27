@@ -18,8 +18,8 @@ class ProductService
         $category = Category::whereSlug($slug_category)->first();
         $ids = [$category->id];
         if ($category->isRoot()){
-            $ids = array_merge($ids, $category->children()->get()->pluck('id')->toArray());
-            $ids = array_merge($ids, $category->siblings()->get()->pluck('id')->toArray());
+            $ids = array_merge($ids, $category->children()->active()->get()->pluck('id')->toArray());
+            $ids = array_merge($ids, $category->leaves()->active()->get()->pluck('id')->toArray());
         }
         return Product::with('shop')->whereIn('id', $ids)->paginate(18);
     }
