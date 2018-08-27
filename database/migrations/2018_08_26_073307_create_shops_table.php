@@ -26,6 +26,12 @@ class CreateShopsTable extends Migration
             $table->string('master_name');
             $table->string('master_phone');
             $table->string('slug')->unique();
+            $table->text('address')->nullable();
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

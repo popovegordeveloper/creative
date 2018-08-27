@@ -11,5 +11,13 @@ Route::get('/social_login/callback/{provider}', 'SocialController@callback');
 
 Route::prefix('user')->group(function () {
     Route::get('activate/{hash}', 'UserController@activate')->name('user.activate');
+    Route::post('update', 'UserController@update')->name('user.update');
 });
 
+Route::prefix('shop')->middleware('auth')->group(function () {
+    Route::get('create', 'ShopController@create')->name('shop.create');
+    Route::post('save', 'ShopController@save')->name('shop.save');
+    Route::get('{slug}', 'ShopController@show')->name('shop.show');
+});
+
+Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');

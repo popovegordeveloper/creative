@@ -7,6 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use App\Models\Delivery;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
 use SleepingOwl\Admin\Section;
@@ -40,6 +41,7 @@ class Shops extends Section implements Initializable
                 AdminColumn::text('slug', 'URL'),
                 AdminColumn::image('logo', 'Лого'),
                 AdminColumn::image('cover', 'Обложка'),
+                AdminColumn::relatedLink('user.full_name', 'Пользователь'),
             ]);
     }
 
@@ -54,11 +56,13 @@ class Shops extends Section implements Initializable
                     ->addColumn([
                         AdminFormElement::text('name', 'Название')->required(),
                         AdminFormElement::textarea('description', 'Описание'),
+                        AdminFormElement::select('user_id', 'Пользователь')->setModelForOptions(User::class)->setDisplay('full_name')->required(),
                         AdminFormElement::image('logo', 'Лого')->required(),
                     ])
                     ->addColumn([
                         AdminFormElement::text('description_preview', 'Краткое описание')->required(),
                         AdminFormElement::textarea('return_conditions', 'Условия возврата'),
+                        AdminFormElement::text('address', 'Адрес'),
                         AdminFormElement::image('cover', 'Обложка')->required(),
                     ])
                     ->addColumn([

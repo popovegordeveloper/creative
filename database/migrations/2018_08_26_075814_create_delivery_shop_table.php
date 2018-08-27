@@ -24,7 +24,6 @@ class CreateDeliveryShopTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
 
             $table->float('price');
-            $table->text('address')->nullable();
 
             $table->timestamps();
         });

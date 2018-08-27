@@ -10,7 +10,13 @@
         <ul class="create-shop">
             <li class="create-shop__item"><a href="" class="create-shop__link">Распродажа</a></li>
             @auth
-                <li class="create-shop__item"><a href="" class="create-shop__link create-shop__link_button">Создать магазин</a></li>
+                <li class="create-shop__item">
+                    @if(auth()->user()->hasRole('Seller'))
+                        <a href="{{ route('shop.show', auth()->user()->shop->slug) }}" class="create-shop__link create-shop__link_button">Мой магазин</a>
+                    @else
+                        <a href="{{ route('shop.create') }}" class="create-shop__link create-shop__link_button">Создать магазин</a>
+                    @endif
+                </li>
             @endauth
         </ul>
     </div>

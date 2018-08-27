@@ -41,6 +41,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property string|null $username
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
  * @property-read \App\Models\UserSocialAccount $account
+ * @property-read \App\Models\Shop $shop
  */
 class User extends Authenticatable
 {
@@ -128,6 +129,22 @@ class User extends Authenticatable
         return $this->hasOne(UserSocialAccount::class);
     }
 
+    /**
+     * Магазин
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function shop()
+    {
+        return $this->hasOne(Shop::class);
+    }
 
+    /**
+     * ФИО
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "$this->name $this->patronymic $this->surname";
+    }
 
 }

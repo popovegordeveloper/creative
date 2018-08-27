@@ -9,11 +9,11 @@
                     <li class="login__item login__item_margin"><a href="" class="login__link login__link_prof">Мой профиль</a></li>
                     <li class="login__item login__item_modal">
                         <ul class="modal-header">
-                            <li><a href="" class="modal-header-link">Мои товары</a></li>
-                            <li><a href="" class="modal-header-link">Мои финансы</a></li>
-                            <li><a href="" class="modal-header-link">Сообщения</a></li>
-                            <li><a href="" class="modal-header-link">Избранное</a></li>
-                            <li><a href="" class="modal-header-link">Найстройки</a></li>
+                            <li><a href="{{ route('cabinet', 'products') }}" class="modal-header-link">Мои товары</a></li>
+                            <li><a href="{{ route('cabinet', 'finance') }}" class="modal-header-link">Мои финансы</a></li>
+                            <li><a href="{{ route('cabinet', 'messages') }}" class="modal-header-link">Сообщения</a></li>
+                            <li><a href="{{ route('cabinet', 'favorites') }}" class="modal-header-link">Избранное</a></li>
+                            <li><a href="{{ route('cabinet', 'settings') }}" class="modal-header-link">Найстройки</a></li>
                             <li><a href="{{ route('logout') }}" class="modal-header-link">Выйти</a></li>
                         </ul>
                     </li>

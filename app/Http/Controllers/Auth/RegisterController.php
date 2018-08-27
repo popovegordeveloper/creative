@@ -71,7 +71,11 @@ class RegisterController extends Controller
 
         $user->roles()->attach(3);
 
-        \Mail::to($user->email)->send(new UserActivate($user));
+        try {
+            \Mail::to($user->email)->send(new UserActivate($user));
+        } catch (\Exception $exception){
+            \Log::error($exception->getMessage());
+        }
 
         return $user;
     }

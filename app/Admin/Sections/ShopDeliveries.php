@@ -52,7 +52,6 @@ class ShopDeliveries extends Section implements Initializable
                     ->addColumn([
                         AdminFormElement::select('shop_id', 'Магазин')->setModelForOptions(Shop::class)->setDisplay('name')->required(),
                         AdminFormElement::select('delivery_id', 'Способ доставки')->setModelForOptions(Delivery::class)->setDisplay('name')->required(),
-                        AdminFormElement::text('address', 'Адрес'),
                         AdminFormElement::number('price', 'Стоимость')->required(),
                     ])
             ])

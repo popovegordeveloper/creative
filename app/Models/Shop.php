@@ -37,11 +37,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $address
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereAddress($value)
+ * @property int $user_id
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereUserId($value)
  */
 class Shop extends Model
 {
     protected $fillable = [
-        'name', 'description_preview', 'logo', 'cover', 'city', 'description', 'return_conditions', 'master_logo', 'master_name', 'master_phone', 'slug'
+        'name', 'description_preview', 'logo', 'cover', 'city', 'description', 'return_conditions', 'master_logo', 'master_name', 'master_phone', 'slug', 'address', 'user_id'
     ];
 
     /**
@@ -51,5 +56,14 @@ class Shop extends Model
     public function deliveries()
     {
         return $this->belongsToMany(Delivery::class, 'delivery_shop', 'shop_id', 'delivery_id')->withPivot(['address', 'price']);
+    }
+
+    /**
+     * Владелец магазина
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
