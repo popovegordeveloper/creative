@@ -38,6 +38,8 @@ use Baum\Node;
  * @method static \Illuminate\Database\Eloquent\Builder|\Baum\Node withoutSelf()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category active()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category disabled()
+ * @property-read string $full_name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  */
 class Category extends Node
 {
@@ -65,6 +67,25 @@ class Category extends Node
     public function scopeDisabled($query)
     {
         return $query->whereIsActive(false);
+    }
+
+    /**
+     * Товары
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Имя категории с родительской категорией, если она есть
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        if ($this->isChild()) return "$this->name (" . $this->parent->name . ")";
+        return $this->name;
     }
 
 }

@@ -21,8 +21,9 @@ class UsersSeeder extends Seeder
 
         $admin->roles()->attach('1');
 
-        factory(\App\Models\User::class, 3)->create()->each(function ($user){
+        factory(\App\Models\User::class, 20)->create()->each(function ($user){
             $user->roles()->attach(3);
+            $user->shop()->save(factory(\App\Models\Shop::class)->make());
         });
 
     }

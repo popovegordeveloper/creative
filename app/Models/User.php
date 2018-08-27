@@ -42,6 +42,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
  * @property-read \App\Models\UserSocialAccount $account
  * @property-read \App\Models\Shop $shop
+ * @property-read string $full_name
  */
 class User extends Authenticatable
 {

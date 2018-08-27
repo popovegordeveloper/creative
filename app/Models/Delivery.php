@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Delivery whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Delivery whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  */
 class Delivery extends Model
 {
@@ -31,5 +32,14 @@ class Delivery extends Model
     public function shops()
     {
         return $this->belongsToMany(Shop::class, 'delivery_shop', 'delivery_id', 'shop_id');
+    }
+
+    /**
+     * Товары
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'delivery_product', 'delivery_id', 'product_id');
     }
 }
