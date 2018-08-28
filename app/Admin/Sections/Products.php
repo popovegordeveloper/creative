@@ -14,12 +14,12 @@ use SleepingOwl\Admin\Section;
 
 use SleepingOwl\Admin\Form\FormElements;
 
-class Shops extends Section implements Initializable
+class Products extends Section implements Initializable
 {
     public function initialize()
     {
-        $this->title = 'Магазины';
-        $this->icon = 'fa fa-shopping-bag';
+        $this->title = 'Товары';
+        $this->icon = 'fa fa-product-hunt';
     }
 
     public function isCreatable()
@@ -34,14 +34,14 @@ class Shops extends Section implements Initializable
             ->setColumns([
                 AdminColumn::text('id', 'ID'),
                 AdminColumn::text('name', 'Название'),
-                AdminColumn::text('description_preview', 'Краткое описание'),
-                AdminColumn::text('city', 'Город'),
-                AdminColumn::text('description', 'Описание'),
-                AdminColumn::text('return_conditions', 'Условия возврата'),
-                AdminColumn::text('slug', 'URL'),
-                AdminColumn::image('logo', 'Лого'),
-                AdminColumn::image('cover', 'Обложка'),
-                AdminColumn::relatedLink('user.full_name', 'Пользователь'),
+                AdminColumn::text('composition', 'Состав'),
+                AdminColumn::text('price', 'Цена'),
+                AdminColumn::text('sale_price', 'Сумма скидки'),
+                AdminColumn::text('qty', 'Количество'),
+                AdminColumn::text('category.name', 'Категория'),
+                AdminColumn::relatedLink('shop.name', 'Магазин'),
+                AdminColumn::text('termDispatch.name', 'Время доставки'),
+                AdminColumn::lists('deliveries.name', 'Способ доставки'),
             ])->paginate(10);
     }
 
