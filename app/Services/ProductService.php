@@ -21,6 +21,6 @@ class ProductService
             $ids = array_merge($ids, $category->children()->active()->get()->pluck('id')->toArray());
             $ids = array_merge($ids, $category->leaves()->active()->get()->pluck('id')->toArray());
         }
-        return Product::with('shop')->whereIn('id', $ids)->paginate(18);
+        return Product::with('shop')->whereIn('category_id', $ids)->paginate(18);
     }
 }
