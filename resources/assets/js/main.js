@@ -1,55 +1,5 @@
 $(document).ready(function () {
-    $(window).on('load', function () {
-       var hd = $('.header').innerHeight();
-       $('.header').css({height: "" + hd + "px"});
-    });
-    $(window).on("scroll load resize", function(){
-        $(' .filter__tags').removeClass('active');
 
-        if ($(window).scrollTop() > 0) {
-
-            $('.header').addClass('header_scroll');
-            $('.header').removeClass('header_normal');
-            $('body').addClass('scroll');
-            $('.login__item_corzina').appendTo('.header__main');
-            //$('.filter').css({display: 'none'}).removeClass('filter_show')
-
-            if($(window).width() > 662) {
-                //console.log($(window).width())
-                $('.filter').css({display: 'none'}).removeClass('filter_show')
-            }
-
-        }
-        else {
-
-            $('.header').removeClass('header_scroll');
-            $('body').removeClass('scroll');
-
-            $('.login__item_corzina').appendTo('.login');
-
-            if (!$('body').is('.hide-filter')) {
-                $('.filter').css({display: 'block'});
-            }
-            $('.header').addClass('header_normal');
-
-
-        }
-
-        if($(window).width() < 992) {
-            $('.login__item_corzina').appendTo('.header__main');
-        }
-    });
-
-
-    $('.header__razdel, .filter__close').click( function () {
-        $('.filter').toggleClass('filter_show');
-        // var hd2 = $('.header').innerHeight();
-        // $('.header').removeClass('header_scroll');
-        // if($(window).width() > 992) {
-        //     $('.header').toggleClass('header_show');
-        // }
-        //$('.header').toggleClass('header_show')
-    });
 
     $('.cashfilter-form').change(function () {
         $('.cashfilter-form__button').addClass('cashfilter-form__button_active');
@@ -60,44 +10,10 @@ $(document).ready(function () {
     });
 
 
-       $('.tags-carusel').owlCarousel({
-           loop: false,
-           dots: false,
-           //center: true,
-           autoWidth: true,
-           nav: true,
-           navText: [ '<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
-           margin: 20,
-           autoplay: false,
-           autoplayHoverPause: true,
-           responsive:{
-               0:{
-                   items:4
-               },
-               600:{
-                   items:5
-               },
-               1000:{
-                   items:11
-               }
-           }
-       });
-
-
-    $('.slider').owlCarousel({
-        loop: false,
-        dots: false,
-        // center: true,
-        //autoWidth: true,
-        nav: true,
-        navText: [],
-        //margin: 20,
-        autoplay: true,
-        autoplayHoverPause: true,
-        //autoWidth: true,
-        items: 1
+    $('.slider').slick({
+        nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>',
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>'
     });
-
     $('.content__wrapper').masonry({
         // options
         itemSelector: '.card',
@@ -105,22 +21,25 @@ $(document).ready(function () {
         fitWidth: true
         // columnWidth: 200
     });
-    $('#carousel1').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        itemWidth: 87,
-        itemMargin: 5,
-        asNavFor: '#slider1'
-    });
 
-    $('#slider1').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        sync: "#carousel1"
+
+    $('.card-slider').slick({
+        slidesToShow: 1,
+        asNavFor: '.card-slider-min',
+        nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>',
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>',
+        infinite: true
+    });
+    $('.card-slider-min').slick({
+        slidesToScroll: 4,
+        slidesToShow: 4,
+        centerMode: true,
+        variableWidth: true,
+        asNavFor: '.card-slider',
+        focusOnSelect: true,
+        infinite: true,
+        nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>',
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>'
     });
     $('.card__hover-w').on('mouseenter touchstart', function () {
         $(this).find('.card__like').removeClass('fadeOutUp').addClass('card__like_active animated fadeInDown');
@@ -142,58 +61,26 @@ $(document).ready(function () {
 
     });
     //tags
-    $('.tags__link').on('click', function (e) {
-       e.preventDefault();
-       var active = $(this).hasClass('tags__link_active');
 
-       if (active === false) {
-           $(this).addClass('tags__link_active').append('<span class="tags__close"></span>');
 
-           // var text = $('.tags__link_active').text(function (text, index) {
-           //     return index;
-           // });
-           // $('.header__razdel_item').text(text)
-           // console.log(text)
-       } else {
-           $(this).removeClass('tags__link_active');
-           $(this).find('.tags__close').remove();
-       }
+    var headerModal = $('.modal-header');
+    var openModalBtn = $('.log-ext__link--in-js');
+
+    openModalBtn.on('click', function (evt) {
+        evt.preventDefault();
+        headerModal.slideToggle(300);
     });
 
-    // $('.calendar-js').minical({
-    //     read_only: false
-    //     // date_format: function(date) {
-    //     //     return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join("/");
-    //     // }
-    // });$('.calendar-js').minical({
-    //     read_only: false
-    //     // date_format: function(date) {
-    //     //     return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join("/");
-    //     // }
-    // });
-
-    $('.login__link_prof').on('click',function (e) {
-        if($(window).width()>992) {
-            e.preventDefault();
-            $('.login__item_modal').toggle(300);
-            $('.shop-box').hide(200);
-        } else {
-            location.href = $(this).attr('href');
-        }
-    });
-    $('.login__link_shop').click(function (e) {
-        if($(window).width()>992) {
-            e.preventDefault();
-            $('.shop-box').toggle(300);
-            $('.login__item_modal').hide(200);
-        } else {
-            location.href = $(this).attr('href');
+    $(document).on('click', function (e){
+        var div = headerModal;
+        if (!div.is(e.target) && !openModalBtn.is(e.target) && div.has(e.target).length === 0) {
+            div.slideUp(300);
         }
     });
 
     function windowSize(){
         if($(window).width() < 992){
-            $('.filter').css({display: 'none'})
+            $('.filter').css({display: 'none'});
             $('.login').prependTo('.filter__wrapper');
             $('.create-shop').prependTo('.filter__wrapper');
         }else{
@@ -204,7 +91,7 @@ $(document).ready(function () {
 
         }
     }
-    $(window).on('load resize scroll',windowSize);
+    $(window).on('load resize scroll', windowSize);
 
 
 
@@ -231,19 +118,6 @@ $(document).ready(function () {
         });
     });
 
-    $('.login__link_prof').click(function (e) {
-       e.preventDefault();
-    });
-    // $('.slider-main').owlCarousel({
-    //     items: 1,
-    //     thumbs: true,
-    //     thumbImage: true,
-    //     //autoWidth: true,
-    //     nav: true,
-    //     navText: [],
-    //     autoplay: true,
-    //     autoplayHoverPause: true
-    // });
 
     // delivery select
     $('.delivery__checkbox').on('change', function() {
@@ -261,7 +135,7 @@ $(document).ready(function () {
                 $('#sm-textarea').addClass("hidden");
             }
         }
-        
+
     });
 
     $('.info-i__input-num, .info-i__select, .ur-form__select, .messenge-win__file, .delivery__checkbox, .select, .input-num, .quantity__any input').styler();
@@ -301,14 +175,14 @@ $(document).ready(function () {
             $(this).closest('.quantity').find(".input-num").removeAttr("disabled");
             console.log('none');
         }
-        
+
     });
 
     /* tabs (begin) */
     $('.tab-list__item').click( function(){
 
         var i    = $(this).index(),
-        tabsCont = $(this).parent('.tab-list').next('.tabs').find('.tabs__item');
+            tabsCont = $(this).parent('.tab-list').next('.tabs').find('.tabs__item');
 
         $(this).parent('.tab-list').find('.tab-list__item').removeClass('act');
         $(this).addClass('act');
@@ -322,73 +196,189 @@ $(document).ready(function () {
 
 
 
+    $('.slider-menu').slick({
+        //centerMode: true,
+        swipeToSlide: true,
+        infinite: true,
+        slidesToShow: 1,
+        variableWidth: true,
+        nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>',
+        prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>',
+    });
 
 
 
+    // меню
 
-    
+    var menu = $('.new-header');
+    var menuTop = $('.new-header__top');
+    var menuMain = $('.new-header__main');
+    var menuBottom = $('.new-header__bottom');
 
 
+    var basket = $('.btn-basked');
+    var wBasket = basket.width();
+    var marginBasket = basket.css('marginLeft');
+    var shopBox = $('.shop-box');
+
+    var toggleButton = $('.cmn-toggle-switch');
 
 
-    // ползунок фильтра цен
-    var html5Slider = document.getElementById('slider');
+    var moveBasket = function () {
+        $('.log-ext .btn-basked').animate({
+            width: 0,
+            marginLeft: 0
+        }, 200, function () {
+            basket.insertBefore('.cmn-toggle-switch');
+            basket.animate({
+                width: 33 + 'px',
+                marginLeft: 40 + 'px'
+            })
+        });
+    };
 
-    noUiSlider.create(html5Slider, {
-        start: [ 0, 15000 ], //значения по умолчанию
-        connect: true,
-        range: {   //
-            'min': 0,
-            'max': 15500
+    var moveBackBasket = function () {
+        $('.menu-row .btn-basked').animate({
+            width: 0,
+            marginLeft: 0
+        }, 200, function () {
+            basket.insertAfter('.log-ext__link--last');
+            basket.animate({
+                width: 33 + 'px',
+                marginLeft: marginBasket
+            })
+        });
+    };
+
+    var hideMenu = function () {
+        menu.addClass('new-header--scrolling');
+        menuTop.slideUp(500);
+        menuBottom.slideUp(500);
+        toggleButton.removeClass('active');
+    };
+
+    var showMenu = function(){
+        menu.removeClass('new-header--scrolling');
+        menuTop.slideDown(500);
+        menuBottom.slideDown(500);
+        toggleButton.addClass('active');
+    };
+
+    // $(document).on('scroll', $.throttle(500, function () {
+    //   // var posScroll = $(window).scrollTop();
+    //   // var lastScrollPos;
+    //   // var headingMenu = menu.height();
+    //   // shopBox.slideUp(500);
+    //   // if (posScroll > 0) {
+    //   //
+    //   // } else {
+    //   //   showMenu();
+    //   // }
+    //   hideMenu();
+    // }));
+
+    toggleButton.on('click', function (evt) {
+        var t = $(this);
+        t.toggleClass('active');
+        if (t.hasClass('active')) {
+            showMenu();
+        } else {
+            hideMenu();
+
         }
     });
-    //console.log(html5Slider.range.min)
-    // $('#left-res').on('click', function () {
-    //     $('#input-number').val(html5Slider.range.min);
-    // });
-    // $('#rig-res').on('click', function () {
-    //
-    // });
 
 
-    var inputNumber = document.getElementById('input-number');
-    var inputNumber2 = document.getElementById('input-number2');
+    var minValueDom = $('.slider-range__input--min');
+    var maxValueDom = $('.slider-range__input--max');
+    var minValue = parseInt(minValueDom.val(), 10);
+    var maxValue = parseInt(maxValueDom.val(), 10);
+    var sliderRange = $( ".slider-range__slider");
 
-    html5Slider.noUiSlider.on('update', function( values, handle ) {
-        var value1 = $('#input-number').val();
-        var value12 = $('#input-number2').val();
-
-        //console.log(value1);
-        var value = values[handle];
-        //console.log(value);
-        //console.log(handle);
-        //console.log(values);
-        if ( handle ) {
-            inputNumber2.value = Math.round(value);
-
-            // inputNumber2.value = value;
-           //$('.cashfilter-form__button').addClass('cashfilter-form__button_active');
-        }
-        else {
-            inputNumber.value = Math.round(value);
-            $('.cashfilter-form__button').addClass('cashfilter-form__button_active');
+    sliderRange.slider({
+        range: true,
+        min: minValue,
+        max: maxValue,
+        animate: "fast",
+        values: [ minValue, maxValue ],
+        slide: function( event, ui ) {
+            minValueDom.val( ui.values[ 0 ]);
+            maxValueDom.val( ui.values[ 1 ]);
+        },
+        change: function( event, ui ) {
+            $('.slider-range__button').slideDown(300);
         }
     });
-    $('.cashfilter-form__reset').on('click', function () {
-        html5Slider.noUiSlider.reset();
-    });
-    inputNumber.addEventListener('change', function(){
-        html5Slider.noUiSlider.set([this.value, null]);
-    });
-    inputNumber2.addEventListener('change', function(){
-        html5Slider.noUiSlider.set([null, this.value]);
 
+
+    minValueDom.on('input', function () {
+        var t = $(this);
+        var changeVal = parseInt(t.val(), 10);
+        sliderRange.slider( "values", 0, changeVal);
     });
 
+    maxValueDom.on('input', function () {
+        var t = $(this);
+        var changeVal = parseInt(t.val(), 10);
+        sliderRange.slider( "values", 1, changeVal);
+    });
+
+    var delMin = $('.slider-range__del--min');
+    var delMax = $('.slider-range__del--max');
+
+    delMin.on('click', function () {
+        sliderRange.slider( "values", 0, minValue);
+        minValueDom.val(minValue);
+    });
+
+    delMax.on('click', function () {
+        sliderRange.slider( "values", 1, maxValue);
+        maxValueDom.val(maxValue);
+    });
+
+
+    basket.on('click', function () {
+        shopBox.slideToggle(500)
+    });
+
+    $('.slider-range__chek').on('click', function () {
+        var inputChek = $('.slider-range__chek-in').is(':checked');
+        var t = $(this);
+        if (inputChek) {
+            t.addClass('active');
+        } else {
+            t.removeClass('active')
+        }
+    });
+
+    $('.tags-new__item').on('click', function () {
+        var t = $(this);
+        var inputChek = t.find('.tags-new__input').is(':checked');
+        if (inputChek) {
+            t.addClass('active');
+        } else {
+            t.removeClass('active')
+        }
+    });
+
+
+    var filterNew = $('.filter-new');
+    filterNew.on('change', function () {
+        $('.slider-range__button').slideDown(300);
+    });
+    $('.slider-range__input').on('input', function () {
+        $('.slider-range__button').slideDown(300);
+    });
+
+    $(window).on('load resize', function () {
+        var w = $(this).width();
+        if (w <= 800) {
+            $('.two-btn').insertAfter('.slider-range');
+        } else {
+            $('.two-btn').insertAfter('.search');
+        }
+    });
 
 
 });
 
-
-
-// сорян тот кто будет смотреть весь этот бардак, у меня не было тз правки в дезайн вносли во время верстки. вот как то так

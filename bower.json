@@ -24,6 +24,8 @@
     "flexslider": "FlexSlider#^2.7.1",
     "nouislider": "^11.1.0",
     "jquery.form-styler": "^2.0.2",
-    "jquery.nicescroll": "^3.7.5"
+    "jquery.nicescroll": "^3.7.5",
+    "slick-carousel": "^1.8.1",
+    "jquery-ui": "^1.12.1"
   }
 }

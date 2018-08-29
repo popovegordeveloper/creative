@@ -30,11 +30,10 @@
 
 <body class="{{ $body_class }}">
 
-    <header class="header">
-        <div class="header__wrapper">
+    <header class="new-header">
+        <div class="new-header__row">
             @include('blocks.header-toolbar')
             @include('blocks.header-middle-container')
-            @include('blocks.header-categories-container')
             @if(request('slug_category'))
                 @include('blocks.header-filters')
             @endif

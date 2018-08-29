@@ -3,25 +3,14 @@
   outline: 0;
 }
 
+
+
 body {
   padding: 0;
   margin: 0;
   color: $black-text;
   font-family: $font;
-  &.scroll {
-    padding-top: 100px;
-  }
-  &.main-page {
-    //.header__razdel {
-    //  display: none;
-    //}
-    //.filter {
-    //  padding: 0;
-    //}
-    //.search {
-    //  margin-left: 0;
-    //}
-  }
+  position: relative;
   &.hide-filter {
 
     .filter {
@@ -35,6 +24,28 @@ a {
   text-decoration: none;
 }
 
+.slick-next, .slick-prev {
+  color: #333;
+  font-size: 24px;
+  line-height: 1;
+  z-index: 200;
+  height: 30px;
+  opacity: 1;
+  &:before {
+    display: none;
+  }
+}
+.slick-next:focus, .slick-next:hover, .slick-prev:focus, .slick-prev:hover {
+  color: #333;
+}
+.slick-next {
+  right: 0;
+}
+.slick-prev {
+  left: 0;
+}
+
+
 .container {
   max-width: 1250px;
   margin: 0 auto;
@@ -43,6 +54,10 @@ a {
 
 .container-responsive {
   width: 100%;
+}
+.container-row {
+  max-width: 100%;
+  padding: 0 25px;
 }
 
 .header {
@@ -176,6 +191,9 @@ a {
   justify-content: space-between;
   position: relative;
   align-items: center;
+  @media (max-width: 992px) {
+   max-width: 40px;
+  }
   &__link {
     color: transparent;
     position: absolute;
@@ -183,6 +201,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
+
   }
   &__img {
     width: 40px;
@@ -201,7 +220,7 @@ a {
 .city {
   font-size: 14px;
   font-weight: 300;
-  flex: 1;
+  min-width: 150px;
   &__name {
     color: $pink;
     text-decoration: underline;
@@ -267,7 +286,7 @@ a {
   width: 330px;
   position: absolute;
   top: 40px;
-  left: -275px;
+  right: -70px;
   background: #fff;
   border-radius: 5px;
   z-index: 1000;
@@ -452,7 +471,7 @@ a {
   max-width: 520px;
   padding: 0 10px;
   //min-width: 1px;
-  flex: 1 1 500px;
+  flex: 1 1;
   align-items: center;
   &__input {
     @include cirkl;
@@ -547,6 +566,23 @@ a {
     //bottom: 0;
     //right: 0;
     //margin: auto;
+  }
+  .slick-next, .slick-prev {
+    height: 50px;
+    color: #fff;
+    width: 35px;
+    font-size: 52px;
+    opacity: 0.6;
+    transition: all .3s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .slick-next {
+    right: 20px;
+  }
+  .slick-prev {
+    left: 20px;
   }
   &__item {
     position: relative;
@@ -803,7 +839,7 @@ a {
 
   &__title {
     display: inline-block;
-    padding: 13px 15px 9px;
+    padding: 5px 15px 4px;
     font-size: 18px;
     @include animate;
     &:hover {
@@ -815,7 +851,7 @@ a {
     color: $gray;
     font-size: 14px;
     display: inline-block;
-    padding: 0 15px 12px;
+    padding: 0 15px 4px;
     &:hover {
       text-decoration: underline;
     }
@@ -1500,7 +1536,7 @@ a {
   width: 250px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin: 0 10px 40px;
   &__wr-img {
     @include cirkl;
     width: 100%;
@@ -2031,7 +2067,8 @@ a {
   }
   &__wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin: 0 -20px;
   }
 }
 
@@ -2075,13 +2112,13 @@ a {
     border: 1px solid #ccc;
     display: flex;
     align-items: center;
-    height: 70px;
+    height: 50px;
     padding: 0 15px;
     font-size: 16px;
   }
   &__button {
     width: 100%;
-    height: 70px;
+    height: 50px;
     background: $pink;
     border-radius: 5px;
     font-size: 18px;
@@ -2262,8 +2299,9 @@ a {
   &__body {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
+    margin: 0 -10px;
   }
 
 }
@@ -2271,6 +2309,8 @@ a {
 .my-card {
   max-width: 320px;
   margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   &__pic {
     display: flex;
     overflow: hidden;
@@ -4892,9 +4932,6 @@ a {
     height: auto;
     flex-direction: column;
     padding: 15px 0;
-  }
-  .city {
-    margin-bottom: 15px;
   }
   .more {
     padding: 50px 0;

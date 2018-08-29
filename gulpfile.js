@@ -77,6 +77,8 @@ gulp.task('js:build', function () {
         'bower_components/nouislider/distribute/nouislider.min.js',
         'bower_components/jquery.form-styler/dist/jquery.formstyler.min.js',
         'bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+        'bower_components/jquery-ui/jquery-ui.min.js',
+        'bower_components/slick-carousel/slick/slick.js',
         'resources/assets/js/jquery.minical.plain.js',
         path.src.js
 

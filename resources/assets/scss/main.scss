@@ -2,14 +2,13 @@
 @import "../../../bower_components/normalize-scss/sass/normalize";
 @import "fonts";
 @import "font-awesome";
-@import "owl.carousel";
-@import "owl.theme.default";
-@import "nouislider.css";
+@import "../../../bower_components/jquery-ui/themes/base/jquery-ui.css";
 @import "jquery.formstyler.css";
-@import "flexslider.css";
 @import "jquery.minical.plain.css";
 //@import "jquery.formstyler.theme.css";
 @import "animate";
+@import "../../../bower_components/slick-carousel/slick/slick.scss";
+@import "../../../bower_components/slick-carousel/slick/slick-theme.scss";
 
 
 //Фвйл со всеми переменными и миксинами
@@ -38,3 +37,4 @@
 
 // Подключение своих SCSS файлов
 @import "my";
+@import "new-my";

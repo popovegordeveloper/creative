@@ -26,9 +26,9 @@
         <div class="footer__social">
             <div class="social"><span class="social__title">Мы в соц сетях</span>
                 <ul class="social__list">
-                    <li class="social__item"><a href="" class="social__link social__link_in"></a></li>
-                    <li class="social__item"><a href="" class="social__link social__link_fb"></a></li>
-                    <li class="social__item"><a href="" class="social__link social__link_vk"></a></li>
+                    <li class="social__item"><a href="{{ $settings->where('key', 'instagram')->first()->value }}" class="social__link social__link_in"></a></li>
+                    <li class="social__item"><a href="{{ $settings->where('key', 'facebook')->first()->value }}" class="social__link social__link_fb"></a></li>
+                    <li class="social__item"><a href="{{ $settings->where('key', 'vk')->first()->value }}" class="social__link social__link_vk"></a></li>
                 </ul>
             </div>
         </div>
