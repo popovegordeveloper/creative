@@ -7,14 +7,14 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use App\Models\Delivery;
-use App\Models\Shop;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
 use SleepingOwl\Admin\Section;
 
 use SleepingOwl\Admin\Form\FormElements;
 
-class ShopDeliveries extends Section implements Initializable
+class ProductDeliveries extends Section implements Initializable
 {
     public function initialize()
     {
@@ -36,8 +36,8 @@ class ShopDeliveries extends Section implements Initializable
                 AdminColumn::text('price', 'Стоимость'),
             ]);
 
-        if($scopes && $scopes[0] === 'shop_id')
-            $display->setApply(function ($query) use ($scopes){ return $query->whereShopId($scopes[1]); });
+        if($scopes && $scopes[0] === 'product_id')
+            $display->setApply(function ($query) use ($scopes){ return $query->whereProductId($scopes[1]); });
 
         return $display;
 
@@ -49,7 +49,7 @@ class ShopDeliveries extends Section implements Initializable
             new FormElements([
                 AdminFormElement::columns()
                     ->addColumn([
-                        AdminFormElement::select('shop_id', 'Магазин')->setModelForOptions(Shop::class)->setDisplay('name')->required(),
+                        AdminFormElement::select('product_id', 'Товар')->setModelForOptions(Product::class)->setDisplay('name')->required(),
                         AdminFormElement::select('delivery_id', 'Способ доставки')->setModelForOptions(Delivery::class)->setDisplay('name')->required(),
                         AdminFormElement::number('price', 'Стоимость')->required(),
                     ])

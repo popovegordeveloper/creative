@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Admin\Models\Categories;
 use App\Admin\Models\Deliveries;
+use App\Admin\Models\ProductDeliveries;
 use App\Admin\Models\Products;
 use App\Admin\Models\ShopDeliveries;
 use App\Admin\Models\Shops;
 use App\Admin\Models\Users;
 use App\Models\Category;
 use App\Models\Delivery;
+use App\Models\DeliveryProduct;
 use App\Models\DeliveryShop;
 use App\Models\Product;
 use App\Models\Shop;
@@ -29,6 +31,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Shop::class => Shops::class,
         Product::class => Products::class,
         DeliveryShop::class => ShopDeliveries::class,
+        DeliveryProduct::class => ProductDeliveries::class,
     ];
 
     /**

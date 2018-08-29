@@ -77,8 +77,11 @@ class Shops extends Section implements Initializable
 
         $deliveries = \AdminSection::getModel(\App\Models\DeliveryShop::class)->fireDisplay(['scopes' => ['shop_id', $id]])->setParameter('shop_id', $id);
 
+        $products = \AdminSection::getModel(\App\Models\Product::class)->fireDisplay(['scopes' => ['shop_id', $id]])->setParameter('shop_id', $id);
+
         $tabs->appendTab($shop, 'Магазин');
         $tabs->appendTab($deliveries, 'Способы доставки');
+        $tabs->appendTab($products, 'Товары');
 
 
         return $tabs;

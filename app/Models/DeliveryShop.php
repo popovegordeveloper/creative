@@ -11,10 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $shop_id
  * @property int $delivery_id
  * @property float $price
- * @property string|null $address
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeliveryShop whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeliveryShop whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeliveryShop whereDeliveryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeliveryShop whereId($value)
@@ -26,4 +24,14 @@ use Illuminate\Database\Eloquent\Model;
 class DeliveryShop extends Model
 {
     protected $table = 'delivery_shop';
+
+    /**
+     * Способ доставки
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function delivery()
+    {
+        return $this->belongsTo(Delivery::class);
+    }
+
 }

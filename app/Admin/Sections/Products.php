@@ -6,7 +6,10 @@ use AdminColumn;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Models\Category;
 use App\Models\Delivery;
+use App\Models\Shop;
+use App\Models\TermDispatch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
@@ -27,12 +30,12 @@ class Products extends Section implements Initializable
         return true;
     }
 
-    public function onDisplay()
+    public function onDisplay($scopes = null)
     {
 
-        return AdminDisplay::datatables()
+        $display = AdminDisplay::datatables()
             ->setColumns([
-                AdminColumn::text('id', 'ID'),
+//                AdminColumn::text('id', 'ID'),
                 AdminColumn::text('name', 'Название'),
                 AdminColumn::text('composition', 'Состав'),
                 AdminColumn::text('price', 'Цена'),
@@ -43,6 +46,11 @@ class Products extends Section implements Initializable
                 AdminColumn::text('termDispatch.name', 'Время доставки'),
                 AdminColumn::lists('deliveries.name', 'Способ доставки'),
             ])->paginate(10);
+
+        if($scopes && $scopes[0] === 'shop_id')
+            $display->setApply(function ($query) use ($scopes){ return $query->whereShopId($scopes[1]); });
+
+        return $display;
     }
 
     public function onEdit($id)
@@ -55,29 +63,24 @@ class Products extends Section implements Initializable
                 AdminFormElement::columns()
                     ->addColumn([
                         AdminFormElement::text('name', 'Название')->required(),
-                        AdminFormElement::textarea('description', 'Описание'),
-                        AdminFormElement::select('user_id', 'Пользователь')->setModelForOptions(User::class)->setDisplay('full_name')->required(),
-                        AdminFormElement::image('logo', 'Лого')->required(),
+                        AdminFormElement::select('shop_id', 'Магазин')->setModelForOptions(Shop::class)->setDisplay('name')->required(),
+                        AdminFormElement::textarea('composition', 'Состав')->required(),
                     ])
                     ->addColumn([
-                        AdminFormElement::text('description_preview', 'Краткое описание')->required(),
-                        AdminFormElement::textarea('return_conditions', 'Условия возврата'),
-                        AdminFormElement::text('address', 'Адрес'),
-                        AdminFormElement::image('cover', 'Обложка')->required(),
+                        AdminFormElement::select('category_id', 'Категория')->setModelForOptions(Category::class)->setDisplay('full_name')->required(),
+                        AdminFormElement::number('sale_price', 'Сумма скидки'),
+                        AdminFormElement::number('qty', 'Количество'),
                     ])
                     ->addColumn([
-                        AdminFormElement::text('city', 'Город')->required(),
-                        AdminFormElement::text('slug', 'URL')->required(),
-                        AdminFormElement::text('master_name', 'Имя мастера')->required(),
-                        AdminFormElement::number('master_phone', 'Телефон мастера')->required(),
-                        AdminFormElement::image('master_logo', 'Лого мастера')->required(),
+                        AdminFormElement::number('price', 'Цена')->required(),
+                        AdminFormElement::select('term_dispatch_id', 'Время доставки')->setModelForOptions(TermDispatch::class)->setDisplay('name')->required(),
                     ])
             ])
         );
 
-        $deliveries = \AdminSection::getModel(\App\Models\DeliveryShop::class)->fireDisplay(['scopes' => ['shop_id', $id]])->setParameter('shop_id', $id);
+        $deliveries = \AdminSection::getModel(\App\Models\DeliveryProduct::class)->fireDisplay(['scopes' => ['product_id', $id]])->setParameter('product_id', $id);
 
-        $tabs->appendTab($shop, 'Магазин');
+        $tabs->appendTab($shop, 'Товар');
         $tabs->appendTab($deliveries, 'Способы доставки');
 
 
