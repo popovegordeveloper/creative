@@ -35,7 +35,7 @@ class Products extends Section implements Initializable
 
         $display = AdminDisplay::datatables()
             ->setColumns([
-//                AdminColumn::text('id', 'ID'),
+                AdminColumn::text('id', 'ID'),
                 AdminColumn::text('name', 'Название'),
                 AdminColumn::text('composition', 'Состав'),
                 AdminColumn::text('price', 'Цена'),

@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeliveryShop whereShopId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeliveryShop whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Delivery $delivery
  */
 class DeliveryShop extends Model
 {
