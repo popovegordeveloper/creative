@@ -7,56 +7,69 @@
     <div class="lk">
         <div class="lk__wrapper">
             <ul class="lk__tabs">
-                <li class="lk__tab-item lk__tab-item_1 @if(!$section or $section == 'products') lk__tab-item_active @endif"><span class="lk__tab-link">Мои товары</span></li>
+                @if($user->shop)<li class="lk__tab-item lk__tab-item_1 @if(!$section or $section == 'products') lk__tab-item_active @endif"><span class="lk__tab-link">Мои товары</span></li>@endif
                 <li class="lk__tab-item lk__tab-item_2 @if($section == 'finance') lk__tab-item_active @endif"><span class="lk__tab-link">Мои финансы</span></li>
                 <li class="lk__tab-item lk__tab-item_3 @if($section == 'messages') lk__tab-item_active @endif"><span class="lk__tab-link">Сообщения</span></li>
                 <li class="lk__tab-item lk__tab-item_4 @if($section == 'favorites') lk__tab-item_active @endif"><span class="lk__tab-link">Избранное</span></li>
                 <li class="lk__tab-item lk__tab-item_5 @if($section == 'settings') lk__tab-item_active @endif"><span class="lk__tab-link">Настройки</span></li>
             </ul>
-            <div class="lk__content  @if(!$section or $section == 'products') lk__content_active @endif">
-                <div class="my-items">
-                    <div class="my-items__top">
-                        <h3 class="my-items__title">Мои товары</h3>
-                        <a href="" class="my-items__button">Добавить товар</a></div>
-                    <div class="my-items__body">
-                        <div class="my-card">
-                            <div class="my-card__pic">
-                                <img src="img/my-card.jpg" alt="" class="my-card__img">
-                                <div class="my-card__ower"></div>
-                                <a href="" class="my-card__edit"></a>
-                                <a href="" class="my-card__del"></a>
+
+            @if($user->shop)
+                <div class="lk__content  @if(!$section or $section == 'products') lk__content_active @endif">
+                    @if($user->shop->products->count())
+                        <div class="my-items">
+                            <div class="my-items__top">
+                                <h3 class="my-items__title">Мои товары</h3>
+                                <a href="{{ route('product.create') }}" class="my-items__button">Добавить товар</a></div>
+                            <div class="my-items__body">
+                                <div class="my-card">
+                                    <div class="my-card__pic">
+                                        <img src="img/my-card.jpg" alt="" class="my-card__img">
+                                        <div class="my-card__ower"></div>
+                                        <a href="" class="my-card__edit"></a>
+                                        <a href="" class="my-card__del"></a>
+                                    </div>
+                                    <a href="" class="my-card__title">Кожаный блокнот со сменными блоками</a>
+                                    <div class="my-card__bottom"><span class="my-card__cash">650 ₽</span><span class="my-card__old-cash">1 600 ₽</span><span class="my-card__views">372</span></div>
+                                </div>
+
+                                <div class="my-card">
+                                    <div class="my-card__pic">
+                                        <img src="img/my-card.jpg" alt="" class="my-card__img">
+                                        <div class="my-card__ower"></div>
+                                        <a href="" class="my-card__edit"></a>
+                                        <a href="" class="my-card__del"></a>
+                                    </div>
+                                    <a href="" class="my-card__title">Кожаный блокнот со сменными блоками</a>
+                                    <div class="my-card__bottom"><span class="my-card__cash">650 ₽</span><span class="my-card__old-cash">1 600 ₽</span><span class="my-card__views">372</span></div>
+                                </div>
+
+                                <div class="my-card">
+                                    <div class="my-card__pic">
+                                        <img src="img/my-card.jpg" alt="" class="my-card__img">
+                                        <div class="my-card__ower"></div>
+                                        <a href="" class="my-card__edit"></a>
+                                        <a href="" class="my-card__del"></a>
+                                    </div>
+                                    <a href="" class="my-card__title">Кожаный блокнот со сменными блоками</a>
+                                    <div class="my-card__bottom"><span class="my-card__cash">650 ₽</span><span class="my-card__old-cash">1 600 ₽</span><span class="my-card__views">372</span></div>
+                                </div>
+
                             </div>
-                            <a href="" class="my-card__title">Кожаный блокнот со сменными блоками</a>
-                            <div class="my-card__bottom"><span class="my-card__cash">650 ₽</span><span class="my-card__old-cash">1 600 ₽</span><span class="my-card__views">372</span></div>
                         </div>
-                        <div class="my-card">
-                            <div class="my-card__pic">
-                                <img src="img/my-card.jpg" alt="" class="my-card__img">
-                                <div class="my-card__ower"></div>
-                                <a href="" class="my-card__edit"></a>
-                                <a href="" class="my-card__del"></a>
-                            </div>
-                            <a href="" class="my-card__title">Кожаный блокнот со сменными блоками</a>
-                            <div class="my-card__bottom"><span class="my-card__cash">650 ₽</span><span class="my-card__old-cash">1 600 ₽</span><span class="my-card__views">372</span></div>
+                    @else
+                        <div class="my-items-empty">
+                            <img src="{{ asset('img/box.jpg') }}" alt="" class="my-items-empty__img">
+                            <h3 class="my-items-empty__title">Мои товары</h3>
+                            <span class="my-items-empty__subtitle">Пока нет ни одного добавленного товара</span>
+                            <a href="{{ route('product.create') }}" class="my-items-empty__button">Добавить товар</a>
                         </div>
-                        <div class="my-card">
-                            <div class="my-card__pic">
-                                <img src="img/my-card.jpg" alt="" class="my-card__img">
-                                <div class="my-card__ower"></div>
-                                <a href="" class="my-card__edit"></a>
-                                <a href="" class="my-card__del"></a>
-                            </div>
-                            <a href="" class="my-card__title">Кожаный блокнот со сменными блоками</a>
-                            <div class="my-card__bottom"><span class="my-card__cash">650 ₽</span><span class="my-card__old-cash">1 600 ₽</span><span class="my-card__views">372</span></div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
-                <div class="my-items-empty"><img src="img/box.jpg" alt="" class="my-items-empty__img">
-                    <h3 class="my-items-empty__title">Мои товары</h3>
-                    <span class="my-items-empty__subtitle">Пока нет ни одного добавленного товара</span>
-                    <a href="" class="my-items-empty__button">Добавить товар</a>
-                </div>
-            </div>
+            @endif
+
+
+
             <div class="lk__content @if($section == 'finance') lk__content_active @endif"><span class="lk__tab-link">
                 <div class="myfinc">
                     <div class="myfince__top">

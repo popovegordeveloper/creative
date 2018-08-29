@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CabinetController extends Controller
@@ -13,6 +14,6 @@ class CabinetController extends Controller
      */
     public function index($section = null)
     {
-        return view('pages.cabinet', ['section' => $section, 'user' => auth()->user()]);
+        return view('pages.cabinet', ['section' => $section, 'user' => User::with(['shop', 'shop.products'])->find(auth()->id())]);
     }
 }

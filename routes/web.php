@@ -15,9 +15,13 @@ Route::prefix('user')->group(function () {
 });
 
 Route::prefix('shop')->middleware('auth')->group(function () {
-    Route::get('create', 'ShopController@create')->name('shop.create');
-    Route::post('save', 'ShopController@save')->name('shop.save');
+    Route::get('create', 'ShopController@create')->name('shop.create')->middleware('shop:no');
+    Route::post('save', 'ShopController@save')->name('shop.save')->middleware('shop:no');
     Route::get('{slug}', 'ShopController@show')->name('shop.show');
+});
+
+Route::prefix('product')->middleware('auth')->group(function () {
+    Route::get('create', 'ProductController@create')->name('product.create')->middleware('shop:yes');
 });
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');
