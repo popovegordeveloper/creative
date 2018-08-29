@@ -39,11 +39,12 @@ class Products extends Section implements Initializable
                 AdminColumn::text('name', 'Название'),
                 AdminColumn::text('composition', 'Состав'),
                 AdminColumn::text('price', 'Цена'),
-                AdminColumn::text('sale_price', 'Сумма скидки'),
+                AdminColumn::text('sale_price', 'Скидка'),
                 AdminColumn::text('qty', 'Количество'),
                 AdminColumn::text('category.name', 'Категория'),
                 AdminColumn::relatedLink('shop.name', 'Магазин'),
                 AdminColumn::text('termDispatch.name', 'Время доставки'),
+                AdminColumn::text('viewed', 'Просмотры'),
                 AdminColumn::lists('deliveries.name', 'Способ доставки'),
             ])->paginate(10);
 
@@ -69,11 +70,14 @@ class Products extends Section implements Initializable
                     ->addColumn([
                         AdminFormElement::select('category_id', 'Категория')->setModelForOptions(Category::class)->setDisplay('full_name')->required(),
                         AdminFormElement::number('sale_price', 'Сумма скидки'),
-                        AdminFormElement::number('qty', 'Количество'),
+                        AdminFormElement::textarea('description', 'Описание')->required(),
                     ])
                     ->addColumn([
                         AdminFormElement::number('price', 'Цена')->required(),
                         AdminFormElement::select('term_dispatch_id', 'Время доставки')->setModelForOptions(TermDispatch::class)->setDisplay('name')->required(),
+                        AdminFormElement::number('qty', 'Количество'),
+                        AdminFormElement::number('viewed', 'Просмотры'),
+                        AdminFormElement::text('address', 'Адрес доставки'),
                     ])
             ])
         );

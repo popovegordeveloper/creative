@@ -22,6 +22,10 @@ Route::prefix('shop')->middleware('auth')->group(function () {
 
 Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('create', 'ProductController@create')->name('product.create')->middleware('shop:yes');
+    Route::post('save', 'ProductController@save')->name('product.save')->middleware('shop:yes');
+    Route::post('update', 'ProductController@update')->name('product.update')->middleware('shop:yes');
+    Route::get('{product}', 'ProductController@show')->name('product.show');
+    Route::get('edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('has_product');
 });
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');

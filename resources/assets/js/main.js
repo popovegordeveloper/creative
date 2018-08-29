@@ -160,10 +160,17 @@ $(document).ready(function () {
         var maximumLength = element.attr("data-maxlength");
         var currentLength = element.text().length + 1;
 
+        element.find('input').val(element.text());
+
         if(currentLength > maximumLength && event.keyCode != 8) {
             event.preventDefault();
             return false;
         }
+    });
+
+    $(document).on("keyup", ".price-n-discount__value span", function(event) {
+        var element = $(this);
+        element.find('input').val(element.text());
     });
 
     $('#any').on('change', function() {

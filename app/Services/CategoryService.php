@@ -14,9 +14,6 @@ class CategoryService
     public function getSubCategories($slug)
     {
         $category = Category::whereSlug($slug)->first();
-        if ($category) {
-            $sub_categories = $category->children()->active()->get()->merge($category->leaves()->active()->get());
-            \View::share(['sub_categories' => $sub_categories]);
-        }
+        if ($category) \View::share(['sub_categories' => $category->descendants()->get()]);
     }
 }

@@ -163,6 +163,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
     ],
 
     /*
@@ -212,6 +213,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];

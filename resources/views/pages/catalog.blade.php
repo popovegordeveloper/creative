@@ -17,9 +17,9 @@
                             <a href="" class="card__more">Подробнее</a>
                         </div>
                     </div>
-                    <a href="" class="card__title">{{ $product->name }}</a>
-                    <a href="" class="card__shopname">{{ $product->shop->name }}</a>
-                    <span class="card__cash">{{ $product->cost }}</span>
+                    <a href="{{ route('product.show', $product->id) }}" class="card__title">{{ $product->name }}</a>
+                    <a href="{{ route('shop.show', $product->shop->slug) }}" class="card__shopname">{{ $product->shop->name }}</a>
+                    <span class="card__cash">{{ $product->getPrice() }}</span>
                 </div>
             @endforeach
         </div>

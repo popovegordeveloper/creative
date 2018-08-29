@@ -56,7 +56,7 @@ class Shop extends Model
      */
     public function deliveries()
     {
-        return $this->belongsToMany(Delivery::class, 'delivery_shop', 'shop_id', 'delivery_id')->withPivot(['address', 'price']);
+        return $this->belongsToMany(Delivery::class, 'delivery_shop', 'shop_id', 'delivery_id')->withPivot(['price']);
     }
 
     /**

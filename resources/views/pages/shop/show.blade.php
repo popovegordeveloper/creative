@@ -42,56 +42,20 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="magazin__items">--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-                {{--<div class="slot">--}}
-                    {{--<div class="slot__wr-img"><img src="img/card-1.jpg" alt="" class="slot__img"></div>--}}
-                    {{--<a href="" class="slot__title">ОП! Усята</a>--}}
-                    {{--<a href="" class="slot__name-mag">ОП!</a>--}}
-                    {{--<span class="slot__cash">3 200 ₽</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            @if($shop->products->count())
+                <div class="magazin__items">
+                    @foreach($shop->products as $product)
+                        <div class="slot">
+                            <div class="slot__wr-img">
+                                <img src="{{ asset($product->photos[0]) }}" alt="" class="slot__img">
+                            </div>
+                            <a href="{{ route('product.show', $product->id) }}" class="slot__title">{{ $product->name }}</a>
+                            <a href="{{ route('shop.show', $shop->slug) }}" class="slot__name-mag">{{ $shop->name }}</a>
+                            <span class="slot__cash">{{ $product->getPrice() }} ₽</span>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
             <div class="magazin__info">
                 <div class="mg-info">
                     <div class="mg-info__ls">

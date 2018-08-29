@@ -17,7 +17,7 @@ class ShopController extends Controller
      */
     public function show($slug)
     {
-        return view('pages.shop.show', ['shop' => Shop::whereSlug($slug)->first()]);
+        return view('pages.shop.show', ['shop' => Shop::with('products')->whereSlug($slug)->first()]);
     }
 
     /**

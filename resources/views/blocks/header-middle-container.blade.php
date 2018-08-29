@@ -11,13 +11,11 @@
         <div class="two-btn">
             <a href="" class="two-btn__link">Распродажа</a>
             @auth
-                <li class="create-shop__item">
-                    @if(auth()->user()->hasRole('Seller'))
-                        <a href="{{ route('shop.show', auth()->user()->shop->slug) }}" class="two-btn__btn">Мой магазин</a>
-                    @else
-                        <a href="{{ route('shop.create') }}" class="two-btn__btn">Создать магазин</a>
-                    @endif
-                </li>
+                @if(auth()->user()->hasRole('Seller'))
+                    <a href="{{ route('shop.show', auth()->user()->shop->slug) }}" class="two-btn__btn">Мой магазин</a>
+                @else
+                    <a href="{{ route('shop.create') }}" class="two-btn__btn">Создать магазин</a>
+                @endif
             @endauth
         </div>
 

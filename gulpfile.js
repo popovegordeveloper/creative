@@ -87,7 +87,7 @@ gulp.task('js:build', function () {
         // .pipe(rigger()) // импортируем все указанные файлы в main.js
         .pipe(concat('main.js'))
         // .pipe(sourcemaps.init()) //инициализируем sourcemap
-        .pipe(uglify()) // минимизируем js
+        // .pipe(uglify()) // минимизируем js
         // .pipe(sourcemaps.write('./')) //  записываем sourcemap
         .pipe(gulp.dest(path.build.js)); // положим готовый файл
 });

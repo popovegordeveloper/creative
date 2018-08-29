@@ -39,11 +39,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read float $cost
+ * @property string|null $address
+ * @property int $viewed
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereViewed($value)
  */
 class Product extends Model
 {
     protected $fillable = [
-        'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty'
+        'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty', 'address', 'shop_id', 'category_id', 'term_dispatch_id', 'viewed'
     ];
 
     protected $casts = [
@@ -83,16 +87,16 @@ class Product extends Model
      */
     public function deliveries()
     {
-        return $this->belongsToMany(Delivery::class, 'delivery_product', 'product_id', 'delivery_id');
+        return $this->belongsToMany(Delivery::class, 'delivery_product', 'product_id', 'delivery_id')->withPivot(['price']);
     }
 
     /**
-     * Цена с учетом скидки
+     * Теккущая цена
      * @return float
      */
-    public function getCostAttribute()
+    public function getPrice()
     {
-        return $this->price - $this->sale_price;
+        return $this->sale_price ? $this->sale_price : $this->price;
     }
 
 }

@@ -4,7 +4,7 @@
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <a href="" class="log-ext__link log-ext__link--in-js">Мой профиль</a>
                     <ul class="modal-header" style="display: none;">
-                        <li><a href="{{ route('cabinet', 'products') }}" class="modal-header-link">Мои товары</a></li>
+                        @if(auth()->user() and auth()->user()->hasRole('Seller')) <li><a href="{{ route('cabinet', 'products') }}" class="modal-header-link">Мои товары</a></li> @endif
                         <li><a href="{{ route('cabinet', 'finance') }}" class="modal-header-link">Мои финансы</a></li>
                         <li><a href="{{ route('cabinet', 'messages') }}" class="modal-header-link">Сообщения</a></li>
                         <li><a href="{{ route('cabinet', 'favorites') }}" class="modal-header-link">Избранное</a></li>

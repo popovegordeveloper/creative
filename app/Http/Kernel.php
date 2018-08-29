@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CheckShop;
+use App\Http\Middleware\HasProduct;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -61,6 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'administrator' => \VladislavTkachenko\Admin\Http\Middleware\Administrator::class,
-        'shop' => CheckShop::class
+        'shop' => CheckShop::class,
+        'has_product' => HasProduct::class
     ];
 }

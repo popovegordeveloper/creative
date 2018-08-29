@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->float('sale_price')->default(0);
             $table->integer('qty')->nullable();
+            $table->string('address')->nullable();
+            $table->integer('viewed')->default(0);
 
             $table->integer('shop_id')->unsigned();
             $table->foreign('shop_id')->references('id')->on('shops')
