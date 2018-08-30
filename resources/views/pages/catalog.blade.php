@@ -7,5 +7,6 @@
         <div class="content__wrapper">
             @include('blocks.items', ['products' => $products])
         </div>
+        @include('blocks.pagination', ['products' => $products])
     </div>
 @endsection

@@ -17,7 +17,7 @@
                             </form>
                         </a>
                     </div>
-                    <a href="" class="my-card__title">{{ $favorite->name }}</a>
+                    <a href="{{ route('product.show', $favorite->id) }}" class="my-card__title">{{ $favorite->name }}</a>
                     <div class="my-card__bottom">
                         <span class="my-card__cash">{{ $favorite->getPrice() }} ₽</span>
                         @if($favorite->sale_price)
