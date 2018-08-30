@@ -39,6 +39,8 @@ class CreateProductsTable extends Migration
 
             $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE products ADD FULLTEXT search(name)');
     }
 
     /**
@@ -48,6 +50,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::table('products', function($table) {$table->dropIndex('search');});
         Schema::dropIfExists('products');
     }
 }

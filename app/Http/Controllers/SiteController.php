@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\Product;
 use App\Services\CategoryService;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
@@ -93,6 +94,19 @@ class SiteController extends Controller
             'products' => Product::where('sale_price', '>', 0)->with('shop')->paginate(18),
             'favorites' => $productService->getFavoriteProducts()
         ]);
+    }
+
+    /**
+     * Поиск
+     * @param Request $request
+     * @param ProductService $productService
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(Request $request, ProductService $productService)
+    {
+        $favorites = $productService->getFavoriteProducts();
+        $products = Product::search($request->name)->paginate(18);
+        return view('pages.catalog', compact('products', 'favorites'));
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * App\Models\Product
@@ -38,7 +39,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereTermDispatchId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read float $cost
  * @property string|null $address
  * @property int $viewed
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereAddress($value)
@@ -46,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty', 'address', 'shop_id', 'category_id', 'term_dispatch_id', 'viewed'
     ];
@@ -53,6 +55,19 @@ class Product extends Model
     protected $casts = [
         'photos' => 'array'
     ];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'name' => null,
+        ];
+    }
+
 
     /**
      * Магазин

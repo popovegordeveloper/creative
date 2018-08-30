@@ -3,11 +3,15 @@
         <div class="logo">
             <img src="/img/logo-icon.svg" alt="" class="logo__img">
             <h1 class="logo__title">Creative Expo</h1>
-            <a href="/" class="logo__link"></a></div>
-        <form action="" class="search">
-            <input type="text" class="search__input">
+            <a href="/" class="logo__link"></a>
+        </div>
+
+        <form action="{{ route('search') }}" class="search" method="post">
+            @csrf
+            <input type="text" class="search__input" name="name">
             <button class="search__button"></button>
         </form>
+
         <div class="two-btn">
             <a href="{{ route('sale') }}" class="two-btn__link">Распродажа</a>
             @auth

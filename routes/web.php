@@ -12,6 +12,7 @@ Route::get('privacy-policy', 'SiteController@privacyPolicy')->name('privacy');
 Route::get('rules-using', 'SiteController@rulesUsing')->name('rules');
 Route::get('technical-support', 'SiteController@technicalSupport')->name('technical');
 Route::get('sale', 'SiteController@sale')->name('sale');
+Route::post('search', 'SiteController@search')->name('search');
 
 Route::prefix('user')->group(function () {
     Route::get('activate/{hash}', 'UserController@activate')->name('user.activate');
