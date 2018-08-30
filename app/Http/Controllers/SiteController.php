@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Product;
 use App\Services\CategoryService;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
@@ -79,6 +79,17 @@ class SiteController extends Controller
     {
         $page = Page::whereSlug('technical-support')->first();
         return view('pages.privacy-policy', ['page' => $page]);
+    }
+
+    /**
+     * Распродажа
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function sale()
+    {
+        return view('pages.sale', [
+            'products' => Product::where('sale_price', '>', 0)->with('shop')->get()
+        ]);
     }
 
 }

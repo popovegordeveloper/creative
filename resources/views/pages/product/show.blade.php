@@ -43,8 +43,8 @@
                         <h3 class="info-i__title">{{ $product->name }}</h3>
                         <div class="info-i__cash">
                             <span class="info-i__main-cash">{{ $product->getPrice() }} ₽</span>
-                            @if($product->sale)
-                                <span class="info-i__soil">{{ $product->price }}</span>
+                            @if($product->sale_price)
+                                <span class="info-i__soil">{{ $product->price }} ₽</span>
                             @endif
                         </div>
                         <form action="" class="info-i__form">
