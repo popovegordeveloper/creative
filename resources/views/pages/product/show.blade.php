@@ -47,6 +47,15 @@
                                 <span class="info-i__soil">{{ $product->price }} ₽</span>
                             @endif
                         </div>
+                        @php
+                            $class = (isset($favorites) and in_array($product->id, $favorites)) ? 'fav-active' : '';
+                            $url = (isset($favorites) and in_array($product->id, $favorites)) ? route('product.delete_favorite') : route('product.add_favorite');
+                        @endphp
+                        <form action="{{ $url }}" method="post" style="display: none" id="one-product">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        </form>
                         <form action="" class="info-i__form">
                             <input type="number" class="info-i__input-num" value="1" min="1">
                             <select name="" id="" class="info-i__select">
@@ -57,7 +66,7 @@
                             <a href="" class="info-i__bytoclick">Купить в 1 клик</a>
                             <div class="info-i__group">
                                 <button class="info-i__button">Добавить в корзину</button>
-                                <a href="" class="info-i__like"></a>
+                                <a href="" class="info-i__like js-add-favorite {{ $class }}"></a>
                             </div>
                         </form>
                         <span class="info-i__time">Срок изготовления и отправления {{ $term_dispatch->name }}</span>

@@ -84,12 +84,14 @@ class SiteController extends Controller
 
     /**
      * Распродажа
+     * @param ProductService $productService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function sale()
+    public function sale(ProductService $productService)
     {
         return view('pages.sale', [
-            'products' => Product::where('sale_price', '>', 0)->with('shop')->paginate(18)
+            'products' => Product::where('sale_price', '>', 0)->with('shop')->paginate(18),
+            'favorites' => $productService->getFavoriteProducts()
         ]);
     }
 

@@ -7,8 +7,8 @@
                 <a href="{{ route('product.show', $product->id) }}" class="card__hover-link"></a>
                 @auth
                     @php
-                        $class = ($favorites and in_array($product->id, $favorites)) ? 'fav-active' : '';
-                        $url = ($favorites and in_array($product->id, $favorites)) ? route('product.delete_favorite') : route('product.add_favorite');
+                        $class = (isset($favorites) and in_array($product->id, $favorites)) ? 'fav-active' : '';
+                        $url = (isset($favorites) and in_array($product->id, $favorites)) ? route('product.delete_favorite') : route('product.add_favorite');
                     @endphp
                     <a href="" class="card__like js-add-favorite {{ $class }}">
                         <form action="{{ $url }}" method="post" style="display: none">

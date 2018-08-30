@@ -3,10 +3,15 @@ $(document).ready(function () {
 
     $('.js-add-favorite').click(function (e) {
         e.preventDefault();
-        if ($(this).hasClass('fav-active')) $(this).removeClass('fav-active');
-        else $(this).addClass('fav-active');
-        var $form = $(this).find('form');
-        $.post($form.attr('action'), $form.serialize());
+        var $form = $('#one-product').length ? $('#one-product') : $(this).find('form');
+        var url = '/product/add-favorite';
+        if ($(this).hasClass('fav-active')) {
+            $(this).removeClass('fav-active');
+            url = '/product/delete-favorite';
+        } else {
+            $(this).addClass('fav-active');
+        }
+        $.post(url, $form.serialize());
     });
 
     $('.js-del-favorite').click(function (e) {
