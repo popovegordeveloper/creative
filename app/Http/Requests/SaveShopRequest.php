@@ -23,16 +23,19 @@ class SaveShopRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required',
             'description_preview' => 'required',
-            'logo' => 'required|image',
-            'cover' => 'required|image',
+            'logo' => 'required_without:logo_exist|image',
+            'cover' => 'required_without:cover_exist|image',
             'city' => 'required|string',
-            'master_logo' => 'required|image',
+            'master_logo' => 'required_without:master_logo_exist|image',
             'master_name' => 'required|string',
             'master_phone' => 'required|numeric',
-            'slug' => 'required|unique:shops',
         ];
+
+        if (!$this->request->has('logo_exist')) $rules['slug'] = 'required|unique:shops,slug';
+
+        return $rules;
     }
 }

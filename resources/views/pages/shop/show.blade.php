@@ -11,6 +11,8 @@
                 <li class="breadcrumbs__item"><a href="" class="breadcrumbs__link">Украшения на шею</a></li>
             </ul>
             <div class="back"><a href="" class="back__link">Вернуться в каталог</a></div>
+        @else
+            <div class="back"><a href="{{ route('shop.edit', $shop->slug) }}" class="back__link">Настройки магазина</a></div>
         @endif
     </div>
 

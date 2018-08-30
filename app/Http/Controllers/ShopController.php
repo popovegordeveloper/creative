@@ -42,4 +42,31 @@ class ShopController extends Controller
         return redirect('/');
     }
 
+    /**
+     * Редактирование магазина
+     * @param Shop $shop
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($slug)
+    {
+        $shop = Shop::with('deliveries')->whereSlug($slug)->first();
+        return view('pages.shop.create', [
+            'shop' => $shop,
+            'shop_deliveries' => $shop->deliveries,
+            'deliveries' => Delivery::all(),
+        ]);
+    }
+
+    /**
+     * Обновление магазина
+     * @param SaveShopRequest $request
+     * @param ShopService $shopService
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(SaveShopRequest $request, ShopService $shopService)
+    {
+        $shopService->updateShop($request);
+        return redirect()->route('shop.show', auth()->user()->shop->slug);
+    }
+
 }

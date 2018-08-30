@@ -75,6 +75,12 @@ class ProductController extends Controller
         ]);
     }
 
+    /**
+     * Обновление товара
+     * @param UpdateProductRequest $request
+     * @param ProductService $productService
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateProductRequest $request, ProductService $productService)
     {
         $productService->updateProduct($request);

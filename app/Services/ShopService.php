@@ -42,4 +42,34 @@ class ShopService
        return "/images/shops/$dir_name/$logo";
    }
 
+    /**
+     * ОБновление магазина
+     * @param $request
+     */
+    public function updateShop($request)
+   {
+       $shop_data = $request->except(['logo', 'cover', 'master_logo', 'delivery', 'delivery_cost']);
+       if ($request->has('logo')) {
+           unlink(public_path($request->logo_exist));
+           $shop_data['logo'] = $this->saveImage($request->logo, $request->slug);
+       }
+       if ($request->has('cover')) {
+           unlink(public_path($request->cover_exist));
+           $shop_data['cover'] = $this->saveImage($request->cover, $request->slug);
+       }
+       if ($request->has('master_logo')) {
+           unlink(public_path($request->master_logo_exist));
+           $shop_data['master_logo'] = $this->saveImage($request->master_logo, $request->slug);
+       }
+       $shop = auth()->user()->shop;
+       $shop->update($shop_data);
+       if ($request->has('delivery')){
+           $delivery_data = [];
+           for ($i = 0; $i < count($request->delivery); $i++){
+               $delivery_data[$request->delivery[$i]] = ['price' => $request->delivery_cost[$i]];
+           }
+           $shop->deliveries()->sync($delivery_data);
+       }
+   }
+
 }

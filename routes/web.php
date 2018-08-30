@@ -17,7 +17,9 @@ Route::prefix('user')->group(function () {
 Route::prefix('shop')->middleware('auth')->group(function () {
     Route::get('create', 'ShopController@create')->name('shop.create')->middleware('shop:no');
     Route::post('save', 'ShopController@save')->name('shop.save')->middleware('shop:no');
+    Route::post('update', 'ShopController@update')->name('shop.update')->middleware('shop:yes');
     Route::get('{slug}', 'ShopController@show')->name('shop.show');
+    Route::get('edit/{slug}', 'ShopController@edit')->name('shop.edit')->middleware(['shop:yes', 'has_shop']);
 });
 
 Route::prefix('product')->middleware('auth')->group(function () {
