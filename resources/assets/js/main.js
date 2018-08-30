@@ -1,10 +1,20 @@
 $(document).ready(function () {
 
 
-    $('.js-add-favorite').click(function () {
-
+    $('.js-add-favorite').click(function (e) {
+        e.preventDefault();
+        if ($(this).hasClass('fav-active')) $(this).removeClass('fav-active');
+        else $(this).addClass('fav-active');
+        var $form = $(this).find('form');
+        $.post($form.attr('action'), $form.serialize());
     });
 
+    $('.js-del-favorite').click(function (e) {
+        e.preventDefault();
+        var $form = $(this).find('form');
+        $.post($form.attr('action'), $form.serialize());
+        $(this).parents('.my-card').remove();
+    });
 
     $('.cashfilter-form').change(function () {
         $('.cashfilter-form__button').addClass('cashfilter-form__button_active');

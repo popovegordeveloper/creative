@@ -100,4 +100,16 @@ class ProductController extends Controller
         return json_encode(['status' => true]);
     }
 
+    /**
+     * Удаление из избранного
+     * @param FavoriteRequest $request
+     * @return string
+     */
+    public function deleteFavorite(FavoriteRequest $request)
+    {
+        $user = User::find($request->user_id);
+        $user->favorite()->detach($request->product_id);
+        return json_encode(['status' => true]);
+    }
+
 }

@@ -128,4 +128,14 @@ class ProductService
             unlink(public_path($photo));
         }
     }
+
+    /**
+     * Избранные товары
+     * @return null
+     */
+    public function getFavoriteProducts()
+    {
+        if ($user = auth()->user()) return $user->favorite->pluck('id')->toArray();
+        return null;
+    }
 }

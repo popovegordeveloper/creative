@@ -48,7 +48,8 @@ class SiteController extends Controller
     {
         $categoryService->getSubCategories($slug_category);
         $products = $productService->getProducts($slug_category);
-        return view('pages.catalog', compact('products'));
+        $favorites = $productService->getFavoriteProducts();
+        return view('pages.catalog', compact('products', 'favorites'));
     }
 
     /**

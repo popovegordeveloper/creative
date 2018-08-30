@@ -14,6 +14,6 @@ class CabinetController extends Controller
      */
     public function index($section = null)
     {
-        return view('pages.cabinet', ['section' => $section, 'user' => User::with(['shop', 'shop.products'])->find(auth()->id())]);
+        return view('pages.cabinet', ['section' => $section, 'user' => User::with(['shop', 'shop.products', 'favorite'])->find(auth()->id())]);
     }
 }

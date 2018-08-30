@@ -33,6 +33,7 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('{product}', 'ProductController@show')->name('product.show');
     Route::get('edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('has_product');
     Route::post('add-favorite', 'ProductController@addFavorite')->name('product.add_favorite');
+    Route::post('delete-favorite', 'ProductController@deleteFavorite')->name('product.delete_favorite');
 
 });
 
