@@ -40,11 +40,15 @@
         </div>
     </header>
 
-    <div class="cn">
-        <div class="container">
-            @yield('content')
+    @if(\Request::route()->getName() != 'home')
+        <div class="cn">
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
-    </div>
+    @else
+        @yield('content')
+    @endif
 
     @include('blocks.footer')
 

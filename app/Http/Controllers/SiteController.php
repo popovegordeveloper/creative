@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -16,7 +17,10 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        return view('pages.index', [
+            'products' => Product::paginate(18),
+            'product_day' => Product::find(Setting::where('key', 'product_day')->first()->value)
+        ]);
     }
 
     /**
