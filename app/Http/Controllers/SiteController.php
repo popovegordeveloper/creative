@@ -88,7 +88,7 @@ class SiteController extends Controller
     public function sale()
     {
         return view('pages.sale', [
-            'products' => Product::where('sale_price', '>', 0)->with('shop')->get()
+            'products' => Product::where('sale_price', '>', 0)->with('shop')->paginate(18)
         ]);
     }
 
