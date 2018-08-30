@@ -96,7 +96,7 @@
                 <div class="ozer">
                     <h3 class="ozer__title">Другие товары из этого магазина</h3>
                     <div class="ozer__wrapper">
-                        @php $products = $shop->products; @endphp
+                            @php $products = $shop->products->take(4); @endphp
                         @foreach($products as $item)
                             <div class="slot">
                                 <div class="slot__wr-img"><img src="{{ asset($item->photos[0]) }}" alt="" class="slot__img"></div>
