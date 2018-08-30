@@ -43,6 +43,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property-read \App\Models\UserSocialAccount $account
  * @property-read \App\Models\Shop $shop
  * @property-read string $full_name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $favorite
  */
 class User extends Authenticatable
 {
@@ -146,6 +147,15 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return "$this->name $this->patronymic $this->surname";
+    }
+
+    /**
+     * Избранные товары
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favorite()
+    {
+        return $this->belongsToMany(Product::class, 'favorite_product', 'user_id', 'product_id');
     }
 
 }

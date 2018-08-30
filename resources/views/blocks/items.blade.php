@@ -5,7 +5,13 @@
             <img src="{{ asset($product->photos[0]) }}" alt="" class="card__img">
             <div class="card__hover-w">
                 <a href="{{ route('product.show', $product->id) }}" class="card__hover-link"></a>
-                <a href="" class="card__like"></a>
+                <a href="" class="card__like js-add-favorite">
+                    <form action="{{ route('product.add_favorite') }}" method="post" style="display: none">
+                        @csrf
+                        <input type="text" name="user_id" value="{{ auth()->id() }}">
+                        <input type="text" name="product_id" value="{{ $product->id }}">
+                    </form>
+                </a>
                 <a href="" class="card__bay">В корзину</a>
                 <a href="{{ route('product.show', $product->id) }}" class="card__more">Подробнее</a>
             </div>

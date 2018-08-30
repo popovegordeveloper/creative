@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FavoriteRequest;
 use App\Http\Requests\SaveProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
@@ -85,6 +86,18 @@ class ProductController extends Controller
     {
         $productService->updateProduct($request);
         return redirect()->route('product.show', $request->product_id);
+    }
+
+    /**
+     * Добавить в избранное
+     * @param FavoriteRequest $request
+     * @return string
+     */
+    public function addFavorite(FavoriteRequest $request)
+    {
+        $user = User::find($request->user_id);
+        $user->favorite()->attach($request->product_id);
+        return json_encode(['status' => true]);
     }
 
 }

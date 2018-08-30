@@ -1,6 +1,11 @@
 $(document).ready(function () {
 
 
+    $('.js-add-favorite').click(function () {
+
+    });
+
+
     $('.cashfilter-form').change(function () {
         $('.cashfilter-form__button').addClass('cashfilter-form__button_active');
     });

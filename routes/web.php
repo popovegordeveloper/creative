@@ -32,6 +32,8 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::post('update', 'ProductController@update')->name('product.update')->middleware('shop:yes');
     Route::get('{product}', 'ProductController@show')->name('product.show');
     Route::get('edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('has_product');
+    Route::post('add-favorite', 'ProductController@addFavorite')->name('product.add_favorite');
+
 });
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');
