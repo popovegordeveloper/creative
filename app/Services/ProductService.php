@@ -84,6 +84,7 @@ class ProductService
 
         $product_data = $request->except(['delivery', 'delivery_price']);
         if ($request->has('photos')) {
+            $this->removePhotos($product->photos);
             $photos = [];
             foreach ($request->photos as $photo) $photos[] = $this->saveImage($photo, $dir_name);
             $product_data['photos'] = $photos;
@@ -100,6 +101,12 @@ class ProductService
         }
     }
 
+    /**
+     * Получаем номер товара в магазине для имени папки с фото
+     * @param $products
+     * @param $product_id
+     * @return int
+     */
     private function getPosition($products, $product_id)
     {
         $position = 0;
@@ -111,4 +118,14 @@ class ProductService
         return $position;
     }
 
+    /**
+     * Уаление фото
+     * @param array $photos
+     */
+    private function removePhotos(array $photos)
+    {
+        foreach ($photos as $photo) {
+            unlink(public_path($photo));
+        }
+    }
 }
