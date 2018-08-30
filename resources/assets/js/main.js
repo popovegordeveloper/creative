@@ -21,6 +21,14 @@ $(document).ready(function () {
         $(this).parents('.my-card').remove();
     });
 
+    $('.js-del-product').click(function (e) {
+        e.preventDefault();
+        var $form = $(this).find('form');
+        $.post($form.attr('action'), $form.serialize());
+        $(this).parents('.my-card').remove();
+    });
+
+/****************************************************************************/
     $('.cashfilter-form').change(function () {
         $('.cashfilter-form__button').addClass('cashfilter-form__button_active');
     });

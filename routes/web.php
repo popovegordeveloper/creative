@@ -35,7 +35,7 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('has_product');
     Route::post('add-favorite', 'ProductController@addFavorite')->name('product.add_favorite');
     Route::post('delete-favorite', 'ProductController@deleteFavorite')->name('product.delete_favorite');
-
+    Route::post('delete', 'ProductController@delete')->name('product.delete');
 });
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');

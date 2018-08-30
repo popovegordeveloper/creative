@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\TermDispatch;
 use App\Models\User;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -109,6 +110,18 @@ class ProductController extends Controller
     {
         $user = User::find($request->user_id);
         $user->favorite()->detach($request->product_id);
+        return json_encode(['status' => true]);
+    }
+
+    /**
+     * Удаление товара
+     * @param \Request $request
+     * @return string
+     */
+    public function delete(Request $request)
+    {
+        $product = auth()->user()->shop->products->find($request->product_id);
+        if ($product) $product->delete();
         return json_encode(['status' => true]);
     }
 
