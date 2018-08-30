@@ -10,6 +10,7 @@ return [
     (new Page(\App\Models\Delivery::class))->addBadge(function (){return \App\Models\Delivery::count();}),
     (new Page(\App\Models\TermDispatch::class))->addBadge(function (){return \App\Models\TermDispatch::count();}),
     (new Page(\App\Models\Setting::class))->addBadge(function (){return \App\Models\Setting::count();}),
+    (new Page(\App\Models\Page::class))->addBadge(function (){return \App\Models\Page::count();}),
 
 
     (new Page())->setTitle('Настроки приложения (.env)')->setIcon('fa fa-exclamation-triangle')->setUrl(route('admin.env.editor')),

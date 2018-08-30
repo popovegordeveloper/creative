@@ -6,6 +6,7 @@
 - php artisan migrate --seed   ||   php artisan migrate:fresh --seed (run 'composer du'  - if some errors)
 - php artisan vendor:publish --tag=assets --force
 - php artisan vendor:publish --provider="VladislavTkachenko\Admin\Providers\ExtendOwlAdminServiceProvider" --force
+- mkdir  public/images/shop
 
 ## Help
 

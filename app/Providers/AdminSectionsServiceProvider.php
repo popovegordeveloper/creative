@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Admin\Models\Categories;
 use App\Admin\Models\Deliveries;
+use App\Admin\Models\Pages;
 use App\Admin\Models\ProductDeliveries;
 use App\Admin\Models\Products;
 use App\Admin\Models\Settings;
@@ -15,6 +16,7 @@ use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\DeliveryProduct;
 use App\Models\DeliveryShop;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Shop;
@@ -38,6 +40,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         DeliveryProduct::class => ProductDeliveries::class,
         TermDispatch::class => TermDispatches::class,
         Setting::class => Settings::class,
+        Page::class => Pages::class,
     ];
 
     /**

@@ -18,9 +18,9 @@
         <div class="footer__menu">
             <ul class="menu">
                 <li class="menu__item"><span class="menu__title">Правовая инфомрация</span></li>
-                <li class="menu__item"><a href="" class="menu__link">Техническая поддержка</a></li>
-                <li class="menu__item"><a href="" class="menu__link">Политика конфиденциальности</a></li>
-                <li class="menu__item"><a href="" class="menu__link">Условия использования</a></li>
+                <li class="menu__item"><a href="{{ route('technical') }}" class="menu__link">Техническая поддержка</a></li>
+                <li class="menu__item"><a href="{{ route('privacy') }}" class="menu__link">Политика конфиденциальности</a></li>
+                <li class="menu__item"><a href="{{ route('rules') }}" class="menu__link">Условия использования</a></li>
             </ul>
         </div>
         <div class="footer__social">
