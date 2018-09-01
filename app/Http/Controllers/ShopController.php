@@ -39,7 +39,7 @@ class ShopController extends Controller
     {
         $shop = $shopService->saveShop($request);
         auth()->user()->roles()->attach(2);
-        return redirect('/');
+        return redirect()->route('shop.show', $shop->slug);
     }
 
     /**

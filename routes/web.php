@@ -27,7 +27,6 @@ Route::prefix('shop')->middleware('auth')->group(function () {
     Route::get('edit/{slug}', 'ShopController@edit')->name('shop.edit')->middleware(['shop:yes', 'has_shop']);
 });
 
-Route::get('product/{product}', 'ProductController@show')->name('product.show');
 
 Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('create', 'ProductController@create')->name('product.create')->middleware('shop:yes');
@@ -38,5 +37,7 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::post('delete-favorite', 'ProductController@deleteFavorite')->name('product.delete_favorite');
     Route::post('delete', 'ProductController@delete')->name('product.delete');
 });
+
+Route::get('product/{product}', 'ProductController@show')->name('product.show');
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');

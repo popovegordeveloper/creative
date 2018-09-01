@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Modles\Color;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -43,6 +44,7 @@ use Laravel\Scout\Searchable;
  * @property int $viewed
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereViewed($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modles\Color[] $colors
  */
 class Product extends Model
 {
@@ -112,6 +114,15 @@ class Product extends Model
     public function getPrice()
     {
         return $this->sale_price ? $this->sale_price : $this->price;
+    }
+
+    /**
+     * Цвета товара
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'color_product', 'product_id', 'color_id');
     }
 
 }

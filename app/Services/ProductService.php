@@ -30,7 +30,7 @@ class ProductService
     {
         $dir_name = "/images/shops/" . $user->shop->slug . "/" . $user->shop->products->count();
         mkdir(public_path($dir_name));
-        $product_data = $request->except(['delivery', 'delivery_price']);
+        $product_data = $request->except(['delivery', 'delivery_price', 'color']);
         $photos = [];
         foreach ($request->photos as $photo) $photos[] = $this->saveImage($photo, $dir_name);
         $product_data['shop_id']  =  $user->shop->id;
@@ -42,6 +42,9 @@ class ProductService
             for ($i = 0; $i < count($request->delivery); $i++){
                 $product->deliveries()->attach($request->delivery[$i], ['price' => $request->delivery_price[$i]]);
             }
+        }
+        if ($request->has('color')){
+            $product->colors()->attach($request->color);
         }
         return $product;
     }
@@ -82,7 +85,7 @@ class ProductService
         $dir = $this->getPosition($shop->products, $product->id);
         $dir_name = "/images/shops/" . $shop->slug . "/" . $dir;
 
-        $product_data = $request->except(['delivery', 'delivery_price']);
+        $product_data = $request->except(['delivery', 'delivery_price', 'color']);
         if ($request->has('photos')) {
             $this->removePhotos($product->photos);
             $photos = [];
@@ -98,6 +101,11 @@ class ProductService
                 $delivery_data[$request->delivery[$i]] = ['price' => $request->delivery_price[$i]];
             }
             $product->deliveries()->sync($delivery_data);
+        }
+
+        if ($request->has('color')){
+            $product->colors()->detach();
+            $product->colors()->attach($request->color);
         }
     }
 

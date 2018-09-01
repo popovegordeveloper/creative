@@ -6,6 +6,7 @@ use App\Http\Requests\FavoriteRequest;
 use App\Http\Requests\SaveProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Delivery;
 use App\Models\Product;
 use App\Models\TermDispatch;
@@ -25,6 +26,7 @@ class ProductController extends Controller
             'categories' => Category::all(),
             'term_dispatches' => TermDispatch::all(),
             'deliveries' => Delivery::all(),
+            'colors' => Color::all(),
         ]);
     }
 
@@ -55,7 +57,9 @@ class ProductController extends Controller
             'product' => $product,
             'shop' => $product->shop,
             'term_dispatch' => $product->termDispatch,
-            'similar_products' => $productService->getSimilarProducts($product)
+            'similar_products' => $productService->getSimilarProducts($product),
+            'colors' => $product->colors,
+            'favorites' => auth()->user()->favorite->pluck('id')->toArray()
         ]);
     }
 
@@ -74,6 +78,8 @@ class ProductController extends Controller
             'categories' => Category::all(),
             'term_dispatches' => TermDispatch::all(),
             'deliveries' => Delivery::all(),
+            'colors' => Color::all(),
+            'product_colors' => $product->colors->pluck('id')->toArray(),
         ]);
     }
 

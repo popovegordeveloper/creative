@@ -58,11 +58,13 @@
                         </form>
                         <form action="" class="info-i__form">
                             <input type="number" class="info-i__input-num" value="1" min="1">
-                            <select name="" id="" class="info-i__select">
-                                <option value="">Выберите цвет</option>
-                                <option value="">Белый</option>
-                                <option value="">Черный</option>
-                            </select>
+                            @if($product->colors)
+                                <select name="" id="" class="info-i__select">
+                                    @foreach($product->colors as $color)
+                                        <option value="{{ $color->id }}">{{ $color->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
                             <a href="" class="info-i__bytoclick">Купить в 1 клик</a>
                             <div class="info-i__group">
                                 <button class="info-i__button">Добавить в корзину</button>
@@ -78,7 +80,7 @@
                 <div class="detail-about">
                     <p class="detail-about__text">{{ $product->description }}</p>
                     <p class="detail-about__text"><b>Состав:</b>   {{ $product->composition }}</p>
-                    <p class="detail-about__text"><b>Условия возврата:</b>    Возврат товара надлежащего качества возможен в течение 14 дней, при сохранении его товарного вида (упаковка, пломбы, ярлыки) и потребительских свойств</p>
+                    <p class="detail-about__text"><b>Условия возврата:</b>    {{ $shop->return_conditions }}</p>
                 </div>
             </div>
             <div class="main-item-b__social">

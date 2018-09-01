@@ -160,7 +160,7 @@
             <div class="settings-shop__group settings-shop__group_type2">
                 <h3 class="settings-shop__name">
                     <span class="settings-shop__s-t">Категория товара</span>
-                    <span class="settings-shop__sub-t">Перечислите через запятую из каких материалов сделан товар.</span>
+                    <span class="settings-shop__sub-t">Выберите категорию товара.</span>
                 </h3>
                 <div class="settings-shop__gr">
                     <select data-placeholder="Выберите необходимую категорию" class="select" name="category_id" id="">
@@ -204,6 +204,20 @@
                         <option value="" disabled>Выбрать</option>
                         @foreach($term_dispatches as $dispatch)
                             <option @if(isset($product_term_dispatch) and $product_term_dispatch->id == $dispatch->id) selected @endif value="{{ $dispatch->id }}">{{ $dispatch->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="settings-shop__group settings-shop__group_type2">
+                <h3 class="settings-shop__name">
+                    <span class="settings-shop__s-t">Цвет товара</span>
+                    <span class="settings-shop__sub-t">Выберите цвет товара.</span>
+                </h3>
+                <div class="settings-shop__gr">
+                    <select data-placeholder="Выбрать" class="multiselect" name="color[]" id="" multiple>
+                        <option value="" disabled>Выбрать</option>
+                        @foreach($colors as $color)
+                            <option @if(isset($product_colors) and in_array($color->id, $product_colors)) selected @endif value="{{ $color->id }}">{{ $color->name }}</option>
                         @endforeach
                     </select>
                 </div>
