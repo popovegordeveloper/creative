@@ -27,11 +27,12 @@ Route::prefix('shop')->middleware('auth')->group(function () {
     Route::get('edit/{slug}', 'ShopController@edit')->name('shop.edit')->middleware(['shop:yes', 'has_shop']);
 });
 
+Route::get('product/{product}', 'ProductController@show')->name('product.show');
+
 Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('create', 'ProductController@create')->name('product.create')->middleware('shop:yes');
     Route::post('save', 'ProductController@save')->name('product.save')->middleware('shop:yes');
     Route::post('update', 'ProductController@update')->name('product.update')->middleware('shop:yes');
-    Route::get('{product}', 'ProductController@show')->name('product.show');
     Route::get('edit/{product}', 'ProductController@edit')->name('product.edit')->middleware('has_product');
     Route::post('add-favorite', 'ProductController@addFavorite')->name('product.add_favorite');
     Route::post('delete-favorite', 'ProductController@deleteFavorite')->name('product.delete_favorite');

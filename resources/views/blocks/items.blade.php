@@ -24,6 +24,11 @@
         </div>
         <a href="{{ route('product.show', $product->id) }}" class="card__title">{{ $product->name }}</a>
         <a href="{{ route('shop.show', $product->shop->slug) }}" class="card__shopname">{{ $product->shop->name }}</a>
+        <div>
         <span class="card__cash">{{ $product->getPrice() }}</span>
+        @if($product->sale_price)
+            <span class="info-i__soil" style="margin-left: 0">{{ $product->price }} ₽</span>
+        @endif
+        </div>
     </div>
 @endforeach
