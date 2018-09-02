@@ -2,12 +2,12 @@
     <div class="container">
             <div class="log-ext">
                 @if(\Illuminate\Support\Facades\Auth::check())
-                    <a href="{{ route('cabinet', 'selling') }}" class="log-ext__link">Мой заказы</a>
+                    @if(auth()->user()->hasRole('Seller'))<a href="{{ route('cabinet', 'selling') }}" class="log-ext__link">Мои заказы</a> @endif
                     <a href="" class="log-ext__link log-ext__link--in-js">Мой профиль</a>
                     <ul class="modal-header" style="display: none;">
                         @if(auth()->user() and auth()->user()->hasRole('Seller')) <li><a href="{{ route('cabinet', 'products') }}" class="modal-header-link">Мои товары</a></li> @endif
                         @if(auth()->user()) <li><a href="{{ route('cabinet', 'purchases') }}" class="modal-header-link">Мои покупки</a></li> @endif
-                        <li><a href="{{ route('cabinet', 'finance') }}" class="modal-header-link">Мои финансы</a></li>
+                            @if(auth()->user() and auth()->user()->hasRole('Seller')) <li><a href="{{ route('cabinet', 'finance') }}" class="modal-header-link">Мои финансы</a></li> @endif
                         <li><a href="{{ route('cabinet', 'messages') }}" class="modal-header-link">Сообщения</a></li>
                         <li><a href="{{ route('cabinet', 'favorites') }}" class="modal-header-link">Избранное</a></li>
                         <li><a href="{{ route('cabinet', 'settings') }}" class="modal-header-link">Найстройки</a></li>
