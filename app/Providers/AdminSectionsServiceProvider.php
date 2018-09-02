@@ -11,6 +11,7 @@ use App\Admin\Models\Products;
 use App\Admin\Models\Settings;
 use App\Admin\Models\ShopDeliveries;
 use App\Admin\Models\Shops;
+use App\Admin\Models\Slides;
 use App\Admin\Models\TermDispatches;
 use App\Admin\Models\Users;
 use App\Admin\Models\Vacancies;
@@ -23,6 +24,7 @@ use App\Models\Page;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Shop;
+use App\Models\Slide;
 use App\Models\TermDispatch;
 use App\Models\User;
 use App\Models\Vacancy;
@@ -47,6 +49,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Page::class => Pages::class,
         Vacancy::class => Vacancies::class,
         Article::class => Articles::class,
+        Slide::class => Slides::class,
     ];
 
     /**

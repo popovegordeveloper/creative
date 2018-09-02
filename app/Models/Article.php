@@ -25,10 +25,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
-    protected $fillable = ['name', 'image', 'preview_description', 'description', 'in_main'];
-
-    public function scopeMain($query)
-    {
-        return $query->where('in_main', true);
-    }
+    protected $fillable = ['name', 'image', 'preview_description', 'description'];
 }

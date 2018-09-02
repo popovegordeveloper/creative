@@ -12,12 +12,12 @@ use SleepingOwl\Admin\Section;
 
 use SleepingOwl\Admin\Form\FormElements;
 
-class Articles extends Section implements Initializable
+class Slides extends Section implements Initializable
 {
     public function initialize()
     {
-        $this->title = 'Блог';
-        $this->icon = 'fa fa-rss';
+        $this->title = 'Слайды на главной';
+        $this->icon = 'fa fa-sliders';
     }
 
     public function isCreatable()
@@ -33,7 +33,8 @@ class Articles extends Section implements Initializable
                 AdminColumn::text('id', 'ID'),
                 AdminColumn::text('name', 'Название'),
                 AdminColumn::image('image', 'Изображение'),
-                AdminColumn::text('preview_description', 'Краткое описание')
+                AdminColumn::text('description', 'Описание'),
+                AdminColumn::text('url', 'URL')
             ]);
     }
 
@@ -46,8 +47,8 @@ class Articles extends Section implements Initializable
                     ->addColumn([
                         AdminFormElement::text('name', 'Название')->required(),
                         AdminFormElement::image('image', 'Изображение')->required(),
-                        AdminFormElement::textarea('preview_description', 'Краткое описание')->required(),
-                        AdminFormElement::ckeditor('description', 'Описание')->required(),
+                        AdminFormElement::text('description', 'Описание')->required(),
+                        AdminFormElement::text('url', 'URL')->required(),
                     ])
             ])
         );

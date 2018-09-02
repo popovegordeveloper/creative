@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Slide;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -20,9 +21,10 @@ class SiteController extends Controller
     {
         $product = Product::find(Setting::where('key', 'product_day')->first()->value);
         return view('pages.index', [
-            'products' => Product::paginate(18),
+            'products' => Product::latest()->paginate(18),
             'product_day' => $product ?? Product::inRandomOrder()->first(),
-            'articles' => Article::main()->get()
+            'slides' => Slide::all(),
+            'collection' => Article::find(Setting::where('key', 'collection')->first()->value)
         ]);
     }
 

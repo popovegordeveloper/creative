@@ -7,16 +7,16 @@
     <div class="banner">
         <div class="banner__wrapper container-responsive">
             <div class="slider owl-carousel">
-                @foreach($articles as $article)
+                @foreach($slides as $slide)
                     <div class="slider__item">
                         <div class="slider__ower"></div>
-                        <img src="{{ asset($article->image) }}" alt="" class="slider__img">
+                        <div style="background-image: url('{{ asset($slide->image) }}')" class="slider__img"></div>
                         <div class="slider__article">
                             <div class="slider__text">
-                                <h3 class="slider__title">{{ $article->name }}</h3>
-                                <p class="slider__subtitle">{{ $article->preview_description }}</p>
+                                <h3 class="slider__title"><span>{{ $slide->name }}</span></h3>
+                                <p class="slider__subtitle">{{ $slide->description }}</p>
                             </div>
-                            <a href="{{ route('blog.show', $article->id) }}" class="slider__button">Подробнее</a>
+                            <a href="{{ $slide->url }}" class="slider__button">Подробнее</a>
                         </div>
                     </div>
                 @endforeach
@@ -32,11 +32,11 @@
             </div>
             <div class="sell">
                 <div class="sell__ower"></div>
-                <img src="img/collection.jpg" alt="" class="sell__img">
+                <img src="{{ asset($collection->image) }}" alt="" class="sell__img">
                 <div class="sell__article">
                     <h3 class="sell__title sell__title_blue">Колекции</h3>
-                    <span class="sell__text">Необычные светильники</span>
-                    <a href="" class="sell__button">Подробнее</a>
+                    <span class="sell__text">{{ $collection->name }}</span>
+                    <a href="{{ route('blog.show', $collection->id) }}" class="sell__button">Подробнее</a>
                 </div>
             </div>
         </div>

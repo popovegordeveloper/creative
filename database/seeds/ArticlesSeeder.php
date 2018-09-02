@@ -11,10 +11,6 @@ class ArticlesSeeder extends Seeder
      */
     public function run()
     {
-        try {
-            factory(\App\Models\Article::class, 20)->create();
-        } catch (Exception $exception){
-            $exception->getMessage();
-        }
+        factory(\App\Models\Article::class, 20)->create();
     }
 }
