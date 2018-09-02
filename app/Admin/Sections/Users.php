@@ -7,6 +7,7 @@ use AdminColumnEditable;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
@@ -41,15 +42,15 @@ class Users extends Section implements Initializable
 
         $all_users =  AdminDisplay::table()->setModelClass(User::class)->setApply(function($query) {
             $query->latest();
-        })->paginate(10)->setColumns($columns);
+        })->paginate(50)->setColumns($columns);
 
         $activated_users =  AdminDisplay::table()->setApply(function($query) {
             $query->latest();
-        })->paginate(10)->getScopes()->set('activated') ->setColumns($columns);
+        })->paginate(50)->getScopes()->set('activated') ->setColumns($columns);
 
         $unactivated_users = AdminDisplay::table()->setApply(function($query) {
             $query->latest();
-        })->paginate(10)->getScopes()->set('unactivated') ->setColumns($columns);
+        })->paginate(50)->getScopes()->set('unactivated') ->setColumns($columns);
 
         $tabs = AdminDisplay::tabbed();
 
@@ -70,17 +71,14 @@ class Users extends Section implements Initializable
                 AdminFormElement::columns()
                     ->addColumn([
                         AdminFormElement::text('name', 'Имя'),
-                    ])
-                    ->addColumn([
-                        AdminFormElement::text('patronymic', 'Отчество')
-                    ])
-                    ->addColumn([
-                        AdminFormElement::text('surname', 'Фамилия')
-                    ])
-                    ->addColumn([
                         AdminFormElement::text('email', 'Email')
                     ])
                     ->addColumn([
+                        AdminFormElement::text('patronymic', 'Отчество'),
+                        AdminFormElement::multiselect('favorite', 'Избранные товары')->setModelForOptions(new Product())->setDisplay('name')
+                    ])
+                    ->addColumn([
+                        AdminFormElement::text('surname', 'Фамилия'),
                         AdminFormElement::checkbox('is_activate', 'Подтвержден')
                     ]),
             ])
