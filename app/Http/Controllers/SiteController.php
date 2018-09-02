@@ -17,9 +17,10 @@ class SiteController extends Controller
      */
     public function index()
     {
+        $product = Product::find(Setting::where('key', 'product_day')->first()->value);
         return view('pages.index', [
             'products' => Product::paginate(18),
-            'product_day' => Product::find(Setting::where('key', 'product_day')->first()->value)
+            'product_day' => $product ?? Product::inRandomOrder()->first()
         ]);
     }
 
