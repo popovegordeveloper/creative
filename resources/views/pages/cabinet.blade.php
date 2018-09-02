@@ -18,8 +18,8 @@
 
             @include('blocks.cabinet-products')
             @include('blocks.cabinet-purchases')
-            @include('blocks.cabinet-selling')
-            @include('blocks.cabinet-finance')
+            @if($user->shop)@include('blocks.cabinet-selling')@endif
+            @if($user->shop)@include('blocks.cabinet-finance')@endif
             @include('blocks.cabinet-messages')
             @include('blocks.cabinet-favorites')
             @include('blocks.cabinet-settings')
