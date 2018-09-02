@@ -12,6 +12,7 @@ use App\Admin\Models\ShopDeliveries;
 use App\Admin\Models\Shops;
 use App\Admin\Models\TermDispatches;
 use App\Admin\Models\Users;
+use App\Admin\Models\Vacancies;
 use App\Models\Category;
 use App\Models\Delivery;
 use App\Models\DeliveryProduct;
@@ -22,6 +23,7 @@ use App\Models\Setting;
 use App\Models\Shop;
 use App\Models\TermDispatch;
 use App\Models\User;
+use App\Models\Vacancy;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 
 class AdminSectionsServiceProvider extends ServiceProvider
@@ -41,6 +43,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         TermDispatch::class => TermDispatches::class,
         Setting::class => Settings::class,
         Page::class => Pages::class,
+        Vacancy::class => Vacancies::class,
     ];
 
     /**

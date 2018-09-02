@@ -38,6 +38,11 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::post('delete', 'ProductController@delete')->name('product.delete');
 });
 
+Route::prefix('vacancy')->group(function () {
+    Route::get('/', 'VacancyController@index')->name('vacancy');
+    Route::get('{vacancy}', 'VacancyController@show')->name('vacancy.show');
+});
+
 Route::get('product/{product}', 'ProductController@show')->name('product.show');
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');
