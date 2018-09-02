@@ -48,6 +48,10 @@ Route::prefix('blog')->group(function () {
     Route::get('{article}', 'ArticleController@show')->name('blog.show');
 });
 
+Route::prefix('message')->middleware('auth')->group(function () {
+    Route::post('create', 'MessageController@create')->name('message.create');
+});
+
 Route::get('product/{product}', 'ProductController@show')->name('product.show');
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');

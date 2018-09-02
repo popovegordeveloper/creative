@@ -79,6 +79,7 @@ gulp.task('js:build', function () {
         'bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js',
         'bower_components/jquery-ui/jquery-ui.min.js',
         'bower_components/slick-carousel/slick/slick.js',
+        'bower_components/magnific-popup/dist/jquery.magnific-popup.min.js',
         'resources/assets/js/jquery.minical.plain.js',
         path.src.js
 

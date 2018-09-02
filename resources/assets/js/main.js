@@ -1,5 +1,27 @@
 $(document).ready(function () {
 
+    $('#new-message-btn').click(function (e) {
+        e.preventDefault();
+        var $form = $(this).parents('form');
+        $.post($form.attr('action'), $form.serialize());
+        $('.mfp-close').click();
+    });
+
+    $('.popup-js').magnificPopup({
+        preloader: false,
+        items: {
+            src: $('#popup-js'),
+            type: 'inline'
+        },
+        callbacks: {
+            open: () => {
+                $('#popup-js').show();
+            },
+            close: () => {
+                $('#popup-js').hide();
+            }
+        }
+    });
 
     $('.js-add-favorite').click(function (e) {
         e.preventDefault();
@@ -166,7 +188,7 @@ $(document).ready(function () {
 
     });
 
-    $('.info-i__input-num, .info-i__select, .ur-form__select, .messenge-win__file, .delivery__checkbox, .select, .input-num, .quantity__any input').styler();
+    $('.info-i__input-num, .info-i__select, .ur-form__select, .messenge-win__file, .delivery__checkbox, .select, .input-num, .quantity__any input, .message-btn').styler();
 
     $('.settings-shop__logo').styler({
         fileBrowse: 'Лого'

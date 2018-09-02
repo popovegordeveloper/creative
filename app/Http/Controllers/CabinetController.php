@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conversation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,10 @@ class CabinetController extends Controller
      */
     public function index($section = null)
     {
-        return view('pages.cabinet', ['section' => $section, 'user' => User::with(['shop', 'shop.products', 'favorite'])->find(auth()->id())]);
+        return view('pages.cabinet', [
+            'section' => $section,
+            'user' => User::with(['shop', 'shop.products', 'favorite'])->find(auth()->id()),
+            'conversations' => Conversation::forUser(auth()->id())->with('messages')->get()
+        ]);
     }
 }

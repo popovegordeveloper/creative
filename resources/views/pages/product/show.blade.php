@@ -38,7 +38,8 @@
                                 <span class="info-i__name">{{ $shop->name }}</span>
                                 <a href="{{ route('shop.show', $shop->slug) }}" class="info-i__link"></a>
                             </div>
-                            <a href="" class="info-i__button-q">Задать вопрос продавцу</a>
+                            <a href="" class="info-i__button-q popup-js">Задать вопрос продавцу</a>
+                            @include('blocks.new-message-popup', ['user_id' => $shop->user_id])
                         </div>
                         <h3 class="info-i__title">{{ $product->name }}</h3>
                         <div class="info-i__cash">
@@ -58,7 +59,7 @@
                         </form>
                         <form action="" class="info-i__form">
                             <input type="number" class="info-i__input-num" value="1" min="1">
-                            @if($product->colors)
+                            @if($product->colors->count())
                                 <select name="" id="" class="info-i__select">
                                     @foreach($product->colors as $color)
                                         <option value="{{ $color->id }}">{{ $color->name }}</option>

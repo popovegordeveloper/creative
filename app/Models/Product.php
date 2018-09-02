@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Modles\Color;
+use App\Models\Color;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -44,7 +44,7 @@ use Laravel\Scout\Searchable;
  * @property int $viewed
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereViewed($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modles\Color[] $colors
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Color[] $colors
  */
 class Product extends Model
 {
