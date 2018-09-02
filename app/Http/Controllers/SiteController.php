@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Setting;
@@ -20,7 +21,8 @@ class SiteController extends Controller
         $product = Product::find(Setting::where('key', 'product_day')->first()->value);
         return view('pages.index', [
             'products' => Product::paginate(18),
-            'product_day' => $product ?? Product::inRandomOrder()->first()
+            'product_day' => $product ?? Product::inRandomOrder()->first(),
+            'articles' => Article::main()->get()
         ]);
     }
 

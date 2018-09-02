@@ -7,39 +7,19 @@
     <div class="banner">
         <div class="banner__wrapper container-responsive">
             <div class="slider owl-carousel">
-                <div class="slider__item">
-                    <div class="slider__ower"></div>
-                    <img src="img/slider-img.jpg" alt="" class="slider__img">
-                    <div class="slider__article">
-                        <div class="slider__text">
-                            <h3 class="slider__title"><span>Подарки ко дню</span><br> <span>влюбленных</span></h3>
-                            <p class="slider__subtitle">Сердца ручной работы, с доставкой до порога</p>
+                @foreach($articles as $article)
+                    <div class="slider__item">
+                        <div class="slider__ower"></div>
+                        <img src="{{ asset($article->image) }}" alt="" class="slider__img">
+                        <div class="slider__article">
+                            <div class="slider__text">
+                                <h3 class="slider__title">{{ $article->name }}</h3>
+                                <p class="slider__subtitle">{{ $article->preview_description }}</p>
+                            </div>
+                            <a href="{{ route('blog.show', $article->id) }}" class="slider__button">Подробнее</a>
                         </div>
-                        <a href="" class="slider__button">Подробнее</a>
                     </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__ower"></div>
-                    <img src="img/slider-img.jpg" alt="" class="slider__img">
-                    <div class="slider__article">
-                        <div class="slider__text">
-                            <h3 class="slider__title"><span>Подарки ко дню</span><br> <span>влюбленных</span></h3>
-                            <p class="slider__subtitle">Сердца ручной работы, с доставкой до порога</p>
-                        </div>
-                        <a href="" class="slider__button">Подробнее</a>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__ower"></div>
-                    <img src="img/slider-img.jpg" alt="" class="slider__img">
-                    <div class="slider__article">
-                        <div class="slider__text">
-                            <h3 class="slider__title"><span>Подарки ко дню</span><br> <span>влюбленных</span></h3>
-                            <p class="slider__subtitle">Сердца ручной работы, с доставкой до порога</p>
-                        </div>
-                        <a href="" class="slider__button">Подробнее</a>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="sell">
                 <div class="sell__ower"></div>

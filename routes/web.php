@@ -43,6 +43,11 @@ Route::prefix('vacancy')->group(function () {
     Route::get('{vacancy}', 'VacancyController@show')->name('vacancy.show');
 });
 
+Route::prefix('blog')->group(function () {
+    Route::get('/', 'ArticleController@index')->name('blog');
+    Route::get('{article}', 'ArticleController@show')->name('blog.show');
+});
+
 Route::get('product/{product}', 'ProductController@show')->name('product.show');
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');
