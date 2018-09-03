@@ -18,7 +18,7 @@
                 <span class="social-en__title">Или авторизируетесь через соц сети:</span>
                 <div class="social-en__wrapper">
                     <a href="{{ route('social_login', 'facebook') }}" class="social-en__link social-en__link_fb"></a>
-                    <a href="{{ route('social_login', 'pinterest') }}" class="social-en__link social-en__link_pin"></a>
+                    {{--<a href="{{ route('social_login', 'pinterest') }}" class="social-en__link social-en__link_pin"></a>--}}
                     <a href="{{ route('social_login', 'google') }}" class="social-en__link social-en__link_gp"></a>
                 </div>
             </div>

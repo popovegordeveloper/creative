@@ -2,7 +2,7 @@
     <div class="footer__wrapper container">
         <div class="footer__logo">
             <div class="logo-f">
-                <a href="" class="logo-f__link">
+                <a href="{{ route('home') }}" class="logo-f__link">
                     <img src="{{ asset('img/logo-vert.svg') }}" alt="" class="logo-f__img">
                 </a>
             </div>
