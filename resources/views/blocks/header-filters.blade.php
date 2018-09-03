@@ -1,13 +1,15 @@
-<div class="new-header__bottom">
+<div class="new-header__bottom" @if(request('slug_subcategory')) style="display: block" @endif>
     <div class="container">
         <form action="" class="filter-new">
             <div class="tags-new">
                 @foreach($sub_categories as $sub_category)
-                    <label class="tags-new__item">
-                        <input type="checkbox" class="tags-new__input">
-                        <span class="tags-new__text">{{ $sub_category->name }}</span>
-                        <a href="" class="tags-new__del"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </label>
+                    <a href="{{ route('catalog', ['slug_category' => $slug_category, 'slug_subcategory' => $sub_category->slug]) }}" class="tags-new__item @if($sub_category->slug == request('slug_subcategory')) active @endif"><span class="tags-new__text">{{ $sub_category->name }}</span></a>
+
+                    {{--<label class="tags-new__item">--}}
+                        {{--<input type="checkbox" class="tags-new__input">--}}
+                        {{--<span class="tags-new__text">{{ $sub_category->name }}</span>--}}
+                        {{--<a href="" class="tags-new__del"><i class="fa fa-times" aria-hidden="true"></i></a>--}}
+                    {{--</label>--}}
                 @endforeach
             </div>
             <div class="slider-range">

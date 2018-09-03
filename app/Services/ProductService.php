@@ -13,10 +13,11 @@ class ProductService
      * @param $slug_category
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getProducts($slug_category)
+    public function getProducts($slug_category, $slug_subcategory)
     {
         if (!$slug_category) return Product::with('shop')->paginate(18);
         $categories = Category::whereSlug($slug_category)->first()->getDescendantsAndSelf();
+        if ($slug_subcategory) return $categories->where('slug', $slug_subcategory)->first()->products()->paginate(18);
         return Product::with('shop')->whereIn('category_id', $categories->pluck('id')->toArray())->paginate(18);
     }
 

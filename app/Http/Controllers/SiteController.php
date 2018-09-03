@@ -52,16 +52,17 @@ class SiteController extends Controller
     /**
      * Каталог
      * @param $slug_category
+     * @param null $slug_subcategory
      * @param CategoryService $categoryService
      * @param ProductService $productService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function catalog($slug_category = null, CategoryService $categoryService, ProductService $productService)
+    public function catalog($slug_category = null, $slug_subcategory = null, CategoryService $categoryService, ProductService $productService)
     {
         $categoryService->getSubCategories($slug_category);
-        $products = $productService->getProducts($slug_category);
+        $products = $productService->getProducts($slug_category, $slug_subcategory);
         $favorites = $productService->getFavoriteProducts();
-        return view('pages.catalog', compact('products', 'favorites'));
+        return view('pages.catalog', compact('products', 'favorites', 'slug_category'));
     }
 
     /**

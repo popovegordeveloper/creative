@@ -5,7 +5,7 @@ Auth::routes();
 Route::get('/', 'SiteController@index')->name('home');
 Route::get('/about', 'SiteController@about')->name('about');
 Route::get('/logout', 'SiteController@logout')->name('logout');
-Route::get('/catalog/{slug_category?}', 'SiteController@catalog')->name('catalog')->middleware(\App\Http\Middleware\CheckCategory::class);
+Route::get('/catalog/{slug_category?}/{slug_subcategory?}', 'SiteController@catalog')->name('catalog')->middleware(\App\Http\Middleware\CheckCategory::class);
 Route::get('/social_login/{provider}', 'SocialController@login')->name('social_login');
 Route::get('/social_login/callback/{provider}', 'SocialController@callback');
 Route::get('privacy-policy', 'SiteController@privacyPolicy')->name('privacy');
