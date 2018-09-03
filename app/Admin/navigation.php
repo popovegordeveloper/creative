@@ -14,6 +14,7 @@ return [
     (new Page(\App\Models\Vacancy::class))->addBadge(function (){return \App\Models\Vacancy::count();}),
     (new Page(\App\Models\Article::class))->addBadge(function (){return \App\Models\Article::count();}),
     (new Page(\App\Models\Slide::class))->addBadge(function (){return \App\Models\Slide::count();}),
+    (new Page(\App\Models\Conversation::class))->addBadge(function (){return \App\Models\Conversation::count();}),
 
 
     (new Page())->setTitle('Настроки приложения (.env)')->setIcon('fa fa-exclamation-triangle')->setUrl(route('admin.env.editor')),

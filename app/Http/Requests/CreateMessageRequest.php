@@ -26,6 +26,7 @@ class CreateMessageRequest extends FormRequest
         $rules = [
             'file' => 'required_without:text',
             'text' => 'required_without:file',
+            'user_id' => 'required:numeric',
         ];
 
         return $rules;
