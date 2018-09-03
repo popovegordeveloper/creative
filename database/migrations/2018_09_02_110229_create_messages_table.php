@@ -15,8 +15,10 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->integer('user_id');
+            $table->string('file')->nullable();
+            $table->string('filename')->nullable();
             $table->string('date');
 
             $table->integer('conversation_id')->unsigned();

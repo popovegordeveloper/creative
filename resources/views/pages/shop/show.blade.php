@@ -71,7 +71,16 @@
                     </div>
                 </div>
             </div>
-            <a href="" class="magazin__button">Задать вопрос продавцу</a>
+            @auth
+                @if(auth()->id() != $shop->user_id)
+                    <a href="" class="magazin__button popup-js">Задать вопрос продавцу</a>
+                    @include('blocks.new-message-popup', ['user_id' => $shop->user_id])
+                @endif
+            @endauth
+            @guest
+                <a href="" class="magazin__button popup-js">Задать вопрос продавцу</a>
+                @include('blocks.new-email', ['user_id' => $shop->user_id, 'shop_id' => $shop->id])
+            @endguest
         </div>
     </div>
 

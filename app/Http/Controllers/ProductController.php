@@ -59,7 +59,7 @@ class ProductController extends Controller
             'term_dispatch' => $product->termDispatch,
             'similar_products' => $productService->getSimilarProducts($product),
             'colors' => $product->colors,
-            'favorites' => auth()->user()->favorite->pluck('id')->toArray()
+            'favorites' => auth()->user() ? auth()->user()->favorite->pluck('id')->toArray() : []
         ]);
     }
 

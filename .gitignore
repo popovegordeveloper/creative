@@ -4,6 +4,7 @@
 /public/fonts
 /public/img
 /public/images
+/public/messages
 /public/js
 /public/storage
 /storage/*.key

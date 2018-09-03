@@ -14,6 +14,12 @@ Route::get('technical-support', 'SiteController@technicalSupport')->name('techni
 Route::get('sale', 'SiteController@sale')->name('sale');
 Route::post('search', 'SiteController@search')->name('search');
 
+Route::prefix('mail')->group(function () {
+    Route::post('product', 'MailController@sendProduct')->name('mail.product');
+    Route::post('shop', 'MailController@sendShop')->name('mail.shop');
+    Route::post('about', 'MailController@sendAbout')->name('mail.about');
+});
+
 Route::prefix('user')->group(function () {
     Route::get('activate/{hash}', 'UserController@activate')->name('user.activate');
     Route::post('update', 'UserController@update')->name('user.update');
@@ -23,10 +29,8 @@ Route::prefix('shop')->middleware('auth')->group(function () {
     Route::get('create', 'ShopController@create')->name('shop.create')->middleware('shop:no');
     Route::post('save', 'ShopController@save')->name('shop.save')->middleware('shop:no');
     Route::post('update', 'ShopController@update')->name('shop.update')->middleware('shop:yes');
-    Route::get('{slug}', 'ShopController@show')->name('shop.show');
     Route::get('edit/{slug}', 'ShopController@edit')->name('shop.edit')->middleware(['shop:yes', 'has_shop']);
 });
-
 
 Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('create', 'ProductController@create')->name('product.create')->middleware('shop:yes');
@@ -53,5 +57,6 @@ Route::prefix('message')->middleware('auth')->group(function () {
 });
 
 Route::get('product/{product}', 'ProductController@show')->name('product.show');
+Route::get('shop/{slug}', 'ShopController@show')->name('shop.show');
 
-Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet');
+Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet')->middleware('auth');

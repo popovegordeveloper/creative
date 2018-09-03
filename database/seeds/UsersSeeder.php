@@ -12,7 +12,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $admin = \App\Models\User::create([
-            'name' => 'Admin',
+            'name' => 'Администратор',
             'email' => 'admin@admin.ru',
             'password' => bcrypt('admin'),
             'created_at' => Carbon\Carbon::now(),

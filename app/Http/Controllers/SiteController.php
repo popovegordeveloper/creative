@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Conversation;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Setting;
@@ -44,7 +45,8 @@ class SiteController extends Controller
      */
     public function about()
     {
-        return view('pages.about');
+        $conversation_with_admin = Conversation::where('user2_id', 1)->where('user1_id', auth()->id())->first();
+        return view('pages.about', ['conversation_with_admin' => $conversation_with_admin]);
     }
 
     /**

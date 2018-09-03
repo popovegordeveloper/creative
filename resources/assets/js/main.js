@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-    $('#new-message-btn').click(function (e) {
-        e.preventDefault();
-        var $form = $(this).parents('form');
-        $.post($form.attr('action'), $form.serialize());
-        $('.mfp-close').click();
-    });
+    // $('#new-message-btn').click(function (e) {
+    //     e.preventDefault();
+    //     var $form = $(this).parents('form');
+    //     $.post($form.attr('action'), $form.serialize());
+    //     $('.mfp-close').click();
+    // });
 
     $('.popup-js').magnificPopup({
         preloader: false,

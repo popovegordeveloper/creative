@@ -38,8 +38,16 @@
                                 <span class="info-i__name">{{ $shop->name }}</span>
                                 <a href="{{ route('shop.show', $shop->slug) }}" class="info-i__link"></a>
                             </div>
-                            <a href="" class="info-i__button-q popup-js">Задать вопрос продавцу</a>
-                            @include('blocks.new-message-popup', ['user_id' => $shop->user_id])
+                            @auth
+                                @if(auth()->id() != $shop->user_id)
+                                    <a href="" class="info-i__button-q popup-js">Задать вопрос продавцу</a>
+                                    @include('blocks.new-message-popup', ['user_id' => $shop->user_id])
+                                @endif
+                            @endauth
+                            @guest
+                                <a href="" class="info-i__button-q popup-js">Задать вопрос продавцу</a>
+                                @include('blocks.new-email', ['user_id' => $shop->user_id, 'product_id' => $product->id])
+                            @endguest
                         </div>
                         <h3 class="info-i__title">{{ $product->name }}</h3>
                         <div class="info-i__cash">

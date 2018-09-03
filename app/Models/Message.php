@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Message extends Model
 {
-    protected $fillable = ['text', 'user_id', 'date'];
+    protected $fillable = ['text', 'user_id', 'date', 'file', 'filename'];
 
     protected $dates = [
         'created_at',

@@ -2,7 +2,7 @@
     <div class="mesenger">
         <div class="mesenger__top">
             <h3 class="mesenger__title">Сообщения</h3>
-            <a href="" class="mesenger__button">Написать в службу поддержки</a>
+            <a href="{{ route('cabinet', 'messages') }}?id={{ $conversations->where('user2_id', 1)->first()->id }}" class="mesenger__button">Написать в службу поддержки</a>
         </div>
         @if($conversations->count())
             <div class="mesenger__content" style="height: auto">
@@ -41,16 +41,17 @@
                                                 {{ auth()->id() == $message->user_id ? 'Вы:' :  $companion->full_name }}
                                             </h3>
                                             <span class="messenge__date">{{ $message->created_at->format('H:i') }}</span></div>
-                                        <p class="messenge__text">{{ $message->text }}</p>
+                                        @if($message->text)<p class="messenge__text">{{ $message->text }}</p>@endif
+                                        @if($message->file)<a style="color: #c51f5d;" download href="{{ asset($message->file) }}">{{ $message->filename }}</a>@endif
                                     </div>
                                 @endforeach
                             @endforeach
                         </div>
-                        <form action="{{ route('message.create') }}" class="messenge-win__form" method="post" style="height: auto">
+                        <form action="{{ route('message.create') }}" class="messenge-win__form" method="post" style="height: auto" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="user_id" value="{{ $companion->id }}">
                             <textarea name="text" class="messenge-win__input" placeholder="Напишите сообщение..."></textarea>
-                            <input type="file" class="messenge-win__file">
+                            <input type="file" class="messenge-win__file" name="file">
                             <button style="background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>
                         </form>
                     </div>

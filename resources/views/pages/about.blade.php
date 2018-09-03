@@ -67,7 +67,13 @@
                     <p>Последнее является нашей задачей. Товары на нашей площадке вы покупаете по ценам производителя.
                         Мы не ставим наценку сверх установленной производителем суммы.</p>
                     <div class="article__ps">Приятного пользования! <br><br>С Уважением, команда Creative Expo.</div>
-                    <a href="" class="button article__option-button">Написать нам</a>
+                    @auth
+                        <a href="{{ route('cabinet', 'messages') }}?id={{ $conversation_with_admin->id }}" class="button article__option-button">Написать нам</a>
+                    @endauth
+                    @guest
+                        <a href="" class="button article__option-button popup-js">Написать нам</a>
+                        @include('blocks.email-about')
+                    @endguest
                 </article>
             </div>
 @endsection
