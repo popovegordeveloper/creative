@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMessageRequest;
+use App\Mail\NewMessage;
 use App\Models\Conversation;
+use App\Models\User;
 use Carbon\Carbon;
 
 class MessageController extends Controller
@@ -28,6 +30,14 @@ class MessageController extends Controller
             $message_data['file'] = "/messages/$filename";
         }
         $conversation->messages()->create($message_data);
+
+        $user = User::find($request->user_id);
+
+        try {
+            \Mail::to($user->email)->send(new NewMessage($user));
+        } catch (\Exception $exception){
+            \Log::error($exception->getMessage());
+        }
 
         return redirect()->back();
     }
