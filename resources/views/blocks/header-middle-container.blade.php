@@ -13,7 +13,7 @@
         </form>
 
         <div class="two-btn">
-            <a href="{{ route('sale') }}" class="two-btn__link">Распродажа</a>
+            <a href="{{ route('catalog') }}?sale=true" class="two-btn__link">Распродажа</a>
             @auth
                 @if(auth()->user()->hasRole('Seller'))
                     <a href="{{ route('shop.show', auth()->user()->shop->slug) }}" class="two-btn__btn">Мой магазин</a>

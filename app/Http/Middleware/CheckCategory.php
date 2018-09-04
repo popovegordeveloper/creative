@@ -16,8 +16,10 @@ class CheckCategory
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->slug_category) return redirect('/');
-        if (!Category::whereSlug($request->slug_category)->first()->is_active) return redirect('/');
+        if (!$request->get('sale')) {
+            if (!$request->slug_category) return redirect('/');
+            if (!Category::whereSlug($request->slug_category)->first()->is_active) return redirect('/');
+        }
 
         return $next($request);
     }

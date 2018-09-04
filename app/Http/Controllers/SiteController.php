@@ -61,6 +61,10 @@ class SiteController extends Controller
     {
         $categoryService->getSubCategories($slug_category);
         $products = $productService->getProducts($slug_category, $slug_subcategory);
+        \View::share([
+            "min" => $products->min('price'),
+            "max" => $products->max('price'),
+        ]);
         $favorites = $productService->getFavoriteProducts();
         return view('pages.catalog', compact('products', 'favorites', 'slug_category'));
     }

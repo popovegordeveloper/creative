@@ -19,18 +19,18 @@
                 </div>
                 <div class="slider-range__group slider-range__group--otstup">
                     <div class="slider-range__inpwr">
-                        <input type="text" class="slider-range__input slider-range__input--min" value="50">
+                        <input type="text" name="cost_from" class="slider-range__input slider-range__input--min" value="{{ $min }}">
                         <div class="slider-range__del slider-range__del--min"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
                     </div>
                     <div class="slider-range__line"></div>
                     <div class="slider-range__inpwr">
-                        <input type="text" class="slider-range__input slider-range__input--max" value="15000">
+                        <input type="text" name="cost_to" class="slider-range__input slider-range__input--max" value="{{ $max }}">
                         <div class="slider-range__del slider-range__del--max"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
                     </div>
                 </div>
                 <div class="slider-range__box">
                     <label class="slider-range__chek">
-                        <input type="checkbox" class="slider-range__chek-in">
+                        <input type="checkbox" class="slider-range__chek-in" name="sale" value="true">
                         <span class="slider-range__chek-l">Только со скидкой</span>
                     </label>
                     <button class="slider-range__button">показать</button>

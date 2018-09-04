@@ -15,10 +15,26 @@ class ProductService
      */
     public function getProducts($slug_category, $slug_subcategory)
     {
-        if (!$slug_category) return Product::with('shop')->paginate(18);
-        $categories = Category::whereSlug($slug_category)->first()->getDescendantsAndSelf();
-        if ($slug_subcategory) return $categories->where('slug', $slug_subcategory)->first()->products()->paginate(18);
-        return Product::with('shop')->whereIn('category_id', $categories->pluck('id')->toArray())->paginate(18);
+
+        if (!$slug_category && !request('sale')) return Product::with('shop')->paginate(18); //Если нет категории и не распродажа
+        if (!$slug_category && request('sale')) return Product::with('shop')->where('sale_price', '>', 0)->paginate(18); //Если нет категории и распродажа
+
+        $categories = Category::whereSlug($slug_category)->first()->getDescendantsAndSelf(); //категория со всеми дочернии категориями
+
+        if ($slug_subcategory) { // Если подкатегория
+            $sub_categories = $categories->where('slug', $slug_subcategory)->first()->getDescendantsAndSelf();
+            $products = Product::whereIn('category_id', $sub_categories->pluck('id')->toArray());
+            if (request('sale')) $products = $products->where('sale_price', '>', '0'); //Если распродажа
+            if (request('cost_from')) $products = $products->where('price', '>=', request('cost_from'));
+            if (request('cost_to')) $products = $products->where('price', '<=', request('cost_to'));
+            return $products->paginate(18);
+        }
+
+        $products = Product::with('shop')->whereIn('category_id', $categories->pluck('id')->toArray());
+        if (request('sale')) $products = $products->where('sale_price', '>', 0);
+        if (request('cost_from')) $products = $products->where('price', '>=', request('cost_from'));
+        if (request('cost_to')) $products = $products->where('price', '<=', request('cost_to'));
+        return $products->paginate(18);
     }
 
     /**
