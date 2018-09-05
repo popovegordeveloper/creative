@@ -68,7 +68,9 @@
                         Мы не ставим наценку сверх установленной производителем суммы.</p>
                     <div class="article__ps">Приятного пользования! <br><br>С Уважением, команда Creative Expo.</div>
                     @auth
-                        <a href="{{ route('cabinet', 'messages') }}?id={{ $conversation_with_admin->id }}" class="button article__option-button">Написать нам</a>
+                        @if(!auth()->user()->hasRole('Admin'))
+                            <a href="{{ route('cabinet', 'messages') }}?id={{ $conversation_with_admin->id }}" class="button article__option-button">Написать нам</a>
+                        @endif
                     @endauth
                     @guest
                         <a href="" class="button article__option-button popup-js">Написать нам</a>
