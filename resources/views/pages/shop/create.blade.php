@@ -24,23 +24,23 @@
                     Создание магазина
                 @endif
             </h3>
-            <div class="settings-shop__banner" @if(isset($shop)) style="background-image: url('{{ asset($shop->cover) }}')" @endif>
-                <input type="file" class="settings-shop__logo" name="logo" @if(!isset($shop)) required @endif>
+            <div class="settings-shop__banner" id="shopBanner" @if(isset($shop)) style="background-image: url('{{ asset($shop->cover) }}')" @endif>
+                <input type="file" class="settings-shop__logo" id="shopLogo" name="logo" @if(!isset($shop)) required @endif>
                 <input type="file" class="settings-shop__obloj" name="cover" @if(!isset($shop)) required @endif>
                 @if(isset($shop))
                     <input type="text" class="settings-shop__title-f" value="{{ $shop->name }}" name="name" required>
                 @else
-                    <input type="text" class="settings-shop__title-f" value="введите название магазина" name="name" required>
+                    <input type="text" class="settings-shop__title-f" value="" placeholder="введите название магазина" name="name" required>
                 @endif
                 @if(isset($shop))
                     <input type="text" class="settings-shop__subtitle" value="{{ $shop->description_preview }}" name="description_preview" required>
                 @else
-                    <input type="text" class="settings-shop__subtitle" value="Добавьте краткое описание о вашем магазине" name="description_preview" required>
+                    <input type="text" class="settings-shop__subtitle" value="" placeholder="Добавьте краткое описание о вашем магазине" name="description_preview" required>
                 @endif
                 @if(isset($shop))
                     <input type="text" class="settings-shop__city" value="{{ $shop->city }}" name="city" required>
                 @else
-                    <input type="text" class="settings-shop__city" value="Укажите город" name="city" required>
+                    <input type="text" class="settings-shop__city" value="" placeholder="Укажите город" name="city" required>
                 @endif
             </div>
             <div class="settings-shop__group">
@@ -103,7 +103,7 @@
                     <span class="settings-shop__sub-t">Мастер — лицо вашего магазина. Мастер отвечает на вопросы пользователей о товаре, сроках доставки и условиях работы.</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <input type="file" @if(!isset($shop)) required @endif name="master_logo" class="settings-shop__logo master-logo">
+                    <input type="file" @if(!isset($shop)) required @endif name="master_logo" class="settings-shop__logo master-logo" id="masterLogo">
                     <input type="text" required name="master_name" class="settings-shop__mast-name" value="@if(isset($shop)){{ $shop->master_name }}@else Введите ваше имя @endif">
                 </div>
             </div>
