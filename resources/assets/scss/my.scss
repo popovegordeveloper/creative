@@ -81,7 +81,7 @@ a {
   //&_show {
   //  height: auto !important;
   //}
-  
+
   &__wrapper {
   }
   &__topbar {
@@ -894,7 +894,7 @@ a {
   }
   &__link-text {
     font-size: 18px;
-    
+
   }
 }
 
@@ -2979,7 +2979,7 @@ a {
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 30px;
-    
+
     &_nav {
       margin-bottom: 80px;
 
@@ -2997,6 +2997,9 @@ a {
     z-index: 1;
     margin-bottom: 50px;
     overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     &:before {
       content: '';
       display: block;
@@ -3037,7 +3040,8 @@ a {
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
-
+    background-size: cover;
+    background-position: center;
     &:before, &:after {
       content: '';
       display: block;
@@ -3068,7 +3072,8 @@ a {
       vertical-align: middle;
       margin: 0 75px;
       background: #cdcdcd;
-
+      background-size: cover;
+      background-position: center;
       @media screen and (max-width: 662px) {
         margin: 0 20px 0 0;
       }
@@ -3697,12 +3702,12 @@ a {
       &::-webkit-scrollbar {
           width: 10px;
       }
-       
+
       &::-webkit-scrollbar-track {
           border-radius: 3px;
           background: #cdcdcd;
       }
-       
+
       &::-webkit-scrollbar-thumb {
           border-radius: 3px;
           background: #9a9a9a;
@@ -3775,7 +3780,7 @@ a {
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 30px;
-    
+
     &_nav {
       margin-bottom: 80px;
 
@@ -3863,7 +3868,7 @@ a {
       margin-right: 0;
       max-width: 300px;
     }
-    
+
     &:nth-child(3n+2) {
       margin-left: 80px;
       margin-right: 80px;
@@ -3989,7 +3994,7 @@ a {
 }
 
 .article {
-  
+
   p {
     font-size: 18px;
     font-weight: 300;
@@ -4185,7 +4190,7 @@ a {
       width: 100%;
       margin-bottom: 25px;
     }
-    
+
     .jqselect.select {
       display: inline-block;
       margin-bottom: 0;
