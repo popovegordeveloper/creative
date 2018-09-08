@@ -222,6 +222,31 @@
                     </select>
                 </div>
             </div>
+            <div class="settings-shop__group settings-shop__group_type2">
+                    <h3 class="settings-shop__name">
+                        <span class="settings-shop__s-t">Цвет</span>
+                        <span class="settings-shop__sub-t">Вы можете выбрать цвет</span>
+                    </h3>
+                    <div class="settings-shop__gr">
+                        <div class="color-product">
+                            <label for="" class="color-product__item color-product__item--white">
+                                <input type="checkbox" name="white" class="color-product__input">
+                            </label>
+                            <label for="" class="color-product__item color-product__item--black">
+                                <input type="checkbox" name="black" class="color-product__input">
+                            </label>
+                            <label for="" class="color-product__item color-product__item--saddlebrown">
+                                <input type="checkbox" name="brown" class="color-product__input">
+                            </label>
+                            <label for="" class="color-product__item color-product__item--gray">
+                                <input type="checkbox" name="gray" class="color-product__input">
+                            </label>
+                            <label for="" class="color-product__item color-product__item--blue">
+                                <input type="checkbox" name="blue" class="color-product__input">
+                            </label>
+                        </div>
+                    </div>
+                </div>
             <div class="center">
                 @if(isset($product))
                     <input class="button" type="submit" value="Сохранить">

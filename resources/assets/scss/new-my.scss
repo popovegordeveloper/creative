@@ -597,3 +597,50 @@ body {
   border-radius: 5px;
 }
 
+.color-product {
+  display: flex;
+  align-items: center;
+  &__item {
+    display: block;
+    margin-right: 35px;
+    width: 40px;
+    height: 40px;
+    background: #ccc;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    &.active {
+      position: relative;
+      &:before {
+        content: "\f00c";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-family: FontAwesome;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: red;
+        font-size: 20px;
+      }
+    }
+    &--black {
+      background: black;
+    }
+    &--saddlebrown {
+      background: saddlebrown;
+    }
+    &--white {
+      background: white;
+    }
+    &--gray {
+      background: grey;
+    }
+    &--blue {
+      background: blue;
+    }
+  }
+  &__input {
+    display: none;
+  }
+}
