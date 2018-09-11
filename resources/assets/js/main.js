@@ -466,5 +466,5 @@ $(document).ready(function () {
   $("#masterLogo").change(function() {
     readURL(this, '#masterLogo-styler');
   });
-
+  $('.color-item').styler();
 });

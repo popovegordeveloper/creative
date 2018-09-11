@@ -644,3 +644,24 @@ body {
     display: none;
   }
 }
+.color-item.jq-select-multiple {
+  width: 100%;
+  border: 1px solid #9a9a9a;
+  border-radius: 4px;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      width: 100%;
+      padding: 4px 20px;
+      border-radius: 4px;
+      &.disabled {
+        color: #9a9a9a;
+      }
+      &.selected {
+        background: #e3e3e3;
+      }
+    }
+  }
+}
