@@ -201,26 +201,21 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('keypress', '.price-n-discount__value span', function(e){
-        return e.which != 13;
-    });
-
     $(document).on("keydown", ".price-n-discount__value span", function(event) {
         var element = $(this);
+        var textEl = element.text().replace(/\s+/g,'');
         var maximumLength = element.attr("data-maxlength");
-        var currentLength = element.text().length + 1;
+        var currentLength = textEl.length + 1;
+        if (element.html().length && !element.text().trim().length) {
+            element.empty();
+        }
 
-        element.find('input').val(element.text());
+        element.find('input').val(textEl);
 
         if(currentLength > maximumLength && event.keyCode != 8) {
             event.preventDefault();
             return false;
         }
-    });
-
-    $(document).on("keyup", ".price-n-discount__value span", function(event) {
-        var element = $(this);
-        element.find('input').val(element.text());
     });
 
     $('#any').on('change', function() {
