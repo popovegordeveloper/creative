@@ -23,11 +23,14 @@ class MessageController extends Controller
         $date = Carbon::now();
         $date = $date->day . " " . $date->month . " " . $date->year;
         $message_data = ['text' => $request->text, 'user_id' => auth()->id(), 'date' => $date];
+        $json = ['status' => 'ok'];
         if ($request->hasFile('file')){
             $filename = $conversation->id . Carbon::now()->timestamp . $request->file->getClientOriginalName();
-            $message_data['filename'] =$request->file->getClientOriginalName();
+            $message_data['filename'] = $request->file->getClientOriginalName();
+            $json['filename'] = $request->file->getClientOriginalName();
             $request->file->move(public_path('messages'), $filename);
             $message_data['file'] = "/messages/$filename";
+            $json['url'] = asset("/messages/$filename");
         }
         $conversation->messages()->create($message_data);
 
@@ -39,6 +42,7 @@ class MessageController extends Controller
             \Log::error($exception->getMessage());
         }
 
+        if (\Request::ajax()) return json_encode($json);
         return redirect()->back();
     }
 

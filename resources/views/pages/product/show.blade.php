@@ -77,7 +77,9 @@
                             <a href="" class="info-i__bytoclick">Купить в 1 клик</a>
                             <div class="info-i__group">
                                 <button class="info-i__button">Добавить в корзину</button>
-                                <a href="" class="info-i__like js-add-favorite {{ $class }}"></a>
+                                @auth
+                                    <a href="" class="info-i__like js-add-favorite {{ $class }}"></a>
+                                @endauth
                             </div>
                         </form>
                         <span class="info-i__time">Срок изготовления и отправления {{ $term_dispatch->name }}</span>

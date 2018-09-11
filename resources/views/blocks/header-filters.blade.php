@@ -29,11 +29,13 @@
                     </div>
                 </div>
                 <div class="slider-range__box">
-                    <label class="slider-range__chek">
-                        <input type="checkbox" class="slider-range__chek-in" name="sale" value="true">
+                    <label class="slider-range__chek @if(request('sale')) active @endif">
+                        <input type="checkbox" class="slider-range__chek-in" name="sale" value="true" @if(request('sale')) checked @endif>
                         <span class="slider-range__chek-l">Только со скидкой</span>
                     </label>
-                    <button class="slider-range__button">показать</button>
+
+                    <button class="slider-range__button"  @if(request('sale') or request('cost_from') or request('cost_to')) style="display: inline-block" @endif>показать</button>
+
                 </div>
             </div>
         </form>

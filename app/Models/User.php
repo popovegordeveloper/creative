@@ -44,6 +44,12 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property-read \App\Models\Shop $shop
  * @property-read string $full_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $favorite
+ * @property string|null $phone
+ * @property string|null $address
+ * @property string|null $index
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIndex($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePhone($value)
  */
 class User extends Authenticatable
 {
@@ -55,7 +61,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'surname', 'patronymic', 'is_activate', 'activation_hash'
+        'name', 'email', 'password', 'surname', 'patronymic', 'is_activate', 'activation_hash', 'index', 'address', 'phone'
     ];
 
     /**

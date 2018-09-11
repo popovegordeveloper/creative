@@ -91,9 +91,11 @@
                 </div>
             </div>
         </div>
-        <button class="cmn-toggle-switch cmn-toggle-switch__htx">
-            <span>toggle menu</span>
-        </button>
+        @if(Route::currentRouteName() == 'catalog')
+            <button class="cmn-toggle-switch cmn-toggle-switch__htx">
+                <span>toggle menu</span>
+            </button>
+        @endif
     </div>
     @include('blocks.header-categories-container')
 </div>

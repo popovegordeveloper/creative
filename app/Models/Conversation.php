@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Conversation whereUser1Id($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Conversation whereUser2Id($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Message[] $messages
  */
 class Conversation extends Model
 {

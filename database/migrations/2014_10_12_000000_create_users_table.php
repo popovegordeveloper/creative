@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->boolean('is_activate')->default(false);
             $table->string('activation_hash')->nullable();
             $table->string('username')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('index')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

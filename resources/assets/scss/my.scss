@@ -1810,6 +1810,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    max-height: 50px;
   }
   &__name {
     display: inline-block;

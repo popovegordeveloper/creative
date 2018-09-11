@@ -18,6 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $user_id
+ * @property string|null $file
+ * @property string|null $filename
+ * @property string $date
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Message whereUserId($value)
  */
 class Message extends Model
 {
