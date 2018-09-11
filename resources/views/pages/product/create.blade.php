@@ -214,7 +214,7 @@
                     <span class="settings-shop__sub-t">Выберите цвет товара.</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <select data-placeholder="Выбрать" class="multiselect" name="color[]" id="" multiple>
+                    <select data-placeholder="" class="multiselect color-item" name="color[]" id="" multiple size="4">
                         <option value="" disabled>Выбрать</option>
                         @foreach($colors as $color)
                             <option @if(isset($product_colors) and in_array($color->id, $product_colors)) selected @endif value="{{ $color->id }}">{{ $color->name }}</option>
