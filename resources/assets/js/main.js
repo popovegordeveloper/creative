@@ -437,5 +437,34 @@ $(document).ready(function () {
     });
 
 
-});
+  // добавление изображение при создании и радактивровании магазина
+  function readURL(input, el) {
 
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        //$(el).attr('src', e.target.result);
+        $(el).css({
+          backgroundImage: 'url('+ e.target.result + ')',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        })
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#shopLogo").change(function() {
+    readURL(this, '#shopLogo-styler');
+  });
+
+  $("input.settings-shop__obloj").change(function() {
+    readURL(this, '#shopBanner');
+  });
+  $("#masterLogo").change(function() {
+    readURL(this, '#masterLogo-styler');
+  });
+
+});
