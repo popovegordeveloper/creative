@@ -1,11 +1,88 @@
 $(document).ready(function () {
 
+    $('#message_form').submit(function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $text = $(this).find('textarea');
+        var formData = new FormData();
+        formData.append('text', $text.val());
+        formData.append('file', $this.find('input[name="file"]').first().prop('files')[0]);
+        formData.append('user_id', $this.find('input[name="user_id"]').val());
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: $this.attr('action'),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            cache: false,
+            contentType: false,
+            success: function (res) {
+                res = JSON.parse(res);
+                var $messages = $('.messenge-win__content');
+                if (res.date){
+                    $messages.append(
+                        '<div class="messenge-win__date"><span class="messenge-win__date-t">'+ res.date + '</span></div>'
+                    );
+                }
+                if (res.url){
+                    $messages.append(
+                        '<div class="messenge">' +
+                        '<div class="messenge__top">' +
+                        '<h3 class="messenge__name">Вы:</h3>' +
+                        '<span class="messenge__date">'+ res.time +'</span>' +
+                        '</div>' +
+                        '<p class="messenge__text">'+ $text.val() + '</p>' +
+                        '<a style="color: #c51f5d;" download="" href="'+ res.url +'">'+ res.filename +'</a>' +
+                        '</div>'
+                    );
+                } else {
+                    $messages.append(
+                        '<div class="messenge">' +
+                        '<div class="messenge__top">' +
+                        '<h3 class="messenge__name">Вы:</h3>' +
+                        '<span class="messenge__date">'+ res.time +'</span>' +
+                        '</div>' +
+                        '<p class="messenge__text">'+ $text.val() + '</p>' +
+                        '</div>'
+                    );
+                }
+                $text.val('');
+            }
+        });
+
+    });
+
     // $('#new-message-btn').click(function (e) {
     //     e.preventDefault();
     //     var $form = $(this).parents('form');
     //     $.post($form.attr('action'), $form.serialize());
     //     $('.mfp-close').click();
     // });
+
+    $('.multiselect').select2({
+        // placeholder: "Выберите цвет",
+        // width: '100%',
+        theme: "flat"
+    });
+
+    $('.multiselect').on('select2:opening select2:closing', function( event ) {
+        var $searchfield = $(this).parent().find('.select2-search__field');
+        $searchfield.prop('disabled', true);
+        $searchfield.hide();
+    });
+
+    $('.multiselect').on('select2:open', function( event ) {
+        $('.select2-container--open').css('width', $('.select2-selection__rendered').css('width'));
+        var top = $('.select2-selection__rendered').outerHeight() + $('.select2-container--open').position().top + "px";
+        $('.select2-container').last().css({top: top});
+        console.log($('.select2-container').last());
+        console.log(top);
+    });
 
     $('.popup-js').magnificPopup({
         preloader: false,
@@ -304,7 +381,7 @@ $(document).ready(function () {
 
     var hideMenu = function () {
         menu.addClass('new-header--scrolling');
-        menuTop.slideUp(500);
+        // menuTop.slideUp(500);
         menuBottom.slideUp(500);
         toggleButton.removeClass('active');
     };

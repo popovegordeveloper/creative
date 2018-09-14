@@ -20,10 +20,15 @@ class MessageController extends Controller
         $conversation = Conversation::where('user1_id', auth()->id())->where('user2_id', $request->user_id)->first();
         if (!$conversation) $conversation = Conversation::where('user2_id', auth()->id())->where('user1_id', $request->user_id)->first();
         if (!$conversation) $conversation = Conversation::create(['user1_id' => auth()->id(), 'user2_id' => $request->user_id]);
-        $date = Carbon::now();
-        $date = $date->day . " " . $date->month . " " . $date->year;
-        $message_data = ['text' => $request->text, 'user_id' => auth()->id(), 'date' => $date];
         $json = ['status' => 'ok'];
+        $date = Carbon::now();
+        $json['time'] = $date->format('H:i');
+        $date = $date->day . " " . $date->month . " " . $date->year;
+        $current_day_message = $conversation->messages()->where('date', $date)->first();
+        if (!$current_day_message) $json['date'] = $date;
+
+        $message_data = ['text' => $request->text, 'user_id' => auth()->id(), 'date' => $date];
+
         if ($request->hasFile('file')){
             $filename = $conversation->id . Carbon::now()->timestamp . $request->file->getClientOriginalName();
             $message_data['filename'] = $request->file->getClientOriginalName();

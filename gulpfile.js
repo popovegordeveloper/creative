@@ -26,8 +26,8 @@ var path = {
         fonts: 'resources/assets/fonts/**/*.*'
     },
     watch: {
-        js:    'resources/assets/js/**/*.js',
-        css:   'resources/assets/style/**/*.scss',
+        js:    'resources/assets/js/main.js',
+        css:   'resources/assets/scss/new-my.scss',
         img:   'resources/assets/img/**/*.*',
         fonts: 'resources/assets/fonts/**/*.*'
     }
@@ -55,7 +55,10 @@ var gulp = require('gulp'),  // подключаем Gulp
 
 // сбор стилей
 gulp.task('css:build', function () {
-    gulp.src(path.src.style) // получим main.scss
+    gulp.src([
+            path.src.style,
+            'bower_components/select2/dist/css/select2.min.css'
+        ]) // получим main.scss
         .pipe(plumber()) // для отслеживания ошибок
         .pipe(sourcemaps.init()) // инициализируем sourcemap
         .pipe(sass()) // scss -> css
@@ -80,6 +83,7 @@ gulp.task('js:build', function () {
         'bower_components/jquery-ui/jquery-ui.min.js',
         'bower_components/slick-carousel/slick/slick.js',
         'bower_components/magnific-popup/dist/jquery.magnific-popup.min.js',
+        'bower_components/select2/dist/js/select2.min.js',
         'resources/assets/js/jquery.minical.plain.js',
         path.src.js
 
