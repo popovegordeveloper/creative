@@ -80,12 +80,16 @@ gulp.task('js:build', function () {
         'bower_components/nouislider/distribute/nouislider.min.js',
         'bower_components/jquery.form-styler/dist/jquery.formstyler.min.js',
         'bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+        'bower_components/jquery-sortable/source/js/jquery-sortable-min.js',
         'bower_components/jquery-ui/jquery-ui.min.js',
+        'bower_components/jquery-validation/dist/jquery.validate.min.js',
         'bower_components/slick-carousel/slick/slick.js',
         'bower_components/magnific-popup/dist/jquery.magnific-popup.min.js',
         'bower_components/select2/dist/js/select2.min.js',
+        'bower_components/dropzone/dist/min/dropzone.min.js',
         'resources/assets/js/jquery.minical.plain.js',
-        path.src.js
+        path.src.js,
+        'resources/assets/js/product.js'
 
     ]) // получим файл main.js
         // .pipe(plumber()) // для отслеживания ошибок
@@ -138,6 +142,7 @@ gulp.task('build', [
 gulp.task('watch', function() {
     gulp.watch(path.watch.css, ['css:build']);
     gulp.watch(path.watch.js, ['js:build']);
+    gulp.watch('resources/assets/js/product.js', ['js:build']);
     gulp.watch(path.watch.img, ['image:build']);
     gulp.watch(path.watch.fonts, ['fonts:build']);
 });

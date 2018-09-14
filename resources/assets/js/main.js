@@ -273,9 +273,9 @@ $(document).ready(function () {
     $('.settings-shop__obloj').styler({
         fileBrowse: 'Загрузить обложку'
     });
-    $('.goods-photo-add').styler({
-        fileBrowse: 'Перетащите или выберите фотографии'
-    });
+    // $('.goods-photo-add').styler({
+    //     fileBrowse: 'Перетащите или выберите фотографии'
+    // });
 
 
     $(document).on("keydown", ".price-n-discount__value span", function(event) {
@@ -539,4 +539,5 @@ $(document).ready(function () {
     readURL(this, '#masterLogo-styler');
   });
   $('.color-item').styler();
+
 });

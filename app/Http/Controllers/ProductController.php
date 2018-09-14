@@ -40,7 +40,7 @@ class ProductController extends Controller
     {
         $user = User::with(['shop', 'shop.products'])->find(auth()->id());
         $product = $productService->saveProduct($request, $user);
-        return redirect()->route('product.show', $product->id);
+        return json_encode(['url' => route('product.show', $product->id)]);
     }
 
     /**

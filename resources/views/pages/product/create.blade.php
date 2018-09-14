@@ -11,7 +11,7 @@
 @section('content')
 
     <div class="settings-shop">
-        <form action="@if(isset($product)){{ route('product.update') }}@else{{ route('product.save') }}@endif" method="post" class="settings-shop__form" enctype="multipart/form-data">
+        <form action="@if(isset($product)){{ route('product.update') }}@else{{ route('product.save') }}@endif" method="post" class="settings-shop__form" enctype="multipart/form-data" id="product-form">
             @csrf
             @if(isset($product))
                 <input type="hidden" value="{{ $product->id }}" name="product_id">
@@ -30,23 +30,23 @@
                     <span class="settings-shop__sub-t">Можно загрузить не более 8 фотографий товара, без водяных знаков и рекламных ссылок. Мы рекомендуем добавлять качественные фотографии с товаром крупным планом и с нескольких ракурсов. И помните, фотографии — это витрина вашего магазина.</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <div class="goods-photo">
+                    <ul class="goods-photo js-dropzone-files" id="sortable">
                         @if(isset($product))
                             @foreach($product->photos as $photo)
                                 <div class="goods-photo__item" style="background-image: url('{{ asset($photo) }}')"></div>
                                 <input type="hidden" name="loaded_photos[]" value="{{ $photo }}">
                             @endforeach
                         @else
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
-                            <div class="goods-photo__item"></div>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item" ><div></div></li>
                         @endif
-                    </div>
+                    </ul>
                 </div>
             </div>
             <div class="settings-shop__group settings-shop__group_type2">
@@ -54,7 +54,12 @@
                     <span class="settings-shop__sub-t">Вы можете перетаскивать фотографии между собой, чтобы выстроить нужный порядок.</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <input class="goods-photo-add" type="file" name="photos[]" multiple @if(!isset($product)) required @endif>
+                    <div class="js-dropzone">
+                        <img src="{{ asset('img/ico-goods-photo-grey.svg') }}" alt="">
+                        <p>Перетащите или выберите фотографии</p>
+                        <input class="goods-photo-add js-dropzone-input" type="file" name="photos" multiple>
+                    </div>
+                    <span style="display: none" id="photos_err" class="error">Это поле обязательное для заполнения</span>
                 </div>
             </div>
             <div class="settings-shop__group settings-shop__group_type2">

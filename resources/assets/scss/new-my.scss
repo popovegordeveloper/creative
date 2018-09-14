@@ -1,6 +1,50 @@
+.error{
+    color: red;
+}
+.goods-photo{
+    padding: 0;
+    margin: 0;
+
+    & li{
+        list-style-type: none;
+        cursor: pointer;
+    }
+}
+.js-dropzone{
+    padding: 40px 0px;
+    text-align: center;
+    border: 1px dashed #9a9a9a;
+    border-radius: 3px;
+
+    &--disable{
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    & img{
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 30px;
+    }
+
+    & p{
+        color: #9a9a9a;
+        display: inline-block;
+    }
+
+    & input {
+        display: none;
+    }
+}
+
+
 .empty-m{
     padding-top: 92.5px;
     padding-bottom: 92.5px;
+}
+
+.magazin__items{
+    justify-content: center;
 }
 
 .slider__article{
