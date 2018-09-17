@@ -1036,3 +1036,22 @@ body {
         }
     }
 }
+
+.header-mobile-container{
+    display: flex;
+}
+
+@media screen and (max-width: 767px) {
+    .header-mobile-container{
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn-basked{
+        margin-top: 20px;
+        align-items: center;
+        width: auto;
+    }
+}
