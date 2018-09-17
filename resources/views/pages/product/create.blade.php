@@ -33,8 +33,9 @@
                     <ul class="goods-photo js-dropzone-files" id="sortable">
                         @if(isset($product))
                             @foreach($product->photos as $photo)
-                                <div class="goods-photo__item" style="background-image: url('{{ asset($photo) }}')"></div>
-                                <input type="hidden" name="loaded_photos[]" value="{{ $photo }}">
+                                <li class="goods-photo__item" style="background-image: url('{{ asset($photo) }}')"><div><input type="hidden" name="loaded_photos[]" value="{{ $photo }}"></div></li>
+                                {{--<div class="goods-photo__item" style="background-image: url('{{ asset($photo) }}')"></div>--}}
+                                {{--<input type="hidden" name="loaded_photos[]" value="{{ $photo }}">--}}
                             @endforeach
                         @else
                             <li class="goods-photo__item" ><div></div></li>
@@ -189,7 +190,7 @@
                             @elseif(isset($product) and !$product->qty)
                                 <input id="quant-val" type="number" class="input-num" value="" min="1" name="qty" disabled>
                             @else
-                                <input id="quant-val" type="number" class="input-num" value="1" min="1" name="qty" disabled>
+                                <input id="quant-val" type="number" class="input-num" value="1" min="1" name="qty">
                             @endif
                         </div>
                         <div class="quantity__any">

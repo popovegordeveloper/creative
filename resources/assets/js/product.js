@@ -6,12 +6,17 @@ var files = [];
 var sort_files = [];
 
 $(document).ready(function () {
+
+    var loaded_photos = $('input[name="loaded_photos[]"]');
+
     $('#sortable').sortable({
         items: "> .goods-photo__item",
         update: function (event,ui) {
-            $('#sortable li').each(function (i, item) {
-                sort_files[i] = files[$(this).data('index')];
-            });
+            if (loaded_photos.length == 0) {
+                $('#sortable li').each(function (i, item) {
+                    sort_files[i] = files[$(this).data('index')];
+                });
+            }
         }
     });
 
@@ -19,7 +24,7 @@ $(document).ready(function () {
         required: "Это поле обязательное для заполнения",
     });
 
-    $('#product-form').validate({
+    if (loaded_photos.length == 0) $('#product-form').validate({
         lang: 'ru'
     });
     $('#product-form').submit(function (e) {
@@ -30,11 +35,19 @@ $(document).ready(function () {
             lang: 'ru'
         });
 
-        if (!sort_files.length) {
+
+        if (!sort_files.length && loaded_photos.length == 0) {
             $('#photos_err').show();
             return;
         }
 
+        if (loaded_photos.length) {
+            formData.append('product_id', $this.find('input[name="product_id"]').val());
+            loaded_photos = $('input[name="loaded_photos[]"]');
+            loaded_photos.each(function (i, item) {
+                formData.append('loaded_photos[]', $(this).val());
+            });
+        }
         for (var i = 0; i < sort_files.length; i++) {
             formData.append('photos[]', sort_files[i]);
         }

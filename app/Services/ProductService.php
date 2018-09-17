@@ -109,6 +109,11 @@ class ProductService
             foreach ($request->photos as $photo) $photos[] = $this->saveImage($photo, $dir_name);
             $product_data['photos'] = $photos;
         }
+        else {
+            $photos = [];
+            foreach ($request->loaded_photos as $photo) $photos[] = $photo;
+            $product_data['photos'] = $photos;
+        }
 
         $product_data['qty']  =  $request->qty_null ? null : $request->qty;
         $product->update($product_data);

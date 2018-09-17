@@ -92,7 +92,8 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, ProductService $productService)
     {
         $productService->updateProduct($request);
-        return redirect()->route('product.show', $request->product_id);
+        return json_encode(['url' => route('product.show', $request->product_id)]);
+//        return redirect()->route('product.show', $request->product_id);
     }
 
     /**
