@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#message_form').submit(function (e) {
+    $(document).on('submit', '#message_form', function (e) {
         e.preventDefault();
         var $this = $(this);
         var $text = $(this).find('textarea');
@@ -8,7 +8,9 @@ $(document).ready(function () {
         formData.append('text', $text.val());
         formData.append('file', $this.find('input[name="file"]').first().prop('files')[0]);
         formData.append('user_id', $this.find('input[name="user_id"]').val());
-
+        var btn = $(this).find('button');
+        btn.prop('disabled', true);
+        $('#preloader').css('opacity', '1');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -51,6 +53,11 @@ $(document).ready(function () {
                         '</div>'
                     );
                 }
+                var $messanger = $('.messenge-win__content');
+                $messanger.scrollTop($messanger.prop('scrollHeight'));
+                $('#preloader').css('opacity', '0');
+                btn.prop('disabled', false);
+                btn.removeProp('disabled');
                 $text.val('');
             }
         });
@@ -266,7 +273,7 @@ $(document).ready(function () {
     });
 
     $('.info-i__input-num, .info-i__select, .ur-form__select, .messenge-win__file, .delivery__checkbox, .select, .input-num, .quantity__any input, .message-btn').styler();
-
+    $('#popup-js form input[type="file"]').styler();
     $('.settings-shop__logo').styler({
         fileBrowse: 'Лого'
     });
@@ -539,5 +546,78 @@ $(document).ready(function () {
     readURL(this, '#masterLogo-styler');
   });
   $('.color-item').styler();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+  //выбор диалога
+    $('.mesenger__item').click(function (e) {
+        e.preventDefault();
+        $conversation_id = $(this).find('input').val();
+        $.post('/message/conversation', {id: $conversation_id}, function (res) {
+            res = JSON.parse(res);
+            var $messanger = $('.mesenger__mesenj-win');
+            $messanger.html('');
+            $messanger.append(
+                '<div class="messenge-win">' +
+                    '<div class="messenge-win__content">' +
+                        '<div class="messenge-win__top">' +
+                            '<h3 class="messenge-win__name"></h3>' +
+                        '</div>' +
+                    '</div>' +
+                    '<form action="/message/create" class="messenge-win__form" method="post" style="height: auto" enctype="multipart/form-data" id="message_form">' +
+                        '<input type="hidden" name="user_id" value="">' +
+                        '<textarea name="text" class="messenge-win__input" placeholder="Напишите сообщение..."></textarea>' +
+                        '<div class="jq-file messenge-win__file"><div class="jq-file__name">Файл не выбран</div><div class="jq-file__browse">Обзор...</div><input type="file" class="messenge-win__file" name="file"></div>' +
+                        '<button style="display: inline-block; vertical-align: top; background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>' +
+                        '<div id="preloader" style="background-image: url(/img/preloader.gif); height: 40px; width: 50px; background-position: center; background-size: cover; display: inline-block; opacity: 0" width="30" height="30">' +
+                    '</form>' +
+                '</div>'
+            );
+
+            $messanger.find('input[name="user_id"]').val(res.companion.id);
+            var companion_name = "";
+            if (res.companion.surname) companion_name += res.companion.surname + " ";
+            if (res.companion.name) companion_name += res.companion.name + " ";
+            if (res.companion.patronymic) companion_name += res.companion.patronymic + " ";
+
+            $('.messenge-win__name').text(companion_name);
+            var $mes_screen = $('.messenge-win__content');
+            var messages = res.messages;
+            for (var date in messages){
+
+                // дата
+                var norm_date = '';
+                var date_arr = date.split(' ');
+                for (var i = 0; i < date_arr.length; i++){
+                    norm_date += date_arr[i].length < 2 ? "0" + date_arr[i] : date_arr[i];
+                    if (i != date_arr.length - 1) norm_date += ".";
+                }
+                //***************
+
+                $mes_screen.append('<div class="messenge-win__date"><span class="messenge-win__date-t">' + norm_date + '</span></div>');
+                for (var i = 0; i < messages[date].length; i++) {
+                    var name =  messages[date][i].user_id == res.companion.id ? companion_name + ":" : "Вы :";
+
+                    var time = messages[date][i].created_at.split(' ')[1].split(':');
+                    time = time[0] + ":" + time[1];
+
+                    $mes_screen.append(
+                        '<div class="messenge">' +
+                            '<div class="messenge__top">' +
+                                '<h3 class="messenge__name">' + name + '</h3>' +
+                                '<span class="messenge__date">'+ time +'</span>'+
+                            '</div>' +
+                            '<p class="messenge__text">' + messages[date][i].text +'</p>'+
+                        '</div>'
+                    );
+                }
+            }
+
+        });
+    });
 
 });

@@ -7,6 +7,7 @@ use App\Mail\NewMessage;
 use App\Models\Conversation;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
@@ -23,11 +24,12 @@ class MessageController extends Controller
         $json = ['status' => 'ok'];
         $date = Carbon::now();
         $json['time'] = $date->format('H:i');
-        $date = $date->day . " " . $date->month . " " . $date->year;
-        $current_day_message = $conversation->messages()->where('date', $date)->first();
+        $date_search = $date->day . " " . $date->month . " " . $date->year;
+        $date =  $date->format('d.m.Y');
+        $current_day_message = $conversation->messages()->where('date', $date_search)->first();
         if (!$current_day_message) $json['date'] = $date;
 
-        $message_data = ['text' => $request->text, 'user_id' => auth()->id(), 'date' => $date];
+        $message_data = ['text' => $request->text, 'user_id' => auth()->id(), 'date' => $date_search];
 
         if ($request->hasFile('file')){
             $filename = $conversation->id . Carbon::now()->timestamp . $request->file->getClientOriginalName();
@@ -49,6 +51,24 @@ class MessageController extends Controller
 
         if (\Request::ajax()) return json_encode($json);
         return redirect()->back();
+    }
+
+    /**
+     * Получить диалог
+     * @param Request $request
+     * @return string
+     */
+    public function conversation(Request $request)
+    {
+        $conversation = Conversation::with('messages')->find($request->id);
+        if ($conversation->user1_id == auth()->id() or $conversation->user2_id == auth()->id()){
+            return json_encode([
+                'conversation' => $conversation,
+                'messages' => $conversation->messages->groupBy('date'),
+                'companion' => $conversation->getCompanion(auth()->id())
+            ]);
+        }
+        return json_encode(['status' => false]);
     }
 
 }

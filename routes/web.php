@@ -58,6 +58,7 @@ Route::prefix('blog')->group(function () {
 
 Route::prefix('message')->middleware('auth')->group(function () {
     Route::post('create', 'MessageController@create')->name('message.create');
+    Route::post('conversation', 'MessageController@conversation')->name('message.conversation');
 });
 
 Route::get('product/{product}', 'ProductController@show')->name('product.show');
