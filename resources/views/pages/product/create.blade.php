@@ -38,14 +38,14 @@
                                 {{--<input type="hidden" name="loaded_photos[]" value="{{ $photo }}">--}}
                             @endforeach
                         @else
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
-                            <li class="goods-photo__item" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
+                            <li class="goods-photo__item preview" ><div></div></li>
                         @endif
                     </ul>
                 </div>
@@ -97,31 +97,31 @@
                 </h3>
                 <div class="settings-shop__gr">
                     <div class="price-n-discount">
-                        <div class="price-n-discount__value">
-                            <span class="inp-text inp-text_edit inp-text_readonly" contenteditable="true" data-maxlength="5">
-                                @if(isset($product))
-                                    {{ $product->price }}
-                                @else
-                                    0
-                                @endif
-                                <input type="hidden" name="price" required  value="@if(isset($product)) {{ $product->price }} @else 0 @endif">
-                            </span>
-                            ₽
+                        <div class="price-n-discount__value" style="margin-left: 0;">
+                            {{--<span class="inp-text inp-text_edit inp-text_readonly" contenteditable="true" data-maxlength="5">--}}
+                                {{--@if(isset($product))--}}
+                                    {{--{{ $product->price }}--}}
+                                {{--@else--}}
+                                    {{--0--}}
+                                {{--@endif--}}
+                                <input type="number" min="0" style="font-size: 24px;text-align: left;" class="delivery__price-value" name="price" required  value="@if(isset($product)) {{ $product->price }} @else 0 @endif" placeholder="0 ₽">
+                            {{--</span>--}}
+                            {{--₽--}}
                         </div>
                         <h3 class="settings-shop__name">
                             <span class="settings-shop__s-t">Скидка на товар</span>
                             <span class="settings-shop__sub-t">Вы сможете сделать скидку через 30 дней</span>
                         </h3>
-                        <div class="price-n-discount__value disabled">
-                            <span class="inp-text inp-text_edit inp-text_readonly" contenteditable="false" data-maxlength="5">
-                                @if(isset($product))
-                                    {{ $product->sale_price }}
-                                @else
-                                    0
-                                @endif
-                                <input type="hidden" name="sale_price" value="@if(isset($product)) {{ $product->sale_price }} @else 0 @endif">
-                            </span>
-                            ₽
+                        <div class="price-n-discount__value disabled"  style="margin-left: 0;">
+                            {{--<span class="inp-text inp-text_edit inp-text_readonly" contenteditable="false" data-maxlength="5">--}}
+                                {{--@if(isset($product))--}}
+                                    {{--{{ $product->sale_price }}--}}
+                                {{--@else--}}
+                                    {{--0--}}
+                                {{--@endif--}}
+                                <input disabled="" type="number" style="font-size: 24px;text-align: center;" class="delivery__price-value" name="sale_price" value="@if(isset($product)) {{ $product->sale_price }} @else 0 @endif" placeholder="0 ₽">
+                            {{--</span>--}}
+                            {{--₽--}}
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                                     <label for="pr">{{ $delivery->name }}</label>
                                 </td>
                                 <td class="delivery__price">
-                                    <input type="text" class="delivery__price-value" name="delivery_price[]" maxlength="6" value="@if(!empty($product_delivery)){{ $product_delivery->pivot->price }} @else 0 @endif"  @if(empty($product_delivery)) disabled @endif>
+                                    <input type="number" placeholder="0" class="delivery__price-value" name="delivery_price[]" maxlength="6" value="@if(!empty($product_delivery)){{ $product_delivery->pivot->price }} @else 0 @endif"  @if(empty($product_delivery)) disabled @endif>
                                 </td>
                             </tr>
                         @endforeach

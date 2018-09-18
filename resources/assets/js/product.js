@@ -7,10 +7,15 @@ var sort_files = [];
 
 $(document).ready(function () {
 
+    $(document).on('click', '.js-delete-photo', function () {
+         $(this).parents('.drag').remove();
+        $dropzonePreview.append('<li class="goods-photo__item preview" ><div></div></li>');
+    });
+
     var loaded_photos = $('input[name="loaded_photos[]"]');
 
     $('#sortable').sortable({
-        items: "> .goods-photo__item",
+        items: "> .drag",
         update: function (event,ui) {
             if (loaded_photos.length == 0) {
                 $('#sortable li').each(function (i, item) {
@@ -19,6 +24,8 @@ $(document).ready(function () {
             }
         }
     });
+
+    $('#sortable').disableSelection();
 
     $.extend($.validator.messages, {
         required: "Это поле обязательное для заполнения",
@@ -114,21 +121,28 @@ if ($dropzoneEl.length) {
 
 
     dropzone.on('addedfile', function(file) {
-        if (files.length == 0) $dropzonePreview.find('.goods-photo__item').remove();
+        // if (files.length == 0) $dropzonePreview.find('.goods-photo__item').remove();
         if (files.length < 8) {
+            $dropzonePreview.find('.goods-photo__item.preview').first().remove();
             files.push(file);
             sort_files.push(file);
-            $dropzonePreview.css('justifyContent', 'flex-start');
+            // $dropzonePreview.css('justifyContent', 'flex-start');
             var reader = new FileReader();
             var index = files.length;
             reader.onloadend = function () {
-                $dropzonePreview.append(
-                    '<li data-index="'+ (index - 1) + '" style=" margin-right: 14px" class="goods-photo__item"><div style="background-image: url(' + reader.result + '); background-size: cover; background-position: center; width: 100%; height: 100%"></div></li>'
+                $dropzonePreview.prepend(
+                    '<li data-index="'+ (index - 1) + '" class="goods-photo__item drag">' +
+                        '<div class="product-preview-cover">' +
+                            '<p class="js-delete-photo">Удалить</p>' +
+                        '</div>' +
+                        '<div style="border-radius: 4px; background-image: url(' + reader.result + '); background-size: cover; background-position: center; width: 100%; height: 100%"></div>' +
+                    '</li>'
                 );
             };
             reader.readAsDataURL(file);
+            if (files.length == 8)  $dropzoneEl.addClass('js-dropzone--disable');
         } else {
-            if (!$dropzoneEl.hasClass('js-dropzone--disable')) $dropzoneEl.addClass('js-dropzone--disable')
+            if (!$dropzoneEl.hasClass('js-dropzone--disable')) $dropzoneEl.addClass('js-dropzone--disable');
         }
     })
 

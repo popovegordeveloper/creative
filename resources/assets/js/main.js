@@ -1,67 +1,73 @@
 $(document).ready(function () {
 
+    var $messanger = $('.messenge-win__content');
+    $messanger.scrollTop($messanger.prop('scrollHeight'));
+
     $(document).on('submit', '#message_form', function (e) {
         e.preventDefault();
         var $this = $(this);
         var $text = $(this).find('textarea');
-        var formData = new FormData();
-        formData.append('text', $text.val());
-        formData.append('file', $this.find('input[name="file"]').first().prop('files')[0]);
-        formData.append('user_id', $this.find('input[name="user_id"]').val());
-        var btn = $(this).find('button');
-        btn.prop('disabled', true);
-        $('#preloader').css('opacity', '1');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: $this.attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false,
-            cache: false,
-            contentType: false,
-            success: function (res) {
-                res = JSON.parse(res);
-                var $messages = $('.messenge-win__content');
-                if (res.date){
-                    $messages.append(
-                        '<div class="messenge-win__date"><span class="messenge-win__date-t">'+ res.date + '</span></div>'
-                    );
+        if ($text.val() || $this.find('input[name="file"]').first().prop('files')[0]) {
+            var formData = new FormData();
+            formData.append('text', $text.val());
+            formData.append('file', $this.find('input[name="file"]').first().prop('files')[0]);
+            formData.append('user_id', $this.find('input[name="user_id"]').val());
+            var btn = $(this).find('button');
+            btn.prop('disabled', true);
+            $('#preloader').css('opacity', '1');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-                if (res.url){
-                    $messages.append(
-                        '<div class="messenge">' +
-                        '<div class="messenge__top">' +
-                        '<h3 class="messenge__name">Вы:</h3>' +
-                        '<span class="messenge__date">'+ res.time +'</span>' +
-                        '</div>' +
-                        '<p class="messenge__text">'+ $text.val() + '</p>' +
-                        '<a style="color: #c51f5d;" download="" href="'+ res.url +'">'+ res.filename +'</a>' +
-                        '</div>'
-                    );
-                } else {
-                    $messages.append(
-                        '<div class="messenge">' +
-                        '<div class="messenge__top">' +
-                        '<h3 class="messenge__name">Вы:</h3>' +
-                        '<span class="messenge__date">'+ res.time +'</span>' +
-                        '</div>' +
-                        '<p class="messenge__text">'+ $text.val() + '</p>' +
-                        '</div>'
-                    );
+            });
+            $.ajax({
+                url: $this.attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                cache: false,
+                contentType: false,
+                success: function (res) {
+                    res = JSON.parse(res);
+                    var $messages = $('.messenge-win__content');
+                    if (res.date){
+                        $messages.append(
+                            '<div class="messenge-win__date"><span class="messenge-win__date-t">'+ res.date + '</span></div>'
+                        );
+                    }
+                    if (res.url){
+                        $messages.append(
+                            '<div class="messenge">' +
+                            '<div class="messenge__top">' +
+                            '<h3 class="messenge__name">Вы:</h3>' +
+                            '<span class="messenge__date">'+ res.time +'</span>' +
+                            '</div>' +
+                            '<p class="messenge__text">'+ $text.val() + '</p>' +
+                            '<a style="color: #c51f5d;" download="" href="'+ res.url +'">'+ res.filename +'</a>' +
+                            '</div>'
+                        );
+                    } else {
+                        $messages.append(
+                            '<div class="messenge">' +
+                            '<div class="messenge__top">' +
+                            '<h3 class="messenge__name">Вы:</h3>' +
+                            '<span class="messenge__date">'+ res.time +'</span>' +
+                            '</div>' +
+                            '<p class="messenge__text">'+ $text.val() + '</p>' +
+                            '</div>'
+                        );
+                    }
+                    var $messanger = $('.messenge-win__content');
+                    $messanger.scrollTop($messanger.prop('scrollHeight'));
+                    $('#preloader').css('opacity', '0');
+                    btn.prop('disabled', false);
+                    btn.removeProp('disabled');
+                    $text.val('');
                 }
-                var $messanger = $('.messenge-win__content');
-                $messanger.scrollTop($messanger.prop('scrollHeight'));
-                $('#preloader').css('opacity', '0');
-                btn.prop('disabled', false);
-                btn.removeProp('disabled');
-                $text.val('');
-            }
-        });
-
+            });
+        } else {
+            console.log('message not send');
+        }
     });
 
     // $('#new-message-btn').click(function (e) {
@@ -573,7 +579,7 @@ $(document).ready(function () {
                         '<textarea name="text" class="messenge-win__input" placeholder="Напишите сообщение..."></textarea>' +
                         '<div class="jq-file messenge-win__file"><div class="jq-file__name">Файл не выбран</div><div class="jq-file__browse">Обзор...</div><input type="file" class="messenge-win__file" name="file"></div>' +
                         '<button style="display: inline-block; vertical-align: top; background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>' +
-                        '<div id="preloader" style="background-image: url(/img/preloader.gif); height: 40px; width: 50px; background-position: center; background-size: cover; display: inline-block; opacity: 0" width="30" height="30">' +
+                        '<div id="preloader" style="background-image: url(/img/preloader.gif); height: 40px; width: 50px; background-position: center; background-size: cover; display: inline-block; opacity: 0" width="30" height="30"></div>' +
                     '</form>' +
                 '</div>'
             );
@@ -616,7 +622,7 @@ $(document).ready(function () {
                     );
                 }
             }
-
+            $mes_screen.scrollTop($mes_screen.prop('scrollHeight'));
         });
     });
 

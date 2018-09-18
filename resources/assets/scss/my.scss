@@ -1597,6 +1597,8 @@ a {
     width: 130px;
     height: 130px;
     border-radius: 50%;
+    background-position: center;
+    background-size: cover;
   }
   &__name {
     margin-top: 27px;
@@ -2941,6 +2943,7 @@ a {
     display: inline-block;
     margin-bottom: 42px;
     font-size: 18px;
+    font-weight: bold;
   }
   &__input {
     border-top: none;
@@ -3460,9 +3463,15 @@ input.settings-shop__obloj {
     border: none;
     background: none;
     padding: 0;
+    &::placeholder{
+        color: #303030;
+    }
 
     .disabled & {
       color: #9a9a9a;
+      &::placeholder{
+        color: #9a9a9a;
+      }
     }
 
     @media screen and (max-width: 662px) {
@@ -3574,7 +3583,7 @@ input.settings-shop__obloj {
   }
 
   &__value {
-    width: 130px;
+    width: 190px;
     margin-left: 25px;
     font-size: 24px;
     color: #303030;

@@ -57,11 +57,19 @@
                         </div>
                     @endforeach
                 </div>
+            @else
+                <div class="my-items-empty">
+                    <img src="{{ asset('img/box.jpg') }}" alt="" class="my-items-empty__img">
+                    <h3 class="my-items-empty__title">Товары</h3>
+                    <span class="my-items-empty__subtitle">Пока нет ни одного добавленного товара</span>
+                    @if($shop->user_id == auth()->id()) <a href="{{ route('product.create') }}" class="my-items-empty__button">Добавить товар</a> @endif
+                </div>
             @endif
+
             <div class="magazin__info">
                 <div class="mg-info">
                     <div class="mg-info__ls">
-                        <img src="{{ asset($shop->master_logo) }}" alt="" class="mg-info__photo">
+                        <div style="background-image: url('{{ asset($shop->master_logo) }}')" class="mg-info__photo"></div>
                         <span class="mg-info__name">{{ $shop->master_name }}</span>
                         <span class="mg-info__dol">Мастер</span>
                     </div>

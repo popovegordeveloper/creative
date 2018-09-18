@@ -52,7 +52,8 @@
                             <input type="hidden" name="user_id" value="{{ $companion->id }}">
                             <textarea name="text" class="messenge-win__input" placeholder="Напишите сообщение..."></textarea>
                             <input type="file" class="messenge-win__file" name="file">
-                            <button style="background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>
+                            <button style="display: inline-block; vertical-align: top;background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>
+                            <div id="preloader" style="background-image: url(/img/preloader.gif); height: 40px; width: 50px; background-position: center; background-size: cover; display: inline-block; opacity: 0" width="30" height="30"></div>
                         </form>
                     </div>
                 </div>

@@ -60,43 +60,43 @@
                     <textarea type="text" name="return_conditions" class="settings-shop__textarea big">@if(isset($shop)){{ $shop->return_conditions }} @else Возврат товара надлежащего качества возможен в течение 14 дней, при сохранении его товарного вида (упаковка, пломбы, ярлыки) и потребительских свойств @endif</textarea>
                 </div>
             </div>
-            <div class="settings-shop__group">
-                <h3 class="settings-shop__name">
-                    <span class="settings-shop__s-t">Способы доставки</span>
-                    <span class="settings-shop__sub-t">Выберите удобные способы доставки и укажите стоимость каждого</span>
-                </h3>
-                <div class="settings-shop__gr">
-                    <table class="delivery">
-                        <tr>
-                            <th></th>
-                            <th>Способ доставки</th>
-                            <th>Стоимость доставки, ₽</th>
-                        </tr>
-                        @foreach($deliveries as $delivery)
-                            @php
-                                $shop_delivery = null;
-                                if (isset($shop_deliveries) and $shop_deliveries->find($delivery->id)) $shop_delivery = $shop_deliveries->find($delivery->id);
-                            @endphp
-                            <tr @if(empty($shop_delivery)) class="disabled" @endif>
-                                <td class="delivery__check">
-                                    <input type="checkbox" @if($delivery->name == "Самовывоз") id="sm" @else id="pr" @endif  name="delivery[]" value="{{ $delivery->id }}" class="delivery__checkbox" @if(!empty($shop_delivery)) checked @endif>
-                                </td>
-                                <td class="delivery__label">
-                                    <label for="pr">{{ $delivery->name }}</label>
-                                </td>
-                                <td class="delivery__price">
-                                    <input type="text" class="delivery__price-value" name="delivery_cost[]" maxlength="6" value="@if(!empty($shop_delivery)){{ $shop_delivery->pivot->price }} @else 0 @endif"  @if(empty($shop_delivery)) disabled @endif>
-                                </td>
-                            </tr>
-                        @endforeach
-                        <tr>
-                            <td class="delivery__address" colspan="3">
-                                <textarea class="settings-shop__textarea hidden" name="address" id="sm-textarea" cols="30" rows="2" placeholder="Укажите место самовывоза (город, адрес, комментарии)">@if(isset($shop)){{ $shop->address }}@endif</textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            {{--<div class="settings-shop__group">--}}
+                {{--<h3 class="settings-shop__name">--}}
+                    {{--<span class="settings-shop__s-t">Способы доставки</span>--}}
+                    {{--<span class="settings-shop__sub-t">Выберите удобные способы доставки и укажите стоимость каждого</span>--}}
+                {{--</h3>--}}
+                {{--<div class="settings-shop__gr">--}}
+                    {{--<table class="delivery">--}}
+                        {{--<tr>--}}
+                            {{--<th></th>--}}
+                            {{--<th>Способ доставки</th>--}}
+                            {{--<th>Стоимость доставки, ₽</th>--}}
+                        {{--</tr>--}}
+                        {{--@foreach($deliveries as $delivery)--}}
+                            {{--@php--}}
+                                {{--$shop_delivery = null;--}}
+                                {{--if (isset($shop_deliveries) and $shop_deliveries->find($delivery->id)) $shop_delivery = $shop_deliveries->find($delivery->id);--}}
+                            {{--@endphp--}}
+                            {{--<tr @if(empty($shop_delivery)) class="disabled" @endif>--}}
+                                {{--<td class="delivery__check">--}}
+                                    {{--<input type="checkbox" @if($delivery->name == "Самовывоз") id="sm" @else id="pr" @endif  name="delivery[]" value="{{ $delivery->id }}" class="delivery__checkbox" @if(!empty($shop_delivery)) checked @endif>--}}
+                                {{--</td>--}}
+                                {{--<td class="delivery__label">--}}
+                                    {{--<label for="pr">{{ $delivery->name }}</label>--}}
+                                {{--</td>--}}
+                                {{--<td class="delivery__price">--}}
+                                    {{--<input type="number" placeholder="0" class="delivery__price-value" name="delivery_cost[]" maxlength="6" value="@if(!empty($shop_delivery)){{ $shop_delivery->pivot->price }} @else 0 @endif"  @if(empty($shop_delivery)) disabled @endif>--}}
+                                {{--</td>--}}
+                            {{--</tr>--}}
+                        {{--@endforeach--}}
+                        {{--<tr>--}}
+                            {{--<td class="delivery__address" colspan="3">--}}
+                                {{--<textarea class="settings-shop__textarea hidden" name="address" id="sm-textarea" cols="30" rows="2" placeholder="Укажите место самовывоза (город, адрес, комментарии)">@if(isset($shop)){{ $shop->address }}@endif</textarea>--}}
+                            {{--</td>--}}
+                        {{--</tr>--}}
+                    {{--</table>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="settings-shop__group">
                 <h3 class="settings-shop__name">
                     <span class="settings-shop__s-t">Мастер</span>
@@ -104,7 +104,7 @@
                 </h3>
                 <div class="settings-shop__gr">
                     <input type="file" @if(!isset($shop)) required @endif name="master_logo" class="settings-shop__logo master-logo" id="masterLogo">
-                    <input type="text" required name="master_name" class="settings-shop__mast-name" value="@if(isset($shop)){{ $shop->master_name }}@else Введите ваше имя @endif">
+                    <input type="text" required name="master_name" class="settings-shop__mast-name" value="@if(isset($shop)){{ $shop->master_name }}@endif" placeholder="Введите ваше имя ">
                 </div>
             </div>
             <div class="settings-shop__group">
