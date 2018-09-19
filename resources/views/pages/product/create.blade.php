@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-
     <div class="settings-shop">
         <form action="@if(isset($product)){{ route('product.update') }}@else{{ route('product.save') }}@endif" method="post" class="settings-shop__form" enctype="multipart/form-data" id="product-form">
             @csrf
@@ -33,10 +32,14 @@
                     <ul class="goods-photo js-dropzone-files" id="sortable">
                         @if(isset($product))
                             @foreach($product->photos as $photo)
-                                <li class="goods-photo__item" style="background-image: url('{{ asset($photo) }}')"><div><input type="hidden" name="loaded_photos[]" value="{{ $photo }}"></div></li>
-                                {{--<div class="goods-photo__item" style="background-image: url('{{ asset($photo) }}')"></div>--}}
-                                {{--<input type="hidden" name="loaded_photos[]" value="{{ $photo }}">--}}
+                                <li class="goods-photo__item drag loaded" style="background-image: url('{{ asset($photo) }}')"><div class="product-preview-cover"><p class="js-delete-photo">Удалить</p><input type="hidden" name="loaded_photos[]" value="{{ $photo }}"></div></li>
                             @endforeach
+                            @php $count = (8 - count($product->photos)); @endphp
+                            @if($count)
+                                @for($i = 0; $i < $count; $i++)
+                                    <li class="goods-photo__item preview" ><div></div></li>
+                                @endfor
+                            @endif
                         @else
                             <li class="goods-photo__item preview" ><div></div></li>
                             <li class="goods-photo__item preview" ><div></div></li>
@@ -104,7 +107,7 @@
                                 {{--@else--}}
                                     {{--0--}}
                                 {{--@endif--}}
-                                <input type="number" min="0" style="font-size: 24px;text-align: left;" class="delivery__price-value" name="price" required  value="@if(isset($product)) {{ $product->price }} @else 0 @endif" placeholder="0 ₽">
+                                <input type="number" min="0" style="font-size: 24px;text-align: left;" class="delivery__price-value" name="price" required  value="@if(isset($product)){{$product->price}}@else 0 @endif" placeholder="0 ₽">
                             {{--</span>--}}
                             {{--₽--}}
                         </div>
@@ -119,7 +122,7 @@
                                 {{--@else--}}
                                     {{--0--}}
                                 {{--@endif--}}
-                                <input disabled="" type="number" style="font-size: 24px;text-align: center;" class="delivery__price-value" name="sale_price" value="@if(isset($product)) {{ $product->sale_price }} @else 0 @endif" placeholder="0 ₽">
+                                <input disabled="" type="number" style="font-size: 24px;text-align: center;" class="delivery__price-value" name="sale_price" value="@if(isset($product)){{$product->sale_price}} @else 0 @endif" placeholder="0 ₽">
                             {{--</span>--}}
                             {{--₽--}}
                         </div>
@@ -151,7 +154,7 @@
                                     <label for="pr">{{ $delivery->name }}</label>
                                 </td>
                                 <td class="delivery__price">
-                                    <input type="number" placeholder="0" class="delivery__price-value" name="delivery_price[]" maxlength="6" value="@if(!empty($product_delivery)){{ $product_delivery->pivot->price }} @else 0 @endif"  @if(empty($product_delivery)) disabled @endif>
+                                    <input type="number" placeholder="0" class="delivery__price-value" name="delivery_price[]" maxlength="6" value="@if(!empty($product_delivery)){{$product_delivery->pivot->price}}@else 0 @endif"  @if(empty($product_delivery)) disabled @endif>
                                 </td>
                             </tr>
                         @endforeach

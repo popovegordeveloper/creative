@@ -8,14 +8,8 @@ var sort_files = [];
 $(document).ready(function () {
 
     $(document).on('click', '.js-delete-photo', function () {
-        // console.log(sort_files);
         $(this).parents('.drag').remove();
         $dropzonePreview.append('<li class="goods-photo__item preview" ><div></div></li>');
-        // sort_files = [];
-        // $('.drag').each(function (i, item) {
-        //     sort_files.push(files[$(this).data('index')]);
-        // });
-        // console.log(sort_files);
     });
 
     var loaded_photos = $('input[name="loaded_photos[]"]');
@@ -40,37 +34,31 @@ $(document).ready(function () {
     if (loaded_photos.length == 0) $('#product-form').validate({
         lang: 'ru'
     });
-    $('#product-form').submit(function (e) {
+
+    $(document).on('submit', '#product-form', function (e) {
         e.preventDefault();
         var formData = new FormData();
         var $this = $(this);
         $this.validate({
             lang: 'ru'
         });
-
-
         if (!sort_files.length && loaded_photos.length == 0) {
             $('#photos_err').show();
             return;
         }
-
-        if (loaded_photos.length) {
-            formData.append('product_id', $this.find('input[name="product_id"]').val());
-            loaded_photos = $('input[name="loaded_photos[]"]');
-            loaded_photos.each(function (i, item) {
-                formData.append('loaded_photos[]', $(this).val());
-            });
+        if ($('input[name="product_id"]').length != 0){
+            formData.append('product_id', $('input[name="product_id"]').val());
         }
-
         sort_files = [];
         if ($('.drag').length){
             $('.drag').each(function () {
-                sort_files.push(files[$(this).data('index')]);
+                if ($(this).hasClass('loaded')) sort_files.push($(this).find('input').val());
+                else sort_files.push(files[$(this).data('index')]);
             });
         }
-        console.log(sort_files);
         for (var i = 0; i < sort_files.length; i++) {
-            formData.append('photos[]', sort_files[i]);
+            console.log(sort_files[i]);
+            formData.append('photos['+ i +']', sort_files[i]);
         }
         formData.append('name', $this.find('textarea[name="name"]').val());
         formData.append('description', $this.find('textarea[name="description"]').val());
@@ -102,7 +90,6 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $.ajax({
             url: $this.attr('action'),
             type: 'POST',
@@ -112,7 +99,6 @@ $(document).ready(function () {
             contentType: false,
             success: function (res) {
                 res = JSON.parse(res);
-                // console.log(res);
                 location.href = res.url;
             }
         });
@@ -121,6 +107,9 @@ $(document).ready(function () {
 });
 
 if ($dropzoneEl.length) {
+
+    var count = 8 - $('.loaded').length;
+    console.log(count);
     var dropzone = new Dropzone('.js-dropzone', {
         url: $dropzoneEl.closest('form').attr('action'),
         paramName: 'photos[]',
@@ -128,18 +117,16 @@ if ($dropzoneEl.length) {
         previewsContainer: false,
         acceptedFiles: '.jpeg, .jpg, .png',
         renameFile: false,
-        maxFiles: 8,
+        maxFiles: count,
         parallelUploads: 3,
         autoProcessQueue: false,
     });
 
     dropzone.on('addedfile', function (file) {
-        // if (files.length == 0) $dropzonePreview.find('.goods-photo__item').remove();
-        if (files.length < 8) {
+        if (files.length < count) {
             $dropzonePreview.find('.goods-photo__item.preview').first().remove();
             files.push(file);
             sort_files.push(file);
-            // $dropzonePreview.css('justifyContent', 'flex-start');
             var reader = new FileReader();
             var index = files.length;
             reader.onloadend = function () {
@@ -153,7 +140,7 @@ if ($dropzoneEl.length) {
                 );
             };
             reader.readAsDataURL(file);
-            if (files.length == 8) $dropzoneEl.addClass('js-dropzone--disable');
+            if (files.length == count) $dropzoneEl.addClass('js-dropzone--disable');
         } else {
             if (!$dropzoneEl.hasClass('js-dropzone--disable')) $dropzoneEl.addClass('js-dropzone--disable');
         }

@@ -103,15 +103,11 @@ class ProductService
         $dir_name = "/images/shops/" . $shop->slug . "/" . $dir;
 
         $product_data = $request->except(['delivery', 'delivery_price', 'color']);
+        $request_photos = $request->photos;
+        ksort($request_photos);
         if ($request->has('photos')) {
-            $this->removePhotos($product->photos);
             $photos = [];
-            foreach ($request->photos as $photo) $photos[] = $this->saveImage($photo, $dir_name);
-            $product_data['photos'] = $photos;
-        }
-        else {
-            $photos = [];
-            foreach ($request->loaded_photos as $photo) $photos[] = $photo;
+            foreach ($request_photos as $photo) $photos[] = is_string($photo) ? $photo : $this->saveImage($photo, $dir_name);
             $product_data['photos'] = $photos;
         }
 

@@ -26,7 +26,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'product_id' => Rule::in(auth()->user()->shop->products->pluck('id')->toArray()),
-            'photos' => 'required_without:loaded_photos',
+            'photos' => 'required',
             'name' => 'required',
             'description' => 'required',
             'composition' => 'required',
