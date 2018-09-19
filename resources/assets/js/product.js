@@ -8,15 +8,21 @@ var sort_files = [];
 $(document).ready(function () {
 
     $(document).on('click', '.js-delete-photo', function () {
-         $(this).parents('.drag').remove();
+        // console.log(sort_files);
+        $(this).parents('.drag').remove();
         $dropzonePreview.append('<li class="goods-photo__item preview" ><div></div></li>');
+        // sort_files = [];
+        // $('.drag').each(function (i, item) {
+        //     sort_files.push(files[$(this).data('index')]);
+        // });
+        // console.log(sort_files);
     });
 
     var loaded_photos = $('input[name="loaded_photos[]"]');
 
     $('#sortable').sortable({
         items: "> .drag",
-        update: function (event,ui) {
+        update: function (event, ui) {
             if (loaded_photos.length == 0) {
                 $('#sortable li').each(function (i, item) {
                     sort_files[i] = files[$(this).data('index')];
@@ -55,6 +61,14 @@ $(document).ready(function () {
                 formData.append('loaded_photos[]', $(this).val());
             });
         }
+
+        sort_files = [];
+        if ($('.drag').length){
+            $('.drag').each(function () {
+                sort_files.push(files[$(this).data('index')]);
+            });
+        }
+        console.log(sort_files);
         for (var i = 0; i < sort_files.length; i++) {
             formData.append('photos[]', sort_files[i]);
         }
@@ -75,11 +89,11 @@ $(document).ready(function () {
         if ($this.find('textarea[name="address"]').val()) formData.append('address', $this.find('textarea[name="address"]').val());
         formData.append('category_id', $this.find('select[name="category_id"]').val());
         formData.append('qty', $this.find('#quant-val').val());
-        if ($this.find('#any:checked').length)  formData.append('qty_null', $this.find('#any:checked').val());
+        if ($this.find('#any:checked').length) formData.append('qty_null', $this.find('#any:checked').val());
         formData.append('term_dispatch_id', $this.find('select[name="term_dispatch_id"]').val());
         if ($this.find('select[name="color[]"]').val().length) {
             var colors = $this.find('select[name="color[]"]').val();
-            for (var i = 0; i < colors.length; i++){
+            for (var i = 0; i < colors.length; i++) {
                 formData.append('color[]', colors[i]);
             }
         }
@@ -98,7 +112,7 @@ $(document).ready(function () {
             contentType: false,
             success: function (res) {
                 res = JSON.parse(res);
-                console.log(res);
+                // console.log(res);
                 location.href = res.url;
             }
         });
@@ -119,8 +133,7 @@ if ($dropzoneEl.length) {
         autoProcessQueue: false,
     });
 
-
-    dropzone.on('addedfile', function(file) {
+    dropzone.on('addedfile', function (file) {
         // if (files.length == 0) $dropzonePreview.find('.goods-photo__item').remove();
         if (files.length < 8) {
             $dropzonePreview.find('.goods-photo__item.preview').first().remove();
@@ -131,20 +144,18 @@ if ($dropzoneEl.length) {
             var index = files.length;
             reader.onloadend = function () {
                 $dropzonePreview.prepend(
-                    '<li data-index="'+ (index - 1) + '" class="goods-photo__item drag">' +
-                        '<div class="product-preview-cover">' +
-                            '<p class="js-delete-photo">Удалить</p>' +
-                        '</div>' +
-                        '<div style="border-radius: 4px; background-image: url(' + reader.result + '); background-size: cover; background-position: center; width: 100%; height: 100%"></div>' +
+                    '<li data-index="' + (index - 1) + '" class="goods-photo__item drag">' +
+                    '<div class="product-preview-cover">' +
+                    '<p class="js-delete-photo">Удалить</p>' +
+                    '</div>' +
+                    '<div style="border-radius: 4px; background-image: url(' + reader.result + '); background-size: cover; background-position: center; width: 100%; height: 100%"></div>' +
                     '</li>'
                 );
             };
             reader.readAsDataURL(file);
-            if (files.length == 8)  $dropzoneEl.addClass('js-dropzone--disable');
+            if (files.length == 8) $dropzoneEl.addClass('js-dropzone--disable');
         } else {
             if (!$dropzoneEl.hasClass('js-dropzone--disable')) $dropzoneEl.addClass('js-dropzone--disable');
         }
     })
-
-
 }

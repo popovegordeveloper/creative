@@ -560,7 +560,7 @@ $(document).ready(function () {
     });
 
   //выбор диалога
-    $('.mesenger__item').click(function (e) {
+    $(document).on('click', '.mesenger__item', function (e) {
         e.preventDefault();
         $conversation_id = $(this).find('input').val();
         $.post('/message/conversation', {id: $conversation_id}, function (res) {
@@ -569,18 +569,18 @@ $(document).ready(function () {
             $messanger.html('');
             $messanger.append(
                 '<div class="messenge-win">' +
-                    '<div class="messenge-win__content">' +
-                        '<div class="messenge-win__top">' +
-                            '<h3 class="messenge-win__name"></h3>' +
-                        '</div>' +
-                    '</div>' +
-                    '<form action="/message/create" class="messenge-win__form" method="post" style="height: auto" enctype="multipart/form-data" id="message_form">' +
-                        '<input type="hidden" name="user_id" value="">' +
-                        '<textarea name="text" class="messenge-win__input" placeholder="Напишите сообщение..."></textarea>' +
-                        '<div class="jq-file messenge-win__file"><div class="jq-file__name">Файл не выбран</div><div class="jq-file__browse">Обзор...</div><input type="file" class="messenge-win__file" name="file"></div>' +
-                        '<button style="display: inline-block; vertical-align: top; background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>' +
-                        '<div id="preloader" style="background-image: url(/img/preloader.gif); height: 40px; width: 50px; background-position: center; background-size: cover; display: inline-block; opacity: 0" width="30" height="30"></div>' +
-                    '</form>' +
+                '<div class="messenge-win__content">' +
+                '<div class="messenge-win__top">' +
+                '<h3 class="messenge-win__name"></h3>' +
+                '</div>' +
+                '</div>' +
+                '<form action="/message/create" class="messenge-win__form" method="post" style="height: auto" enctype="multipart/form-data" id="message_form">' +
+                '<input type="hidden" name="user_id" value="">' +
+                '<textarea name="text" class="messenge-win__input" placeholder="Напишите сообщение..."></textarea>' +
+                '<div class="jq-file messenge-win__file"><div class="jq-file__name">Файл не выбран</div><div class="jq-file__browse">Обзор...</div><input type="file" class="messenge-win__file" name="file"></div>' +
+                '<button style="display: inline-block; vertical-align: top; background: transparent; border: none; padding-left: 40px; color: #c36; cursor: pointer" class="mesenger__button">Отправить</button>' +
+                '<div id="preloader" style="background-image: url(/img/preloader.gif); height: 40px; width: 50px; background-position: center; background-size: cover; display: inline-block; opacity: 0" width="30" height="30"></div>' +
+                '</form>' +
                 '</div>'
             );
 
@@ -613,11 +613,11 @@ $(document).ready(function () {
 
                     $mes_screen.append(
                         '<div class="messenge">' +
-                            '<div class="messenge__top">' +
-                                '<h3 class="messenge__name">' + name + '</h3>' +
-                                '<span class="messenge__date">'+ time +'</span>'+
-                            '</div>' +
-                            '<p class="messenge__text">' + messages[date][i].text +'</p>'+
+                        '<div class="messenge__top">' +
+                        '<h3 class="messenge__name">' + name + '</h3>' +
+                        '<span class="messenge__date">'+ time +'</span>'+
+                        '</div>' +
+                        '<p class="messenge__text">' + messages[date][i].text +'</p>'+
                         '</div>'
                     );
                 }
