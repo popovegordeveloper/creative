@@ -28,7 +28,7 @@
                     <span class="settings-shop__s-t">Фотографии товара</span>
                     <span class="settings-shop__sub-t">Можно загрузить не более 8 фотографий товара, без водяных знаков и рекламных ссылок. Мы рекомендуем добавлять качественные фотографии с товаром крупным планом и с нескольких ракурсов. И помните, фотографии — это витрина вашего магазина.</span>
                 </h3>
-                <div class="settings-shop__gr">
+                <div class="settings-shop__gr" style="position: relative;">
                     <ul class="goods-photo js-dropzone-files" id="sortable">
                         @if(isset($product))
                             @foreach($product->photos as $photo)
@@ -100,31 +100,17 @@
                 </h3>
                 <div class="settings-shop__gr">
                     <div class="price-n-discount">
-                        <div class="price-n-discount__value" style="margin-left: 0;">
-                            {{--<span class="inp-text inp-text_edit inp-text_readonly" contenteditable="true" data-maxlength="5">--}}
-                                {{--@if(isset($product))--}}
-                                    {{--{{ $product->price }}--}}
-                                {{--@else--}}
-                                    {{--0--}}
-                                {{--@endif--}}
-                                <input type="number" min="0" style="font-size: 24px;text-align: left;" class="delivery__price-value" name="price" required  value="@if(isset($product)){{$product->price}}@else 0 @endif" placeholder="0 ₽">
-                            {{--</span>--}}
-                            {{--₽--}}
+                        <div class="price-n-discount__value">
+                            <input type="number" style="font-size: 36px;text-align: center;" class="delivery__price-value" name="price" required  value="@if(isset($product)){{$product->price}}@else 0 @endif" placeholder="0">
+                            <span style="font-size: 24px">₽</span>
                         </div>
                         <h3 class="settings-shop__name">
                             <span class="settings-shop__s-t">Скидка на товар</span>
                             <span class="settings-shop__sub-t">Вы сможете сделать скидку через 30 дней</span>
                         </h3>
                         <div class="price-n-discount__value disabled"  style="margin-left: 0;">
-                            {{--<span class="inp-text inp-text_edit inp-text_readonly" contenteditable="false" data-maxlength="5">--}}
-                                {{--@if(isset($product))--}}
-                                    {{--{{ $product->sale_price }}--}}
-                                {{--@else--}}
-                                    {{--0--}}
-                                {{--@endif--}}
-                                <input disabled="" type="number" style="font-size: 24px;text-align: center;" class="delivery__price-value" name="sale_price" value="@if(isset($product)){{$product->sale_price}} @else 0 @endif" placeholder="0 ₽">
-                            {{--</span>--}}
-                            {{--₽--}}
+                            <input disabled="" type="number" style="font-size: 36px;text-align: center;" class="delivery__price-value" name="sale_price" value="@if(isset($product)){{$product->sale_price}}@else 0 @endif" placeholder="0">
+                            <span style="font-size: 24px">₽</span>
                         </div>
                     </div>
                 </div>
@@ -220,7 +206,7 @@
             <div class="settings-shop__group settings-shop__group_type2">
                 <h3 class="settings-shop__name">
                     <span class="settings-shop__s-t">Цвет товара</span>
-                    <span class="settings-shop__sub-t">Выберите цвет товара.</span>
+                    <span class="settings-shop__sub-t">Выберите цвет товара. <br><br>Не обязательное поле</span>
                 </h3>
                 <div class="settings-shop__gr">
                     <select class="js-example-basic-multiple multiselect" name="color[]" id="id_label_multiple" multiple="multiple">
@@ -228,12 +214,6 @@
                             <option @if(isset($product_colors) and in_array($color->id, $product_colors)) selected @endif value="{{ $color->id }}">{{ $color->name }}</option>
                         @endforeach
                     </select>
-                    {{--<select data-placeholder="" class="multiselect" name="color[]" id="" multiple size="4">--}}
-                        {{--<option value="" disabled>Выбрать</option>--}}
-                        {{--@foreach($colors as $color)--}}
-                            {{--<option @if(isset($product_colors) and in_array($color->id, $product_colors)) selected @endif value="{{ $color->id }}">{{ $color->name }}</option>--}}
-                        {{--@endforeach--}}
-                    {{--</select>--}}
                 </div>
             </div>
 

@@ -78,23 +78,34 @@ $(document).ready(function () {
     // });
 
     $('.multiselect').select2({
-        // placeholder: "Выберите цвет",
+        placeholder: "Доступные цвета товара",
         // width: '100%',
-        theme: "flat"
+        theme: "flat",
+        // allowClear: true
     });
 
     $('.multiselect').on('select2:opening select2:closing', function( event ) {
         var $searchfield = $(this).parent().find('.select2-search__field');
-        $searchfield.prop('disabled', true);
-        $searchfield.hide();
+        $searchfield.attr('placeholder', 'Доступные цвета товара');
+        // $searchfield.prop('disabled', true);
+        // $searchfield.hide();
+    });
+
+    $('.multiselect').on('select2:close', function( event ) {
+        var $searchfield = $(this).parent().find('.select2-search__field');
+        $searchfield.attr('placeholder', 'Доступные цвета товара');
+        // $searchfield.prop('disabled', true);
+        // $searchfield.hide();
     });
 
     $('.multiselect').on('select2:open', function( event ) {
         $('.select2-container--open').css('width', $('.select2-selection__rendered').css('width'));
         var top = $('.select2-selection__rendered').outerHeight() + $('.select2-container--open').position().top + "px";
         $('.select2-container').last().css({top: top});
-        console.log($('.select2-container').last());
-        console.log(top);
+    });
+
+    $(document).on('click', '.select2-selection__choice__remove', function () {
+        $('.multiselect').select2('close');
     });
 
     $('.popup-js').magnificPopup({
@@ -291,22 +302,13 @@ $(document).ready(function () {
     // });
 
 
-    $(document).on("keydown", ".price-n-discount__value span", function(event) {
-        var element = $(this);
-        var textEl = element.text().replace(/\s+/g,'');
-        var maximumLength = element.attr("data-maxlength");
-        var currentLength = textEl.length + 1;
-        if (element.html().length && !element.text().trim().length) {
-            element.empty();
-        }
-
-        element.find('input').val(textEl);
-
-        if(currentLength > maximumLength && event.keyCode != 8) {
-            event.preventDefault();
-            return false;
-        }
-    });
+    // $(document).on("keydown", ".price-n-discount__value input", function(event) {
+    //     var str = $(this).val().toString();
+    //
+    //     console.log(str);
+    //     if ($(this).val() < 1 ) $(this).val(1);
+    //     if ($(this).val() > 99999) $(this).val(99999);
+    // });
 
     $('#any').on('change', function() {
 
