@@ -13,7 +13,8 @@
                     <ul class="card-slider">
                         @foreach($product->photos as $photo)
                             <li >
-                                <img src="{{ asset($photo) }}" />
+                                <div class="product-image" style="background-image: url('{{ asset($photo) }}')"></div>
+                                {{--<img src="{{ asset($photo) }}" />--}}
                             </li>
                         @endforeach
                     </ul>
@@ -68,7 +69,8 @@
                         <form action="" class="info-i__form">
                             <input type="number" class="info-i__input-num" value="1" min="1">
                             @if($product->colors->count())
-                                <select name="" id="" class="info-i__select">
+                                <select name="color_id" id="" class="info-i__select">
+                                    {{--<option disabled value="" >Выберите цвет</option>--}}
                                     @foreach($product->colors as $color)
                                         <option value="{{ $color->id }}">{{ $color->name }}</option>
                                     @endforeach

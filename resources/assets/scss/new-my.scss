@@ -1,3 +1,35 @@
+.info-i__select {
+    cursor: pointer;
+}
+
+.info-i__select .jq-selectbox__trigger {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50px;
+}
+
+.info-i__select .jq-selectbox__trigger-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 13px;
+    margin: -6px 0 0 -10px;
+    background: url(../img/ico-select-arrow.svg) 0 0 no-repeat;
+}
+
+.info-i__form .jq-selectbox{
+    width: 285px;
+}
+.product-image{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
 .error{
     color: red;
 }
@@ -123,7 +155,7 @@ body > .select2-container--open{
     & input {
         //display: none;
         font-size: 16px;
-        color: #9a9a9a;
+        color: #ffea00;
         font-family: Roboto,Helvetica;
         cursor: pointer;
     }
@@ -138,8 +170,8 @@ Author : Techhysahil
 Link : http://techhysahil.com
 *********************************/
 
-$flat-theme-light-color :#e3e3e3;
-$flat-theme-dark-color : #e3e3e3;
+$flat-theme-light-color : #ffea00;
+$flat-theme-dark-color : #ffea00;
 
 .select2-container--open .select2-dropdown--below,
 .select2-container--open .select2-dropdown--above{

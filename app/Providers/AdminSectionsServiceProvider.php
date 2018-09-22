@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Admin\Models\Articles;
 use App\Admin\Models\Categories;
+use App\Admin\Models\Colors;
 use App\Admin\Models\Conversations;
 use App\Admin\Models\Deliveries;
 use App\Admin\Models\Pages;
@@ -18,6 +19,7 @@ use App\Admin\Models\Users;
 use App\Admin\Models\Vacancies;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Conversation;
 use App\Models\Delivery;
 use App\Models\DeliveryProduct;
@@ -53,6 +55,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Article::class => Articles::class,
         Slide::class => Slides::class,
         Conversation::class => Conversations::class,
+        Color::class => Colors::class,
     ];
 
     /**

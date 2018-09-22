@@ -104,6 +104,10 @@ $(document).ready(function () {
         $('.select2-container').last().css({top: top});
     });
 
+    $('.multiselect').on('select2:select', function( event ) {
+        $('.multiselect').select2('open');
+    });
+
     $(document).on('click', '.select2-selection__choice__remove', function () {
         $('.multiselect').select2('close');
     });
