@@ -109,7 +109,6 @@ $(document).ready(function () {
 if ($dropzoneEl.length) {
 
     var count = 8 - $('.loaded').length;
-    console.log(count);
     var dropzone = new Dropzone('.js-dropzone', {
         url: $dropzoneEl.closest('form').attr('action'),
         paramName: 'photos[]',
