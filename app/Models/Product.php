@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Color;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -46,7 +47,7 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereViewed($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Color[] $colors
  */
-class Product extends Model
+class Product extends Model implements Buyable
 {
     use Searchable;
 
@@ -125,4 +126,33 @@ class Product extends Model
         return $this->belongsToMany(Color::class, 'color_product', 'product_id', 'color_id');
     }
 
+    /**
+     * Get the identifier of the Buyable item.
+     *
+     * @return int|string
+     */
+    public function getBuyableIdentifier($options = null)
+    {
+        // TODO: Implement getBuyableIdentifier() method.
+    }
+
+    /**
+     * Get the description or title of the Buyable item.
+     *
+     * @return string
+     */
+    public function getBuyableDescription($options = null)
+    {
+        // TODO: Implement getBuyableDescription() method.
+    }
+
+    /**
+     * Get the price of the Buyable item.
+     *
+     * @return float
+     */
+    public function getBuyablePrice($options = null)
+    {
+        // TODO: Implement getBuyablePrice() method.
+    }
 }

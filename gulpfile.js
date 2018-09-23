@@ -142,6 +142,7 @@ gulp.task('build', [
 gulp.task('watch', function() {
     gulp.watch(path.watch.css, ['css:build']);
     gulp.watch('resources/assets/scss/popup.scss', ['css:build']);
+    gulp.watch('resources/assets/scss/cart.scss', ['css:build']);
     gulp.watch(path.watch.js, ['js:build']);
     gulp.watch('resources/assets/js/product.js', ['js:build']);
     gulp.watch(path.watch.img, ['image:build']);

@@ -29,7 +29,6 @@
 @endphp
 
 <body class="{{ $body_class }}">
-
     <header class="new-header">
         <div class="new-header__row">
             @include('blocks.header-toolbar')
