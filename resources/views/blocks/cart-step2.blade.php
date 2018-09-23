@@ -83,7 +83,7 @@
         </div>
     </div>
     <div style="display: flex;justify-content: center;">
-        <a href="" class="button button_nav" style="margin-right: 50px;">Вернуться назад</a>
+        <a href="" id="js-back-step1" class="button button_nav" style="margin-right: 50px;">Вернуться назад</a>
         <a href="" class="button">Перейти к оплате</a>
     </div>
     <p class="settings-shop__sub-t" style="text-align: center;">Вы будете перенаправлены на сторонний сервис Moneta.ru, где вы сможете выбрать удобный способ оплаты.</p>

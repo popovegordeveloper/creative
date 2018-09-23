@@ -89,7 +89,8 @@ gulp.task('js:build', function () {
         'bower_components/dropzone/dist/min/dropzone.min.js',
         'resources/assets/js/jquery.minical.plain.js',
         path.src.js,
-        'resources/assets/js/product.js'
+        'resources/assets/js/product.js',
+        'resources/assets/js/cart.js'
 
     ]) // получим файл main.js
         // .pipe(plumber()) // для отслеживания ошибок
@@ -145,6 +146,7 @@ gulp.task('watch', function() {
     gulp.watch('resources/assets/scss/cart.scss', ['css:build']);
     gulp.watch(path.watch.js, ['js:build']);
     gulp.watch('resources/assets/js/product.js', ['js:build']);
+    gulp.watch('resources/assets/js/cart.js', ['js:build']);
     gulp.watch(path.watch.img, ['image:build']);
     gulp.watch(path.watch.fonts, ['fonts:build']);
 });
