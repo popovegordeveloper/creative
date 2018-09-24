@@ -9,43 +9,43 @@
                 <div class="cart__row">
                     <div>
                         <label for="cart-name">Имя</label>
-                        <input type="text" name="name" id="cart-name" value="{{ $user->name }}">
+                        <input type="text" name="name" id="cart-name" @if($user) value="{{ $user->name }}" @endif>
                     </div>
 
                     <div>
                         <label for="cart-patronymic">Отчество</label>
-                        <input type="text" name="patronymic" id="cart-patronymic" value="{{ $user->patronymic }}">
+                        <input type="text" name="patronymic" id="cart-patronymic" @if($user) value="{{ $user->patronymic }}" @endif>
                     </div>
                 </div>
 
                 <div class="cart__row">
                     <div>
                         <label for="cart-surname">Фамилия</label>
-                        <input type="text" name="surname" id="cart-surname" value="{{ $user->surname }}">
+                        <input type="text" name="surname" id="cart-surname" @if($user) value="{{ $user->surname }}" @endif>
                     </div>
 
                     <div>
                         <label for="cart-phone">Контактный телефон</label>
-                        <input type="text" name="phone" id="cart-phone" value="{{ $user->phone }}">
+                        <input type="text" name="phone" id="cart-phone" @if($user) value="{{ $user->phone }}" @endif>
                     </div>
                 </div>
 
                 <div class="cart__row">
                     <div>
                         <label for="cart-email">Эл. почта</label>
-                        <input type="text" name="email" id="cart-email" value="{{ $user->email }}">
+                        <input type="text" name="email" id="cart-email" @if($user) value="{{ $user->email }}" @endif>
                     </div>
 
                     <div>
                         <label for="cart-index">Индекс</label>
-                        <input type="text" name="index" id="cart-index" value="{{ $user->index }}">
+                        <input type="text" name="index" id="cart-index" @if($user) value="{{ $user->index }}" @endif>
                     </div>
                 </div>
 
                 <div class="cart__row">
                     <div>
                         <label for="cart-address">Адрес доставки</label>
-                        <textarea type="text" name="address" id="cart-address">{{ $user->address }}</textarea>
+                        <textarea type="text" name="address" id="cart-address">@if($user) {{ $user->address }} @endif</textarea>
                     </div>
 
                     <div>
@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-    <div style="display: flex;justify-content: center;">
+    <div class="cart-step2__buttons" style="display: flex;justify-content: center;">
         <a href="" id="js-back-step1" class="button button_nav" style="margin-right: 50px;">Вернуться назад</a>
         <a href="" class="button">Перейти к оплате</a>
     </div>
