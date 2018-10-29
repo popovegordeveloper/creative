@@ -2,8 +2,8 @@
     @php $class = rand(0, 1); @endphp
     <div class="card @if(!$class) card_long @endif">
         <div class="card__img-w">
-            <img src="{{ asset($product->photos[0]) }}" alt="" class="card__img">
-            <div class="card__hover-w">
+            {{--<img src="{{ asset($product->photos[0]) }}" alt="" class="card__img">--}}
+            <div class="card__hover-w" style="background-image: url('{{ asset($product->photos[0]) }}')">
                 <a href="{{ route('product.show', $product->id) }}" class="card__hover-link"></a>
                 @auth
                     @php
@@ -18,7 +18,7 @@
                         </form>
                     </a>
                 @endauth
-                <a href="" class="card__bay">В корзину</a>
+                <a href="{{ route('cart.add') }}" data-product="{{ $product->id }}" class="card__bay js-add-to-cart">В корзину</a>
                 <a href="{{ route('product.show', $product->id) }}" class="card__more">Подробнее</a>
             </div>
         </div>

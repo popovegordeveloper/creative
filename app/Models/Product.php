@@ -133,7 +133,7 @@ class Product extends Model implements Buyable
      */
     public function getBuyableIdentifier($options = null)
     {
-        // TODO: Implement getBuyableIdentifier() method.
+        return $this->id;
     }
 
     /**
@@ -143,7 +143,7 @@ class Product extends Model implements Buyable
      */
     public function getBuyableDescription($options = null)
     {
-        // TODO: Implement getBuyableDescription() method.
+        return $this->description;
     }
 
     /**
@@ -153,6 +153,6 @@ class Product extends Model implements Buyable
      */
     public function getBuyablePrice($options = null)
     {
-        // TODO: Implement getBuyablePrice() method.
+        return $this->getPrice();
     }
 }

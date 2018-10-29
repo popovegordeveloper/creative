@@ -292,6 +292,9 @@ a {
   z-index: 1000;
   box-shadow: 7px 0 20px 0 rgba(0,0,0,.2);
   padding: 20px 30px;
+  &__message{
+    font-size: 16px;
+  }
   &__top {
     display: flex;
     justify-content: space-between;
@@ -307,7 +310,7 @@ a {
     }
   }
   &__content {
-    height: 315px;
+    max-height: 315px;
     overflow-y: auto;
   }
 }
@@ -331,6 +334,9 @@ a {
     align-items: center;
     border-radius: 5px;
     overflow: hidden;
+    background-position: center;
+    -webkit-background-size: cover;
+    background-size: cover;
   }
   &__close {
     position: absolute;
@@ -770,10 +776,12 @@ a {
     flex-direction: column;
     align-items: center;
     padding: 20px 20px 23px;
+    background-size: cover;
+    background-position: center;
     @include cirkl;
     @include animate;
     &:hover {
-      background: rgba(0, 0, 0, .3);
+      background-color: rgba(0, 0, 0, .3);
     }
   }
   &__hover-link {

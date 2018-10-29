@@ -66,8 +66,9 @@
                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                         </form>
-                        <form action="" class="info-i__form">
-                            <input type="number" class="info-i__input-num" value="1" min="1">
+                        <form action="{{ route('cart.add') }}" id="add_to_cart" class="info-i__form js-add_to_cart">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="number" name="qty" class="info-i__input-num" value="1" min="1">
                             @if($product->colors->count())
                                 <select name="color_id" id="" class="info-i__select">
                                     {{--<option disabled value="" >Выберите цвет</option>--}}
@@ -76,7 +77,7 @@
                                     @endforeach
                                 </select>
                             @endif
-                            <a href="" class="info-i__bytoclick">Купить в 1 клик</a>
+                            <a href="{{ route('cart.add') }}" data-product="{{ $product->id }}" class="info-i__bytoclick js-add-to-cart">Купить в 1 клик</a>
                             <div class="info-i__group">
                                 <button class="info-i__button">Добавить в корзину</button>
                                 @auth

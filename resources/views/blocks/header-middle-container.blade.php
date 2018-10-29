@@ -23,76 +23,18 @@
                     @endif
                 @endauth
             </div>
+
             <div class="btn-basked btn-basked--otstup">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <span class="btn-basked__items">2</span>
-                <div class="shop-box">
-                    <div class="shop-box__top">
-                        <span>Корзина</span>
-                        <a href="">Очистить все</a>
-                    </div>
-                    <div class="shop-box__content">
-                        <div class="sb-i">
-                            <div class="sb-i__body">
-                                <div class="sb-i__img-w">
-                                    <img src="img/sb-i.png" alt="" class="sb-i__img">
-                                    <a href="" class="sb-i__close"></a>
-                                </div>
-                                <div class="sb-i__nb">
-                                    <a href="" class="sb-i__title">ГАЛСТУК-БАБОЧКА BOWTIE LEATHER STRAP</a>
-                                    <a href="" class="sb-i__magazin">TO BE MAGIC</a>
-                                </div>
-                            </div>
-                            <div class="sb-i__bottom">
-                                <span class="sb-i__col-vo">Кол: 1 шт.</span>
-                                <span class="sb-i__cash">990 ₽</span>
-                            </div>
-                        </div>
-                        <div class="sb-i">
-                            <div class="sb-i__body">
-                                <div class="sb-i__img-w">
-                                    <img src="img/sb-i.png" alt="" class="sb-i__img">
-                                    <a href="" class="sb-i__close"></a>
-                                </div>
-                                <div class="sb-i__nb">
-                                    <a href="" class="sb-i__title">ГАЛСТУК-БАБОЧКА BOWTIE LEATHER STRAP</a>
-                                    <a href="" class="sb-i__magazin">TO BE MAGIC</a>
-                                </div>
-                            </div>
-                            <div class="sb-i__bottom">
-                                <span class="sb-i__col-vo">Кол: 1 шт.</span>
-                                <span class="sb-i__cash">990 ₽</span>
-                            </div>
-                        </div>
-                        <div class="sb-i">
-                            <div class="sb-i__body">
-                                <div class="sb-i__img-w">
-                                    <img src="img/sb-i.png" alt="" class="sb-i__img">
-                                    <a href="" class="sb-i__close"></a>
-                                </div>
-                                <div class="sb-i__nb">
-                                    <a href="" class="sb-i__title">ГАЛСТУК-БАБОЧКА BOWTIE LEATHER STRAP</a>
-                                    <a href="" class="sb-i__magazin">TO BE MAGIC</a>
-                                </div>
-                            </div>
-                            <div class="sb-i__bottom">
-                                <span class="sb-i__col-vo">Кол: 1 шт.</span>
-                                <span class="sb-i__cash">990 ₽</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="shop-box__footer">
-                        <div class="sb-f">
-                            <div class="sb-f__top">
-                                <span class="sb-f__text">Общая стоимость</span><span class="sb-f__cash">15 999 ₽ </span></div>
-                            <div class="sb-f__f"><a href="" class="sb-f__button">Оформить покупку</a></div>
-                        </div>
-                    </div>
+                <span class="btn-basked__items js-cart-count">{{ \Gloudemans\Shoppingcart\Facades\Cart::count() }}</span>
+                <div class="shop-box js-cart-small">
+                    @include('blocks.cart-small')
                 </div>
             </div>
+
         </div>
-        @if(Route::currentRouteName() == 'catalog')
+
+        @if(Route::currentRouteName() == 'catalog' and isset($sub_categories))
             <button class="cmn-toggle-switch cmn-toggle-switch__htx">
                 <span>toggle menu</span>
             </button>

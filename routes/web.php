@@ -44,6 +44,9 @@ Route::prefix('product')->middleware('auth')->group(function () {
 
 Route::prefix('cart')->group(function () {
     Route::get('/', 'CartController@index')->name('cart');
+    Route::post('add', 'CartController@add')->name('cart.add');
+    Route::post('delete', 'CartController@delete')->name('cart.delete');
+    Route::post('delete-all', 'CartController@deleteAll')->name('cart.delete.all');
 });
 
 Route::prefix('vacancy')->group(function () {
