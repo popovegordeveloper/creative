@@ -16,16 +16,18 @@ class SiteController extends Controller
 {
     /**
      * Главная страница
+     * @param ProductService $productService
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(ProductService $productService)
     {
         $product = Product::find(Setting::where('key', 'product_day')->first()->value);
         return view('pages.index', [
             'products' => Product::latest()->paginate(18),
             'product_day' => $product ?? Product::inRandomOrder()->first(),
             'slides' => Slide::all(),
-            'collection' => Article::find(Setting::where('key', 'collection')->first()->value)
+            'collection' => Article::find(Setting::where('key', 'collection')->first()->value),
+            'favorites' => $productService->getFavoriteProducts()
         ]);
     }
 
@@ -123,6 +125,15 @@ class SiteController extends Controller
         $favorites = $productService->getFavoriteProducts();
         $products = Product::search($request->name)->paginate(18);
         return view('pages.catalog', compact('products', 'favorites'));
+    }
+
+    /**
+     * Страница вопрос - ответ
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function faq()
+    {
+        return view('pages.faq');
     }
 
 }

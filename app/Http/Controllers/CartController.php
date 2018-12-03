@@ -26,10 +26,31 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $product = Product::find($request->product_id);
-        Cart::add($product, $request->get('qty', 1));
+        $row = Cart::add($product, $request->get('qty', 1));
+
         return response()->json([
             'html' => view('blocks.cart-small')->render(),
             'qty' => Cart::count(),
+            'price' => $row->price * $row->qty,
+            'total' => Cart::subtotal()
+        ]);
+    }
+
+    /**
+     * minus item from cart
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
+    public function minus(Request $request)
+    {
+        $row = Cart::get($request->get('cart_row_id'));
+        $row = Cart::update($request->get('cart_row_id'), $row->qty - 1);
+        return response()->json([
+            'html' => view('blocks.cart-small')->render(),
+            'qty' => Cart::count(),
+            'price' => $row->price * $row->qty,
+            'total' => Cart::subtotal()
         ]);
     }
 

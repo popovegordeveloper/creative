@@ -534,7 +534,7 @@ body {
 }
 
 .btn-basked {
-    font-size: 22px;
+    font-size: 30px;
     width: 33px;
     color: #333;
     display: flex;
@@ -578,7 +578,7 @@ body {
         }
         @media (max-width: 816px) {
             padding: 0;
-            margin-left: 0;
+            margin-left: 10px;
         }
     }
     &__btn {
@@ -1117,6 +1117,7 @@ body {
 
 .header-mobile-container{
     display: flex;
+    position: relative;
 }
 
 @media screen and (max-width: 767px) {
@@ -1124,7 +1125,7 @@ body {
         display: flex;
         flex-wrap: nowrap;
         width: 100%;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     .btn-basked{

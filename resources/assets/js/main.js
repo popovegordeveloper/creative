@@ -132,13 +132,24 @@ $(document).ready(function () {
         e.preventDefault();
         var $form = $('#one-product').length ? $('#one-product') : $(this).find('form');
         var url = '/product/add-favorite';
+        var message = "Товар добавлен в избранное";
         if ($(this).hasClass('fav-active')) {
             $(this).removeClass('fav-active');
             url = '/product/delete-favorite';
+            message = "Товар удален из избранного";
         } else {
             $(this).addClass('fav-active');
         }
         $.post(url, $form.serialize());
+        $('.message-popup').show();
+        $('.message-popup').css('opacity', 1);
+        $('.message-popup p').text(message);
+        setTimeout(function () {
+            $('.message-popup').css('opacity', 0);
+            setTimeout(function () {
+                $('.message-popup').hide();
+            }, 500);
+        }, 1000);
     });
 
     $('.js-del-favorite').click(function (e) {

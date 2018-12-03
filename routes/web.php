@@ -13,6 +13,7 @@ Route::get('rules-using', 'SiteController@rulesUsing')->name('rules');
 Route::get('technical-support', 'SiteController@technicalSupport')->name('technical');
 Route::get('sale', 'SiteController@sale')->name('sale');
 Route::post('search', 'SiteController@search')->name('search');
+Route::get('faq', 'SiteController@faq')->name('faq');
 
 Route::prefix('mail')->group(function () {
     Route::post('product', 'MailController@sendProduct')->name('mail.product');
@@ -46,6 +47,7 @@ Route::prefix('cart')->group(function () {
     Route::get('/', 'CartController@index')->name('cart');
     Route::post('add', 'CartController@add')->name('cart.add');
     Route::post('delete', 'CartController@delete')->name('cart.delete');
+    Route::post('minus', 'CartController@minus')->name('cart.update');
     Route::post('delete-all', 'CartController@deleteAll')->name('cart.delete.all');
 });
 

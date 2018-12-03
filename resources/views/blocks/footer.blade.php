@@ -17,10 +17,10 @@
         </div>
         <div class="footer__menu">
             <ul class="menu">
-                <li class="menu__item"><span class="menu__title">Правовая инфомрация</span></li>
+                <li class="menu__item"><span class="menu__title">Помощь</span></li>
+                <li class="menu__item"><a href="{{ route('rules') }}" class="menu__link">Правила пользования сервисом</a></li>
                 <li class="menu__item"><a href="{{ route('technical') }}" class="menu__link">Техническая поддержка</a></li>
-                <li class="menu__item"><a href="{{ route('privacy') }}" class="menu__link">Политика конфиденциальности</a></li>
-                <li class="menu__item"><a href="{{ route('rules') }}" class="menu__link">Условия использования</a></li>
+                <li class="menu__item"><a href="{{ route('faq') }}" class="menu__link">Вопрос - Ответ</a></li>
             </ul>
         </div>
         <div class="footer__social">
@@ -35,3 +35,8 @@
     </div>
     <div class="copy container"><span class="copy__text">© Creativexpo.ru 2018</span></div>
 </footer>
+
+
+<div class="message-popup" style="display: none; opacity: 0">
+    <p>Товар добавлен в избранное</p>
+</div>

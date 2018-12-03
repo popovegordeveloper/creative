@@ -8,10 +8,14 @@
         <div class="lk__wrapper">
             <ul class="lk__tabs">
                 <li class="lk__tab-item lk__tab-item_1 step1 lk__tab-item_active"><span class="lk__tab-link">Шаг 1</span></li>
-                <li class="lk__tab-item lk__tab-item_2 step2"><span class="lk__tab-link">Шаг 2</span></li>
+                @if(\Gloudemans\Shoppingcart\Facades\Cart::count())
+                    <li class="lk__tab-item lk__tab-item_2 step2"><span class="lk__tab-link">Шаг 2</span></li>
+                @endif
             </ul>
             @include('blocks.cart-step1')
-            @include('blocks.cart-step2')
+            @if(\Gloudemans\Shoppingcart\Facades\Cart::count())
+                @include('blocks.cart-step2')
+            @endif
         </div>
     </div>
 

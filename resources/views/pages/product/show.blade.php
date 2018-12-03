@@ -77,7 +77,7 @@
                                     @endforeach
                                 </select>
                             @endif
-                            <a href="{{ route('cart.add') }}" data-product="{{ $product->id }}" class="info-i__bytoclick js-add-to-cart">Купить в 1 клик</a>
+{{--                            <a href="{{ route('cart.add') }}" data-product="{{ $product->id }}" class="info-i__bytoclick js-add-to-cart">Купить в 1 клик</a>--}}
                             <div class="info-i__group">
                                 <button class="info-i__button">Добавить в корзину</button>
                                 @auth
@@ -86,7 +86,7 @@
                             </div>
                         </form>
                         <span class="info-i__time">Срок изготовления и отправления {{ $term_dispatch->name }}</span>
-                        <span class="info-i__vozvrat">Гарантия возврата денег</span>
+                        {{--<span class="info-i__vozvrat">Гарантия возврата денег</span>--}}
                     </div>
                 </div>
             </div>
