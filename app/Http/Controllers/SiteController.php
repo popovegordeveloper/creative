@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Conversation;
 use App\Models\Page;
 use App\Models\Product;
@@ -23,8 +24,8 @@ class SiteController extends Controller
     {
         $product = Product::find(Setting::where('key', 'product_day')->first()->value);
         return view('pages.index', [
-            'products' => Product::latest()->paginate(18),
-            'product_day' => $product ?? Product::inRandomOrder()->first(),
+            'products' => Product::checked()->active()->latest()->paginate(18),
+            'product_day' => $product ?? Product::checked()->inRandomOrder()->first(),
             'slides' => Slide::all(),
             'collection' => Article::find(Setting::where('key', 'collection')->first()->value),
             'favorites' => $productService->getFavoriteProducts()
@@ -69,6 +70,17 @@ class SiteController extends Controller
         ]);
         $favorites = $productService->getFavoriteProducts();
         return view('pages.catalog', compact('products', 'favorites', 'slug_category'));
+    }
+
+    /**
+     * Страница "категории"
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function categories()
+    {
+        $categories = Category::active()->orderBy('name')->get();
+        $categories = $categories->groupBy(function ($item, $key) { return mb_substr($item->name, 0, 1, "UTF-8");  });
+        return view('pages.catalog-categories', ['categories' => $categories]);
     }
 
     /**

@@ -39,7 +39,7 @@
         </div>
     </header>
 
-    @if(!in_array(\Request::route()->getName(), ['home', 'sale', 'catalog']))
+    @if(!in_array(\Request::route()->getName(), ['home', 'sale', 'catalog', 'categories']))
         <div class="cn">
             <div class="container">
                 @yield('content')

@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->integer('qty')->nullable();
             $table->string('address')->nullable();
             $table->integer('viewed')->default(0);
+            $table->boolean('is_checked')->default(false);
+            $table->boolean('is_active')->default(true);
 
             $table->integer('shop_id')->unsigned();
             $table->foreign('shop_id')->references('id')->on('shops')

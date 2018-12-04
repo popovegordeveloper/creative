@@ -125,6 +125,15 @@
                     <span class="settings-shop__domain">{{ env('APP_URL') }}/shop/</span><input type="text" required name="slug" class="settings-shop__ss" placeholder="название_вашего_магазина" @if(isset($shop)) value="{{ $shop->slug }}" @endif>
                 </div>
             </div>
+            <div class="settings-shop__group">
+                <h3 class="settings-shop__name">
+                    <span class="settings-shop__s-t">Статус</span>
+                    <span class="settings-shop__sub-t">Выберите, чтобы активировать магазин</span>
+                </h3>
+                <div class="settings-shop__gr">
+                    <input type="checkbox" name="is_user_active" @if(isset($shop) && $shop->is_user_active) checked @endif class="delivery__checkbox" >
+                </div>
+            </div>
             <div class="center">
                 <input class="button" type="submit" value="Сохранить">
             </div>

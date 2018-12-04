@@ -3,6 +3,7 @@
 namespace App\Admin\Models;
 
 use AdminColumn;
+use AdminColumnEditable;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
@@ -46,6 +47,7 @@ class Products extends Section implements Initializable
                 AdminColumn::text('termDispatch.name', 'Время доставки'),
                 AdminColumn::text('viewed', 'Просмотры'),
                 AdminColumn::lists('deliveries.name', 'Способ доставки'),
+                AdminColumnEditable::checkbox('is_checked', 'Да', 'Нет')->setLabel('Проверенный'),
             ])->paginate(10);
 
         if($scopes && $scopes[0] === 'shop_id')
@@ -78,6 +80,7 @@ class Products extends Section implements Initializable
                         AdminFormElement::number('qty', 'Количество'),
                         AdminFormElement::number('viewed', 'Просмотры'),
                         AdminFormElement::text('address', 'Адрес доставки'),
+                        AdminFormElement::checkbox('is_checked', 'Проверенный'),
                     ])
             ])
         );

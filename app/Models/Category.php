@@ -40,6 +40,7 @@ use Baum\Node;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category disabled()
  * @property-read string $full_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read string $url
  */
 class Category extends Node
 {
@@ -75,7 +76,7 @@ class Category extends Node
      */
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->where('is_checked', true)->where('is_active', true);
     }
 
     /**
@@ -86,6 +87,16 @@ class Category extends Node
     {
         if ($this->isChild()) return "$this->name (" . $this->parent->name . ")";
         return $this->name;
+    }
+
+    /**
+     * Урл категории
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        if ($this->isRoot()) return route('catalog', ['slug_category' => $this->slug]);
+        return route('catalog', ['slug_category' => $this->getRoot()->slug, 'slug_subcategory' => $this->slug]);
     }
 
 }

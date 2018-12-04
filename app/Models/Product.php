@@ -46,13 +46,19 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereViewed($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Color[] $colors
+ * @property int $is_checked
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product checked()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereIsChecked($value)
+ * @property int $is_active
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product active()
  */
 class Product extends Model implements Buyable
 {
     use Searchable;
 
     protected $fillable = [
-        'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty', 'address', 'shop_id', 'category_id', 'term_dispatch_id', 'viewed'
+        'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty', 'address', 'shop_id', 'category_id', 'term_dispatch_id', 'viewed', 'is_checked', 'is_active'
     ];
 
     protected $casts = [
@@ -154,5 +160,25 @@ class Product extends Model implements Buyable
     public function getBuyablePrice($options = null)
     {
         return $this->getPrice();
+    }
+
+    /**
+     * Проверееные модератором
+     * @param $query
+     * @return mixed
+     */
+    public function scopeChecked($query)
+    {
+        return $query->whereIsChecked(true);
+    }
+
+    /**
+     * Активный
+     * @param $query
+     * @return mixed
+     */
+    public function scopeActive($query)
+    {
+        return $query->whereIsActive(true);
     }
 }

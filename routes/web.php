@@ -6,6 +6,8 @@ Route::get('/', 'SiteController@index')->name('home');
 Route::get('/about', 'SiteController@about')->name('about');
 Route::get('/logout', 'SiteController@logout')->name('logout');
 Route::get('/catalog/{slug_category?}/{slug_subcategory?}', 'SiteController@catalog')->name('catalog')->middleware(\App\Http\Middleware\CheckCategory::class);
+Route::get('categories', 'SiteController@categories')->name('categories');
+//Route::get('/catalog/{slug_category?}/{slug_subcategory?}', 'SiteController@catalog')->name('catalog');
 Route::get('/social_login/{provider}', 'SocialController@login')->name('social_login');
 Route::get('/social_login/callback/{provider}', 'SocialController@callback');
 Route::get('privacy-policy', 'SiteController@privacyPolicy')->name('privacy');
@@ -66,7 +68,10 @@ Route::prefix('message')->middleware('auth')->group(function () {
     Route::post('conversation', 'MessageController@conversation')->name('message.conversation');
 });
 
-Route::get('product/{product}', 'ProductController@show')->name('product.show');
-Route::get('shop/{slug}', 'ShopController@show')->name('shop.show');
+Route::get('product/{product}', 'ProductController@show')->name('product.show')->middleware([
+    \App\Http\Middleware\CheckModeration::class,
+    \App\Http\Middleware\CheckActiveProduct::class
+]);
+Route::get('shop/{slug}', 'ShopController@show')->name('shop.show')->middleware(\App\Http\Middleware\CheckActiveShop::class);
 
 Route::get('cabinet/{section?}', 'CabinetController@index')->name('cabinet')->middleware('auth');

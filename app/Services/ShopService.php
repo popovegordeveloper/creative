@@ -48,7 +48,8 @@ class ShopService
      */
     public function updateShop($request)
    {
-       $shop_data = $request->except(['logo', 'cover', 'master_logo', 'delivery', 'delivery_cost']);
+       $shop_data = $request->except(['logo', 'cover', 'master_logo', 'delivery', 'delivery_cost', 'is_user_active']);
+       $shop_data['is_user_active'] = true;
        if ($request->has('logo')) {
            unlink(public_path($request->logo_exist));
            $shop_data['logo'] = $this->saveImage($request->logo, $request->slug);
@@ -61,6 +62,7 @@ class ShopService
            unlink(public_path($request->master_logo_exist));
            $shop_data['master_logo'] = $this->saveImage($request->master_logo, $request->slug);
        }
+       if (!$request->has('is_user_active')) $shop_data['is_user_active'] = false;
        $shop = auth()->user()->shop;
        $shop->update($shop_data);
        if ($request->has('delivery')){
@@ -70,6 +72,8 @@ class ShopService
            }
            $shop->deliveries()->sync($delivery_data);
        }
+       if (!$request->has('is_user_active')) $shop->products()->update(['is_active' => false]);
+       else $shop->products()->update(['is_active' => true]);
    }
 
 }

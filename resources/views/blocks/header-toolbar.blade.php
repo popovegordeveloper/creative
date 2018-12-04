@@ -1,5 +1,7 @@
 <div class="new-header__top">
     <div class="container">
+        <div style="display: flex; justify-content: space-between; width: 100%">
+            <a class="log-ext__link" href="{{ route('categories') }}">Каталог</a>
             <div class="log-ext">
                 @if(\Illuminate\Support\Facades\Auth::check())
                     @if(auth()->user()->hasRole('Seller'))<a href="{{ route('cabinet', 'selling') }}" class="log-ext__link">Мои заказы</a> @endif
@@ -15,8 +17,9 @@
                     </ul>
                 @else
                     <a class="log-ext__link"><a href="/login" class="log-ext__link">Войти</a>
-                    <a href="/register" class="log-ext__link log-ext__link--last">Регистрация</a>
+                        <a href="/register" class="log-ext__link log-ext__link--last">Регистрация</a>
                 @endif
             </div>
+        </div>
     </div>
 </div>

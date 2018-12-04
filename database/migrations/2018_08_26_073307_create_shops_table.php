@@ -27,6 +27,7 @@ class CreateShopsTable extends Migration
             $table->string('master_phone');
             $table->string('slug')->unique();
             $table->text('address')->nullable();
+            $table->boolean('is_user_active')->default(false);
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')

@@ -43,11 +43,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereUserId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property int $is_user_active
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereIsUserActive($value)
  */
 class Shop extends Model
 {
     protected $fillable = [
-        'name', 'description_preview', 'logo', 'cover', 'city', 'description', 'return_conditions', 'master_logo', 'master_name', 'master_phone', 'slug', 'address', 'user_id'
+        'name', 'description_preview', 'logo', 'cover', 'city', 'description', 'return_conditions', 'master_logo', 'master_name', 'master_phone', 'slug', 'address', 'user_id', 'is_user_active'
     ];
 
     /**
@@ -74,6 +76,6 @@ class Shop extends Model
      */
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->where('is_checked', true);
     }
 }
