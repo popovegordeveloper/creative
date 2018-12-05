@@ -106,15 +106,6 @@ class Product extends Model implements Buyable
     }
 
     /**
-     * Способы доставки
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function deliveries()
-    {
-        return $this->belongsToMany(Delivery::class, 'delivery_product', 'product_id', 'delivery_id')->withPivot(['price']);
-    }
-
-    /**
      * Теккущая цена
      * @return float
      */

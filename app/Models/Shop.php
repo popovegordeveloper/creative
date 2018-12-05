@@ -45,6 +45,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property int $is_user_active
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereIsUserActive($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
  */
 class Shop extends Model
 {
@@ -77,5 +78,14 @@ class Shop extends Model
     public function products()
     {
         return $this->hasMany(Product::class)->where('is_checked', true);
+    }
+
+    /**
+     * Способы оплаты
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function payments()
+    {
+        return $this->belongsToMany(Payment::class, 'payment_shop', 'shop_id', 'payment_id');
     }
 }

@@ -8,6 +8,7 @@ use App\Admin\Models\Colors;
 use App\Admin\Models\Conversations;
 use App\Admin\Models\Deliveries;
 use App\Admin\Models\Pages;
+use App\Admin\Models\Payments;
 use App\Admin\Models\ProductDeliveries;
 use App\Admin\Models\Products;
 use App\Admin\Models\Settings;
@@ -25,6 +26,7 @@ use App\Models\Delivery;
 use App\Models\DeliveryProduct;
 use App\Models\DeliveryShop;
 use App\Models\Page;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Shop;
@@ -47,7 +49,6 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Shop::class => Shops::class,
         Product::class => Products::class,
         DeliveryShop::class => ShopDeliveries::class,
-        DeliveryProduct::class => ProductDeliveries::class,
         TermDispatch::class => TermDispatches::class,
         Setting::class => Settings::class,
         Page::class => Pages::class,
@@ -56,6 +57,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Slide::class => Slides::class,
         Conversation::class => Conversations::class,
         Color::class => Colors::class,
+        Payment::class => Payments::class,
     ];
 
     /**

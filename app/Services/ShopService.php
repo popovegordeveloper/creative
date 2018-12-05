@@ -21,6 +21,7 @@ class ShopService
        $shop_data['master_logo']  = $this->saveImage($request->master_logo, $request->slug);
        $shop_data['user_id']  = auth()->id();
        $shop = Shop::create($shop_data);
+       if ($request->has('payment')) $shop->payments()->sync($request->payment);
        if ($request->has('delivery')){
            for ($i = 0; $i < count($request->delivery); $i++){
                $shop->deliveries()->attach($request->delivery[$i], ['price' => $request->delivery_cost[$i]]);
@@ -63,8 +64,13 @@ class ShopService
            $shop_data['master_logo'] = $this->saveImage($request->master_logo, $request->slug);
        }
        if (!$request->has('is_user_active')) $shop_data['is_user_active'] = false;
+
+       /* @var Shop $shop */
        $shop = auth()->user()->shop;
+
        $shop->update($shop_data);
+       if ($request->has('payment')) $shop->payments()->sync($request->payment);
+
        if ($request->has('delivery')){
            $delivery_data = [];
            for ($i = 0; $i < count($request->delivery); $i++){

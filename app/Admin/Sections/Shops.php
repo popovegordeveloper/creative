@@ -7,6 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use App\Models\Delivery;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Initializable;
@@ -70,6 +71,7 @@ class Shops extends Section implements Initializable
                         AdminFormElement::text('slug', 'URL')->required(),
                         AdminFormElement::text('master_name', 'Имя мастера')->required(),
                         AdminFormElement::number('master_phone', 'Телефон мастера')->required(),
+                        AdminFormElement::multiselect('payments', 'Способы оплаты')->setModelForOptions(new Payment())->setDisplay('name'),
                         AdminFormElement::image('master_logo', 'Лого мастера')->required(),
                     ])
             ])

@@ -93,7 +93,6 @@ class ProductController extends Controller
     {
         $productService->updateProduct($request);
         return json_encode(['url' => route('product.show', $request->product_id)]);
-//        return redirect()->route('product.show', $request->product_id);
     }
 
     /**

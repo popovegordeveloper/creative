@@ -46,7 +46,6 @@ class Products extends Section implements Initializable
                 AdminColumn::relatedLink('shop.name', 'Магазин'),
                 AdminColumn::text('termDispatch.name', 'Время доставки'),
                 AdminColumn::text('viewed', 'Просмотры'),
-                AdminColumn::lists('deliveries.name', 'Способ доставки'),
                 AdminColumnEditable::checkbox('is_checked', 'Да', 'Нет')->setLabel('Проверенный'),
             ])->paginate(10);
 
@@ -85,10 +84,8 @@ class Products extends Section implements Initializable
             ])
         );
 
-        $deliveries = \AdminSection::getModel(\App\Models\DeliveryProduct::class)->fireDisplay(['scopes' => ['product_id', $id]])->setParameter('product_id', $id);
 
         $tabs->appendTab($shop, 'Товар');
-        $tabs->appendTab($deliveries, 'Способы доставки');
 
 
         return $tabs;

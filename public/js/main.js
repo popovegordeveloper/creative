@@ -6731,17 +6731,17 @@ $(document).ready(function () {
         formData.append('description', $this.find('textarea[name="description"]').val());
         formData.append('composition', $this.find('textarea[name="composition"]').val());
         formData.append('price', $this.find('input[name="price"]').val());
-        if ($this.find('input[name="delivery[]"]:checked').length) {
-            $this.find('input[name="delivery[]"]:checked').each(function () {
-                formData.append('delivery[]', $(this).val());
-            });
-        }
-        if ($this.find('input[name="delivery[]"]:checked').length) {
-            $this.find('input[name="delivery_price[]"]:input:enabled').each(function () {
-                formData.append('delivery_price[]', $(this).val());
-            });
-        }
-        if ($this.find('textarea[name="address"]').val()) formData.append('address', $this.find('textarea[name="address"]').val());
+        // if ($this.find('input[name="delivery[]"]:checked').length) {
+        //     $this.find('input[name="delivery[]"]:checked').each(function () {
+        //         formData.append('delivery[]', $(this).val());
+        //     });
+        // }
+        // if ($this.find('input[name="delivery[]"]:checked').length) {
+        //     $this.find('input[name="delivery_price[]"]:input:enabled').each(function () {
+        //         formData.append('delivery_price[]', $(this).val());
+        //     });
+        // }
+        // if ($this.find('textarea[name="address"]').val()) formData.append('address', $this.find('textarea[name="address"]').val());
         formData.append('category_id', $this.find('select[name="category_id"]').val());
         formData.append('qty', $this.find('#quant-val').val());
         if ($this.find('#any:checked').length) formData.append('qty_null', $this.find('#any:checked').val());
@@ -6765,6 +6765,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             success: function (res) {
+                // console.log(res);
                 res = JSON.parse(res);
                 location.href = res.url;
             }

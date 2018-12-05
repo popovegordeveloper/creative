@@ -70,13 +70,13 @@
                 <div><span>Общая стоимость:</span></div>
                 <div><span class="big-text">15950₽</span></div>
             </div>
-            <div class="cart__row">
-                <div style="display: block">
-                    <label for="cart-promo">Промокод</label>
-                    <input type="text" name="promo" id="cart-promo">
-                </div>
-                <div style="display: block;align-self: flex-end;"><a class="button button_nav">Применить</a></div>
-            </div>
+            {{--<div class="cart__row">--}}
+                {{--<div style="display: block">--}}
+                    {{--<label for="cart-promo">Промокод</label>--}}
+                    {{--<input type="text" name="promo" id="cart-promo">--}}
+                {{--</div>--}}
+                {{--<div style="display: block;align-self: flex-end;"><a class="button button_nav">Применить</a></div>--}}
+            {{--</div>--}}
             <div class="cart__row">
                 <div><p>Нажимая на кнопку «Перейти к оплате», вы подтверждаете согласие с <a href="" style="color: #c36;text-decoration: underline;">офертой</a> для покупателей на сайте creativexpo.ru</p></div>
             </div>

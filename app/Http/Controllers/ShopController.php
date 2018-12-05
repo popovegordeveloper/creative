@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveShopRequest;
 use App\Models\Delivery;
+use App\Models\Payment;
 use App\Models\Shop;
 use App\Services\ShopService;
 
@@ -26,7 +27,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        return view('pages.shop.create', ['deliveries' => Delivery::all()]);
+        return view('pages.shop.create', ['deliveries' => Delivery::all(), 'payments' => Payment::all()]);
     }
 
     /**
@@ -54,6 +55,8 @@ class ShopController extends Controller
             'shop' => $shop,
             'shop_deliveries' => $shop->deliveries,
             'deliveries' => Delivery::all(),
+            'payments' => Payment::all(),
+            'shop_payments' => $shop->payments,
         ]);
     }
 

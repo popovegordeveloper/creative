@@ -115,43 +115,43 @@
                     </div>
                 </div>
             </div>
-            <div class="settings-shop__group settings-shop__group_type2">
-                <h3 class="settings-shop__name">
-                    <span class="settings-shop__s-t">Способы доставки</span>
-                    <span class="settings-shop__sub-t">Выберите удобные способы доставки и укажите стоимость каждого</span>
-                </h3>
-                <div class="settings-shop__gr">
-                    <table class="delivery">
-                        <tr>
-                            <th></th>
-                            <th>Способ доставки</th>
-                            <th>Стоимость доставки, ₽</th>
-                        </tr>
-                        @foreach($deliveries as $delivery)
-                            @php
-                                $product_delivery = null;
-                                if (isset($product_deliveries) and $product_deliveries->find($delivery->id)) $product_delivery = $product_deliveries->find($delivery->id);
-                            @endphp
-                            <tr @if(empty($product_delivery)) class="disabled" @endif>
-                                <td class="delivery__check">
-                                    <input type="checkbox" @if($delivery->name == "Самовывоз") id="sm" @else id="pr" @endif  name="delivery[]" value="{{ $delivery->id }}" class="delivery__checkbox" @if(!empty($product_delivery)) checked @endif>
-                                </td>
-                                <td class="delivery__label">
-                                    <label for="pr">{{ $delivery->name }}</label>
-                                </td>
-                                <td class="delivery__price">
-                                    <input type="number" placeholder="0" class="delivery__price-value" name="delivery_price[]" maxlength="6" value="@if(!empty($product_delivery)){{$product_delivery->pivot->price}}@else 0 @endif"  @if(empty($product_delivery)) disabled @endif>
-                                </td>
-                            </tr>
-                        @endforeach
-                        <tr>
-                            <td class="delivery__address" colspan="3">
-                                <textarea class="settings-shop__textarea @if(!isset($product)) hidden @endif" name="address" id="sm-textarea" cols="30" rows="2" placeholder="Укажите место самовывоза (город, адрес, комментарии)">@if(isset($product)){{ $product->address }}@endif</textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            {{--<div class="settings-shop__group settings-shop__group_type2">--}}
+                {{--<h3 class="settings-shop__name">--}}
+                    {{--<span class="settings-shop__s-t">Способы доставки</span>--}}
+                    {{--<span class="settings-shop__sub-t">Выберите удобные способы доставки и укажите стоимость каждого</span>--}}
+                {{--</h3>--}}
+                {{--<div class="settings-shop__gr">--}}
+                    {{--<table class="delivery">--}}
+                        {{--<tr>--}}
+                            {{--<th></th>--}}
+                            {{--<th>Способ доставки</th>--}}
+                            {{--<th>Стоимость доставки, ₽</th>--}}
+                        {{--</tr>--}}
+                        {{--@foreach($deliveries as $delivery)--}}
+                            {{--@php--}}
+                                {{--$product_delivery = null;--}}
+                                {{--if (isset($product_deliveries) and $product_deliveries->find($delivery->id)) $product_delivery = $product_deliveries->find($delivery->id);--}}
+                            {{--@endphp--}}
+                            {{--<tr @if(empty($product_delivery)) class="disabled" @endif>--}}
+                                {{--<td class="delivery__check">--}}
+                                    {{--<input type="checkbox" @if($delivery->name == "Самовывоз") id="sm" @else id="pr" @endif  name="delivery[]" value="{{ $delivery->id }}" class="delivery__checkbox" @if(!empty($product_delivery)) checked @endif>--}}
+                                {{--</td>--}}
+                                {{--<td class="delivery__label">--}}
+                                    {{--<label for="pr">{{ $delivery->name }}</label>--}}
+                                {{--</td>--}}
+                                {{--<td class="delivery__price">--}}
+                                    {{--<input type="number" placeholder="0" class="delivery__price-value" name="delivery_price[]" maxlength="6" value="@if(!empty($product_delivery)){{$product_delivery->pivot->price}}@else 0 @endif"  @if(empty($product_delivery)) disabled @endif>--}}
+                                {{--</td>--}}
+                            {{--</tr>--}}
+                        {{--@endforeach--}}
+                        {{--<tr>--}}
+                            {{--<td class="delivery__address" colspan="3">--}}
+                                {{--<textarea class="settings-shop__textarea @if(!isset($product)) hidden @endif" name="address" id="sm-textarea" cols="30" rows="2" placeholder="Укажите место самовывоза (город, адрес, комментарии)">@if(isset($product)){{ $product->address }}@endif</textarea>--}}
+                            {{--</td>--}}
+                        {{--</tr>--}}
+                    {{--</table>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="settings-shop__group settings-shop__group_type2">
                 <h3 class="settings-shop__name">
                     <span class="settings-shop__s-t">Категория товара</span>
