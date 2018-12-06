@@ -88,4 +88,16 @@ class Shop extends Model
     {
         return $this->belongsToMany(Payment::class, 'payment_shop', 'shop_id', 'payment_id');
     }
+
+    public function getPaymentsForDescriptionProduct()
+    {
+        $payments = $this->payments->pluck('name')->toArray();
+        return implode(", ", $payments);
+    }
+
+    public function getDeliveriesForDescriptionProduct()
+    {
+        $payments = $this->deliveries->pluck('name')->toArray();
+        return implode(", ", $payments);
+    }
 }

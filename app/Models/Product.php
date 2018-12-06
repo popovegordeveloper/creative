@@ -52,13 +52,23 @@ use Laravel\Scout\Searchable;
  * @property int $is_active
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereIsActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product active()
+ * @property string|null $size
+ * @property string|null $season
+ * @property string|null $style
+ * @property string|null $weight
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereSeason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereWeight($value)
  */
 class Product extends Model implements Buyable
 {
     use Searchable;
 
     protected $fillable = [
-        'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty', 'address', 'shop_id', 'category_id', 'term_dispatch_id', 'viewed', 'is_checked', 'is_active'
+        'photos', 'name', 'description', 'composition', 'price', 'sale_price', 'qty',
+        'address', 'shop_id', 'category_id', 'term_dispatch_id', 'viewed', 'is_checked',
+        'is_active', 'size', 'season', 'style', 'weight'
     ];
 
     protected $casts = [

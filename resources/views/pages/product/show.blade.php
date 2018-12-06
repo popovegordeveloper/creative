@@ -92,9 +92,24 @@
             </div>
             <div class="main-item-b__about">
                 <div class="detail-about">
-                    <p class="detail-about__text">{{ $product->description }}</p>
-                    <p class="detail-about__text"><b>Состав:</b>   {{ $product->composition }}</p>
-                    <p class="detail-about__text"><b>Условия возврата:</b>    {{ $shop->return_conditions }}</p>
+                    @if($product->description) <p class="detail-about__text">{{ $product->description }}</p> @endif
+                    @if($product->composition)<p class="detail-about__text"><b>Состав:</b>   {{ $product->composition }}</p> @endif
+                    @if($shop->return_conditions)<p class="detail-about__text"><b>Условия возврата:</b>    {{ $shop->return_conditions }}</p> @endif
+                    @if($product->size)<p class="detail-about__text"><b>Размер:</b>    {{ $product->size }}</p> @endif
+                    @if($product->season)<p class="detail-about__text"><b>Сезон:</b>    {{ $product->season }}</p> @endif
+                    @if($product->style)<p class="detail-about__text"><b>Стиль:</b>    {{ $product->style }}</p> @endif
+                    @if($product->weight)<p class="detail-about__text"><b>Вес:</b>    {{ $product->weight }}</p> @endif
+                    @if($shop->getPaymentsForDescriptionProduct())<p class="detail-about__text"><b>Способы оплаты:</b>    {{ $shop->getPaymentsForDescriptionProduct() }}</p> @endif
+                    @if($shop->deliveries->count())
+                            <p class="detail-about__text"><b>Способы доставки:</b></p>
+                            @php $deliveries = $shop->deliveries; @endphp
+                            @foreach($deliveries as $delivery)
+                                <p class="detail-about__text">{{ $delivery->name }}: @if($delivery->pivot->price) {{ $delivery->pivot->price }} р. @else бесплатно @endif</p>
+                                @if($delivery->name == "Самовывоз" and $shop->address)
+                                    <p class="detail-about__text">Адрес самовывоза:    {{ $shop->address }}</p>
+                                @endif
+                            @endforeach
+                    @endif
                 </div>
             </div>
             <div class="main-item-b__social">

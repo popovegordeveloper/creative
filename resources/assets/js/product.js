@@ -64,17 +64,10 @@ $(document).ready(function () {
         formData.append('description', $this.find('textarea[name="description"]').val());
         formData.append('composition', $this.find('textarea[name="composition"]').val());
         formData.append('price', $this.find('input[name="price"]').val());
-        // if ($this.find('input[name="delivery[]"]:checked').length) {
-        //     $this.find('input[name="delivery[]"]:checked').each(function () {
-        //         formData.append('delivery[]', $(this).val());
-        //     });
-        // }
-        // if ($this.find('input[name="delivery[]"]:checked').length) {
-        //     $this.find('input[name="delivery_price[]"]:input:enabled').each(function () {
-        //         formData.append('delivery_price[]', $(this).val());
-        //     });
-        // }
-        // if ($this.find('textarea[name="address"]').val()) formData.append('address', $this.find('textarea[name="address"]').val());
+        formData.append('size', $this.find('textarea[name="size"]').val());
+        formData.append('season', $this.find('textarea[name="season"]').val());
+        formData.append('style', $this.find('textarea[name="style"]').val());
+        formData.append('weight', $this.find('textarea[name="weight"]').val());
         formData.append('category_id', $this.find('select[name="category_id"]').val());
         formData.append('qty', $this.find('#quant-val').val());
         if ($this.find('#any:checked').length) formData.append('qty_null', $this.find('#any:checked').val());

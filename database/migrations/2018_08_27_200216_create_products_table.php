@@ -26,6 +26,10 @@ class CreateProductsTable extends Migration
             $table->integer('viewed')->default(0);
             $table->boolean('is_checked')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->string('size')->nullable();
+            $table->string('season')->nullable();
+            $table->string('style')->nullable();
+            $table->string('weight')->nullable();
 
             $table->integer('shop_id')->unsigned();
             $table->foreign('shop_id')->references('id')->on('shops')

@@ -14,12 +14,13 @@ class ShopService
      */
     public function saveShop($request)
    {
-       mkdir(public_path("/images/shops/$request->slug"));
-       $shop_data = $request->except(['logo', 'cover', 'master_logo', 'delivery', 'delivery_cost']);
+       try { mkdir(public_path("/images/shops/$request->slug")); } catch (\Exception $exception) { \Log::error($exception->getMessage()); }
+       $shop_data = $request->except(['logo', 'cover', 'master_logo', 'delivery', 'delivery_cost', 'is_user_active']);
        $shop_data['logo'] = $this->saveImage($request->logo, $request->slug);
        $shop_data['cover']  = $this->saveImage($request->cover, $request->slug);
        $shop_data['master_logo']  = $this->saveImage($request->master_logo, $request->slug);
        $shop_data['user_id']  = auth()->id();
+       if ($request->has('is_user_active')) $shop_data['is_user_active'] = true;
        $shop = Shop::create($shop_data);
        if ($request->has('payment')) $shop->payments()->sync($request->payment);
        if ($request->has('delivery')){

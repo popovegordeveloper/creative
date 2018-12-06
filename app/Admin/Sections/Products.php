@@ -67,11 +67,14 @@ class Products extends Section implements Initializable
                         AdminFormElement::text('name', 'Название')->required(),
                         AdminFormElement::select('shop_id', 'Магазин')->setModelForOptions(Shop::class)->setDisplay('name')->required(),
                         AdminFormElement::textarea('composition', 'Состав')->required(),
+                        AdminFormElement::text('size', 'Размер'),
+                        AdminFormElement::text('weight', 'Вес'),
                     ])
                     ->addColumn([
                         AdminFormElement::select('category_id', 'Категория')->setModelForOptions(Category::class)->setDisplay('full_name')->required(),
                         AdminFormElement::number('sale_price', 'Сумма скидки'),
                         AdminFormElement::textarea('description', 'Описание')->required(),
+                        AdminFormElement::text('season', 'Сезон'),
                     ])
                     ->addColumn([
                         AdminFormElement::number('price', 'Цена')->required(),
@@ -80,7 +83,8 @@ class Products extends Section implements Initializable
                         AdminFormElement::number('viewed', 'Просмотры'),
                         AdminFormElement::text('address', 'Адрес доставки'),
                         AdminFormElement::checkbox('is_checked', 'Проверенный'),
-                    ])
+                        AdminFormElement::text('style', 'Стиль'),
+                    ]),
             ])
         );
 
