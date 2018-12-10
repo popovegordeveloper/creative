@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/cabinet/settings';
 
     /**
      * Create a new controller instance.
@@ -51,7 +51,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+//            'password_confirmation ' => 'required|string|min:6'
+        ],
+        [
+            'password.confirmed' => 'Пароли не совпадают',
+            'email.unique' => 'Пользователь с указанным Email существует'
         ]);
     }
 

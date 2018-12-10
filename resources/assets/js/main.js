@@ -569,7 +569,7 @@ $(document).ready(function () {
     readURL(this, '#masterLogo-styler');
   });
   $('.color-item').styler();
-
+2
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -641,6 +641,18 @@ $(document).ready(function () {
             }
             $mes_screen.scrollTop($mes_screen.prop('scrollHeight'));
         });
+    });
+
+    $('#sex_wooman').on('change', function (e) {
+        $('#sex_man').removeAttr('checked');
+        $('#sex_man').parents('.js-sex-setting').removeClass('checked');
+        $("#sex_man").prop('checked',false);
+    });
+
+    $('#sex_man').on('change', function (e) {
+        $('#sex_wooman').removeAttr('checked');
+        $('#sex_wooman').parents('.js-sex-setting').removeClass('checked');
+        $("#sex_wooman").prop('checked',false);
     });
 
 });

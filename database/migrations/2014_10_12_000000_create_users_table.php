@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('index')->nullable();
+            $table->boolean('sex')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

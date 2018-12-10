@@ -27,6 +27,16 @@
                 <label  class="settings__label"><span>Почтовый индекс</span>
                     <input type="text" class="settings__input" name="index" value="{{ $user->index }}">
                 </label>
+                <div  class="settings__label" style="align-items: center"><span>Пол</span>
+                    <div class="delivery__check">
+                        <label for="sex_wooman" style="margin-right: 5px;">Женский</label>
+                        <input type="checkbox" name="sex" id="sex_wooman" value="0" class="delivery__checkbox js-sex-setting" @if(!$user->sex) checked @endif>
+                    </div>
+                    <div class="delivery__check">
+                        <label for="sex_man" style="margin-right: 5px;">Мужской</label>
+                        <input type="checkbox" name="sex" id="sex_man" value="1" class="delivery__checkbox js-sex-setting" @if($user->sex) checked @endif>
+                    </div>
+                </div>
             </div>
             <div class="settings__right">
                 <span class="settings__pass">Изменить пароль</span>
