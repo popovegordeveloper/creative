@@ -17,6 +17,9 @@ return [
     (new Page(\App\Models\Conversation::class))->addBadge(function (){return \App\Models\Conversation::count();}),
     (new Page(\App\Models\Color::class))->addBadge(function (){return \App\Models\Color::count();}),
     (new Page(\App\Models\Payment::class))->addBadge(function (){return \App\Models\Payment::count();}),
+    (new Page(\App\Models\CategoryQuestion::class))->addBadge(function (){return \App\Models\CategoryQuestion::count();}),
+    (new Page(\App\Models\Question::class))->addBadge(function (){return \App\Models\Question::count();}),
+    (new Page(\App\Models\Answer::class))->addBadge(function (){return \App\Models\Answer::count();}),
 
 
     (new Page())->setTitle('Настроки приложения (.env)')->setIcon('fa fa-exclamation-triangle')->setUrl(route('admin.env.editor')),

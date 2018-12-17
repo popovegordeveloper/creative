@@ -15,12 +15,13 @@ Route::get('rules-using', 'SiteController@rulesUsing')->name('rules');
 Route::get('technical-support', 'SiteController@technicalSupport')->name('technical');
 Route::get('sale', 'SiteController@sale')->name('sale');
 Route::post('search', 'SiteController@search')->name('search');
-Route::get('faq', 'SiteController@faq')->name('faq');
+Route::get('faq/{question_id?}', 'SiteController@faq')->name('faq');
 
 Route::prefix('mail')->group(function () {
     Route::post('product', 'MailController@sendProduct')->name('mail.product');
     Route::post('shop', 'MailController@sendShop')->name('mail.shop');
     Route::post('about', 'MailController@sendAbout')->name('mail.about');
+    Route::post('answer', 'MailController@sendAnswer')->name('mail.answer');
 });
 
 Route::prefix('user')->group(function () {

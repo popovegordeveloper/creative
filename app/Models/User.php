@@ -50,6 +50,8 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereIndex($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePhone($value)
+ * @property int $sex
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereSex($value)
  */
 class User extends Authenticatable
 {

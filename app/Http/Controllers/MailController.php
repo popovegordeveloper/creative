@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AboutMailRequest;
+use App\Http\Requests\AnswerRequest;
 use App\Http\Requests\SendMailRequest;
 use App\Mail\AboutMail;
 use App\Mail\ProductMail;
@@ -48,5 +49,23 @@ class MailController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function sendAnswer(AnswerRequest $request)
+    {
+        $email = Setting::where('key','email')->first();
+        try {
+            \Mail::to($email->value)->send(new AboutMail($request->email, $request->message, $request->name));
+            return response()->json([
+                'error' => false,
+                'message' => "Ok"
+            ]);
+        } catch (\Exception $exception){
+            \Log::error($exception->getMessage());
+            return response()->json([
+                'error' => true,
+                'message' => $exception->getMessage()
+            ]);
+        }
     }
 }

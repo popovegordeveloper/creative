@@ -24,5 +24,7 @@ class DatabaseSeeder extends Seeder
          $this->call(ArticlesSeeder::class);
          $this->call(SlidesSeeder::class);
          $this->call(PaymentsSeeder::class);
+         $this->call(CategoryQuestionSeeder::class);
+         $this->call(QuestionSeeder::class);
     }
 }

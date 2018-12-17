@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\CategoryQuestion;
 use App\Models\Conversation;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Question;
 use App\Models\Setting;
 use App\Models\Slide;
 use App\Services\CategoryService;
@@ -109,8 +111,8 @@ class SiteController extends Controller
      */
     public function technicalSupport()
     {
-        $page = Page::whereSlug('technical-support')->first();
-        return view('pages.privacy-policy', ['page' => $page]);
+        $email = Setting::where('key','email')->first();
+        return view('pages.privacy-policy', ['email' => $email]);
     }
 
     /**
@@ -141,11 +143,13 @@ class SiteController extends Controller
 
     /**
      * Страница вопрос - ответ
+     * @param null $question_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function faq()
+    public function faq($question_id = null)
     {
-        return view('pages.faq');
+        if (!$question_id) return view('pages.faq', ['categories' => CategoryQuestion::with('questions')->get()]);
+        return view('pages.faq', ['question' => Question::with('answer')->find($question_id)]);
     }
 
 }

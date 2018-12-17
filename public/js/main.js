@@ -6020,6 +6020,19 @@ this._delay(function(){n===this.counter&&this.refreshPositions(!s)})},_clear:fun
 
 $(document).ready(function () {
 
+    $('#answer-button').click(function () {
+        $(this).hide();
+        $('#answer-form').slideDown();
+    });
+    $('#answer-form > form > button').click(function (e) {
+        e.preventDefault();
+        var $form = $(this).parents('form');
+        $.post($form.attr('action'), $form.serialize(), function (res) {
+            alert(res.message);
+            $form.find('input, textarea').val('');
+        })
+    });
+
     var $messanger = $('.messenge-win__content');
     $messanger.scrollTop($messanger.prop('scrollHeight'));
 
@@ -6589,7 +6602,6 @@ $(document).ready(function () {
     readURL(this, '#masterLogo-styler');
   });
   $('.color-item').styler();
-2
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
