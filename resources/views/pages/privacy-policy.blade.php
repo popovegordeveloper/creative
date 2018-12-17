@@ -10,7 +10,7 @@
                 по электронной почте: <span style="color: #c36">{{ $email->value }}</span>. Или отправить нам сообщение с помощью формы обратной связи:</div>
                 <div class="tabs">
                     <div class="tabs__item opn">
-                        <div class="about-info">
+                        <div class="about-info" id="answer-form">
                             <form action="{{ route('mail.answer') }}" style="width: 350px; margin: 0 auto; display: block">
                                 @csrf
                                 <div style="margin-bottom: 15px;">
