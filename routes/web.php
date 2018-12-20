@@ -51,6 +51,7 @@ Route::prefix('cart')->group(function () {
     Route::post('add', 'CartController@add')->name('cart.add');
     Route::post('delete', 'CartController@delete')->name('cart.delete');
     Route::post('minus', 'CartController@minus')->name('cart.update');
+    Route::post('plus', 'CartController@plus')->name('cart.update.plus');
     Route::post('delete-all', 'CartController@deleteAll')->name('cart.delete.all');
 });
 

@@ -6866,7 +6866,7 @@ $(document).ready(function () {
     $(document).on('click', '.js-add-from-cart .plus',function (e) {
         e.preventDefault();
         var $this = $(this).parents('.js-add-from-cart');
-        $.post('/cart/add',{product_id: $this.data('product')}, function (resp) {
+        $.post('/cart/plus',{cart_row_id: $this.data('row')}, function (resp) {
             $('.js-cart-count').text(resp.qty);
             $('.js-cart-small').html(resp.html);
             $this.parents('.cart-item').find('.cart-item__price').text(resp.price + " ₽");

@@ -20,19 +20,19 @@
                                 </div>
                             </div>
 
-                            {{--<div class="cart-item__column cart-item__column--center">--}}
-                                {{--<input id="quant-val" type="number" class="input-num js-add-from-cart" min="1" data-row="{{ $product->rowId }}" data-product="{{ $product->model->id }}" value="{{ $product->qty }}" name="qty">--}}
-                                {{--<div class="info-i__form">--}}
-                                    {{--@php $colors = $product->model->colors; @endphp--}}
-                                    {{--@if($colors->count())--}}
-                                        {{--<select name="color_id" id="" class="info-i__select">--}}
-                                            {{--@foreach($colors as $color)--}}
-                                                {{--<option value="" >{{ $color->name }}</option>--}}
-                                            {{--@endforeach--}}
-                                        {{--</select>--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="cart-item__column cart-item__column--center">
+                                <input id="quant-val" type="number" class="input-num js-add-from-cart" min="1" data-row="{{ $product->rowId }}" data-product="{{ $product->model->id }}" value="{{ $product->qty }}" name="qty">
+                                <div class="info-i__form">
+                                    @php $payments = $product->model->shop->payments; @endphp
+                                    @if($payments->count())
+                                        <select name="payment_id" id="cart-payment" class="info-i__select">
+                                            @foreach($payments as $payment)
+                                                <option value="{{ $payment->id }}" >{{ $payment->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         <div>
@@ -41,6 +41,7 @@
                     </div>
                     <div class="cart-item__data">
                         @php $deliveries = $product->model->shop->deliveries; @endphp
+                        @php $payments = $product->model->shop->payments; @endphp
                         @if($deliveries->count())
                             <div class="cart-item__data sub-data"
                                  style="justify-content: flex-start;margin-top: 35px;align-items: center;">
