@@ -52,6 +52,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User wherePhone($value)
  * @property int $sex
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereSex($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
  */
 class User extends Authenticatable
 {
@@ -164,6 +165,15 @@ class User extends Authenticatable
     public function favorite()
     {
         return $this->belongsToMany(Product::class, 'favorite_product', 'user_id', 'product_id');
+    }
+
+    /**
+     * Заказы
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
 }

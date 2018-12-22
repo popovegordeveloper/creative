@@ -26,7 +26,7 @@ class SiteController extends Controller
     {
         $product = Product::find(Setting::where('key', 'product_day')->first()->value);
         return view('pages.index', [
-            'products' => Product::checked()->active()->latest()->paginate(18),
+            'products' => Product::checked()->active()->with('shop')->latest()->paginate(18),
             'product_day' => $product ?? Product::checked()->inRandomOrder()->first(),
             'slides' => Slide::all(),
             'collection' => Article::find(Setting::where('key', 'collection')->first()->value),

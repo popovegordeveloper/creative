@@ -4,6 +4,9 @@
         <p class="js-cart-step1-desc">Проверьте выбранные товары, их количество и выберите желаемый способ доставки</p>
 
         <div class="cart cart--column">
+            @php
+                $total_cost = \Gloudemans\Shoppingcart\Facades\Cart::subtotal();
+            @endphp
             @foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $product)
                 <div class="cart-item">
                     <div class="cart-item__shop">
@@ -23,11 +26,14 @@
                             <div class="cart-item__column cart-item__column--center">
                                 <input id="quant-val" type="number" class="input-num js-add-from-cart" min="1" data-row="{{ $product->rowId }}" data-product="{{ $product->model->id }}" value="{{ $product->qty }}" name="qty">
                                 <div class="info-i__form">
-                                    @php $payments = $product->model->shop->payments; @endphp
+                                    @php
+                                        $payments = $product->model->shop->payments;
+                                        $current_payment = $product->options['payment'] ?? null
+                                    @endphp
                                     @if($payments->count())
-                                        <select name="payment_id" id="cart-payment" class="info-i__select">
+                                        <select name="payment_id" id="cart-payment" data-row="{{ $product->rowId }}" class="info-i__select js-item-payment">
                                             @foreach($payments as $payment)
-                                                <option value="{{ $payment->id }}" >{{ $payment->name }}</option>
+                                                <option value="{{ $payment->id }}" @if($current_payment and $current_payment->id == $payment->id) selected @endif>{{ $payment->name }}</option>
                                             @endforeach
                                         </select>
                                     @endif
@@ -47,16 +53,18 @@
                                  style="justify-content: flex-start;margin-top: 35px;align-items: center;">
                                 <span class="cart-item__delivery">Способ доставки</span>
                                 <div class="info-i__form">
-                                    <select name="delivery_id" id="" class="info-i__select js-item-delivery">
+                                    @php $current_delivery = $product->options['delivery'] ?? null @endphp
+                                    <select data-row="{{ $product->rowId }}" name="delivery_id" id="delivery_cart" class="info-i__select js-item-delivery">
                                         @foreach($deliveries as $delivery)
                                             <option data-cost="{{ $delivery->pivot->price }}"
-                                                    value="">{{ $delivery->name }}</option>
+                                                    value="{{ $delivery->id }}" @if($current_delivery and $current_delivery->id == $delivery->id) selected @endif>{{ $delivery->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="cart-item__delivery-price">
-                                <span class="cart-item__price js-item-price-delivery">{{ $deliveries->first()->pivot->price }}</span>
+                                @php $total_cost += $current_delivery->pivot->price ?? 0; @endphp
+                                <span class="cart-item__price js-item-price-delivery">{{ $current_delivery->pivot->price ?? '' }} ₽</span>
                             </div>
                         @endif
                     </div>
@@ -64,7 +72,7 @@
             @endforeach
             <div class="cart__total js-cart-total">
                 <span class="cart__total-title">Итого:</span>
-                <span class="js-total-price">{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }} ₽</span>
+                <span class="js-total-price" data-cost="{{ $total_cost }}">{{ $total_cost }} ₽</span>
             </div>
 
         </div>

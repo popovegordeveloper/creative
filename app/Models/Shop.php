@@ -46,6 +46,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $is_user_active
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Shop whereIsUserActive($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
  */
 class Shop extends Model
 {
@@ -99,5 +100,14 @@ class Shop extends Model
     {
         $payments = $this->deliveries->pluck('name')->toArray();
         return implode(", ", $payments);
+    }
+
+    /**
+     * Заказы
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

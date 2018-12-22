@@ -53,6 +53,12 @@ Route::prefix('cart')->group(function () {
     Route::post('minus', 'CartController@minus')->name('cart.update');
     Route::post('plus', 'CartController@plus')->name('cart.update.plus');
     Route::post('delete-all', 'CartController@deleteAll')->name('cart.delete.all');
+    Route::post('change-delivery', 'CartController@changeDelivery')->name('cart.update.delivery');
+    Route::post('change-payment', 'CartController@changePayment')->name('cart.update.payment');
+});
+
+Route::prefix('order')->group(function () {
+    Route::post('create', 'OrderController@create')->name('order.create');
 });
 
 Route::prefix('vacancy')->group(function () {

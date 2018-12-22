@@ -18,7 +18,7 @@
                         </form>
                     </a>
                 @endauth
-                <a href="{{ route('cart.add') }}" data-product="{{ $product->id }}" class="card__bay js-add-to-cart">В корзину</a>
+                @if($product->shop->user_id != auth()->id())<a href="{{ route('cart.add') }}" data-product="{{ $product->id }}" class="card__bay js-add-to-cart">В корзину</a> @endif
                 <a href="{{ route('product.show', $product->id) }}" class="card__more">Подробнее</a>
             </div>
         </div>

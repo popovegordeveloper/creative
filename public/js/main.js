@@ -6832,6 +6832,11 @@ if ($dropzoneEl.length) {
 }
 
 $(document).ready(function () {
+
+    $('#create-order-btn').click(function () {
+        $('#order-form').submit();
+    });
+
     $("#js-back-step1").click(function (e) {
         e.preventDefault();
         $('.step1').click();
@@ -6844,7 +6849,19 @@ $(document).ready(function () {
 
     $("select.js-item-delivery").change(function () {
         var $cost = $(this).parents('.cart-item__data').find('.js-item-price-delivery');
-        $cost.text($(this).find('option:selected').data('cost') + '₽');
+        var delivery_cost = parseFloat($(this).find('option:selected').data('cost'));
+        $cost.text(delivery_cost + '₽');
+        $.post('/cart/change-delivery',{cart_row_id: $(this).data('row'), delivery_id: $(this).find('option:selected').val() }, function (resp) {
+            var total_price = parseFloat(resp.total);
+            $('.js-total-price').text(total_price + " ₽");
+            $('#cart-step2-cost-delivery').text(resp.delivery_cost + " ₽");
+            $('#cart-step2-cost-total').text(total_price + " ₽");
+            $('.js-total-price').data('cost',total_price);
+        });
+    });
+
+    $("select.js-item-payment").change(function () {
+        $.post('/cart/change-payment',{cart_row_id: $(this).data('row'), payment_id: $(this).find('option:selected').val() });
     });
 
     $('#add_to_cart').submit(function (e) {
@@ -6869,20 +6886,37 @@ $(document).ready(function () {
         $.post('/cart/plus',{cart_row_id: $this.data('row')}, function (resp) {
             $('.js-cart-count').text(resp.qty);
             $('.js-cart-small').html(resp.html);
-            $this.parents('.cart-item').find('.cart-item__price').text(resp.price + " ₽");
-            $('.js-total-price').text(resp.total + " ₽");
+            $this.parents('.cart-item').find('.cart-item__price').first().text(resp.price + " ₽");
+            var total_price = parseFloat(resp.total);
+            $('#cart-step2-cost-product').text(total_price + " ₽");
+            $('.js-item-price-delivery').each(function () {
+                total_price += parseFloat($(this).text());
+            });
+            $('.js-total-price').text(total_price + " ₽");
+            $('#cart-step2-cost-total').text(total_price + " ₽");
+            $('.js-total-price').data('cost',total_price);
         });
     });
 
     $(document).on('click', '.js-add-from-cart .minus',function (e) {
         e.preventDefault();
         var $this = $(this).parents('.js-add-from-cart');
-        $.post('/cart/minus',{cart_row_id: $this.data('row')}, function (resp) {
-            $('.js-cart-count').text(resp.qty);
-            $('.js-cart-small').html(resp.html);
-            $this.parents('.cart-item').find('.cart-item__price').text(resp.price + " ₽");
-            $('.js-total-price').text(resp.total + " ₽");
-        });
+        // if ($(this).parents('.jq-number').find('#quant-val').val() >= 1) {
+            $.post('/cart/minus', {cart_row_id: $this.data('row')}, function (resp) {
+                $('.js-cart-count').text(resp.qty);
+                $('.js-cart-small').html(resp.html);
+                $this.parents('.cart-item').find('.cart-item__price').first().text(resp.price + " ₽");
+                var total_price = parseFloat(resp.total);
+                $('#cart-step2-cost-product').text(total_price + " ₽");
+                $('.js-item-price-delivery').each(function () {
+                    console.log(parseFloat($(this).text()), total_price);
+                    total_price += parseFloat($(this).text());
+                });
+                $('.js-total-price').text(total_price + " ₽");
+                $('#cart-step2-cost-total').text(total_price + " ₽");
+                $('.js-total-price').data('cost', total_price);
+            });
+        // }
     });
 
     $(document).on('click', '.js-remove-item-cart', function (e) {
@@ -6900,6 +6934,11 @@ $(document).ready(function () {
         $.post($this.attr('href'), {cart_row_id: $this.data('row')}, function (resp) {
             $('.js-cart-small').html(resp.html);
             $('.js-cart-count').text(resp.qty);
+            $('.js-total-price').text(resp.total + " ₽");
+            $('#cart-step2-cost-total').text(resp.total + " ₽");
+            $('#cart-step2-cost-product').text(resp.products_cost + " ₽");
+            $('#cart-step2-cost-delivery').text(resp.delivery_cost + " ₽");
+            $('.js-total-price').data('cost', resp.total);
             $this.parents('.cart-item').remove();
             if ($('.cart-item').length == 0) {
                 $('.js-cart-total').remove();

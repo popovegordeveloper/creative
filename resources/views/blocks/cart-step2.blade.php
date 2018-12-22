@@ -4,7 +4,7 @@
     <div class="cart">
         <div class="cart__column1">
             <h3 class="my-items__title title">Контактная информация</h3>
-            <form action="">
+            <form action="{{ route('order.create') }}" id="order-form" method="post">
                 @csrf
                 <div class="cart__row">
                     <div>
@@ -33,7 +33,7 @@
                 <div class="cart__row">
                     <div>
                         <label for="cart-email">Эл. почта</label>
-                        <input type="text" name="email" id="cart-email" @if($user) value="{{ $user->email }}" @endif>
+                        <input type="text" required name="email" id="cart-email" @if($user) value="{{ $user->email }}" @endif>
                     </div>
 
                     <div>
@@ -59,16 +59,17 @@
         <div class="cart__column2">
             <h3 class="my-items__title title">Итого:</h3>
             <div class="cart__row">
+                @php $products_cost = \Gloudemans\Shoppingcart\Facades\Cart::subtotal(); @endphp
                 <div><span>Товары:</span></div>
-                <div><span class="big-text">1990₽</span></div>
+                <div><span class="big-text" id="cart-step2-cost-product">{{ $products_cost }} ₽</span></div>
             </div>
             <div class="cart__row">
                 <div><span>Доставка:</span></div>
-                <div><span class="big-text">350₽</span></div>
+                <div><span class="big-text" id="cart-step2-cost-delivery">{{ $cost_delivery }} ₽</span></div>
             </div>
             <div class="cart__row">
                 <div><span>Общая стоимость:</span></div>
-                <div><span class="big-text">15950₽</span></div>
+                <div><span class="big-text" id="cart-step2-cost-total">{{ $products_cost + $cost_delivery }} ₽</span></div>
             </div>
             {{--<div class="cart__row">--}}
                 {{--<div style="display: block">--}}
@@ -84,7 +85,7 @@
     </div>
     <div class="cart-step2__buttons" style="display: flex;justify-content: center;">
         <a href="" id="js-back-step1" class="button button_nav" style="margin-right: 50px;">Вернуться назад</a>
-        <a href="" class="button">Перейти к оплате</a>
+        <button id="create-order-btn" class="button">Заказать</button>
     </div>
     <p class="settings-shop__sub-t" style="text-align: center;">Вы будете перенаправлены на сторонний сервис Moneta.ru, где вы сможете выбрать удобный способ оплаты.</p>
 </div>
