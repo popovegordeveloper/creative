@@ -173,7 +173,67 @@ class User extends Authenticatable
      */
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->with('status');
+    }
+
+    /**
+     * Купленные товары
+     * @param $query
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getPurchasesAttribute($query)
+    {
+        return $this->orders->where('status_id', 6);
+    }
+
+    /**
+     * Сумма купленных товаров
+     * @return float|int
+     */
+    public function getPurchasedSumAttribute()
+    {
+        return $this->purchases->sum('price');
+    }
+
+    /**
+     * Кол-во купленных товаров
+     * @return float|int
+     */
+    public function getPurchasedCountAttribute()
+    {
+        $count = 0;
+        foreach ($this->purchases as $purchase){
+            $item = unserialize($purchase->product);
+            $count += $item->qty;
+        }
+        return $count;
+    }
+
+    /**
+     * Текущию заказы
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCurrentlyOrdersAttribute()
+    {
+        return $this->orders->whereIn('status_id', [1,2,3,4]);
+    }
+
+    /**
+     * Отмененные заказы
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCanceledOrdersAttribute()
+    {
+        return $this->orders->where('status_id', 5);
+    }
+
+    /**
+     * Завершенные заказы
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCompletedOrdersAttribute()
+    {
+        return $this->orders->where('status_id', 6);
     }
 
 }

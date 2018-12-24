@@ -1,3 +1,14 @@
+.order-tab-btn{
+    margin-right: 10px;
+    &:last-child{
+        margin-right: 0;
+    }
+    &__active{
+        background: #c36;
+        color: #fff;
+        border: 1px solid #c36;
+    }
+}
 .goods-photo li{
     cursor: auto !important;
 }

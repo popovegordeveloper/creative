@@ -32,6 +32,6 @@ return [
    |
    */
 
-    'check_admin' => false,
+    'check_admin' => true,
 
 ];

@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'shop_id', 'comment', 'product'];
+    protected $fillable = ['user_id', 'shop_id', 'comment', 'product', 'address', 'price', 'delivery_price', 'status_id', 'cancel', 'is_new'];
     /**
      * Пользователь
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -42,5 +42,14 @@ class Order extends Model
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+
+    /**
+     * Статус заказа
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

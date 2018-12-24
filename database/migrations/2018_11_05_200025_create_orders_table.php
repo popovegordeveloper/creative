@@ -24,9 +24,18 @@ class CreateOrdersTable extends Migration
             $table->foreign('shop_id')->references('id')->on('shops')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            $table->integer('status_id')->unsigned()->default(1);
+            $table->foreign('status_id')->references('id')->on('statuses')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->string('address')->nullable();
+            $table->string('price');
+            $table->string('delivery_price')->nullable();
             $table->text('product');
+            $table->text('cancel')->nullable();
 
             $table->text('comment')->nullable();
+            $table->boolean('is_new')->default(true);
 
             $table->timestamps();
         });

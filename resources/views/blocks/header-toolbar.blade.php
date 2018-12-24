@@ -4,7 +4,10 @@
             <a class="log-ext__link" href="{{ route('categories') }}">Каталог</a>
             <div class="log-ext">
                 @if(\Illuminate\Support\Facades\Auth::check())
-                    @if(auth()->user()->hasRole('Seller'))<a href="{{ route('cabinet', 'selling') }}" class="log-ext__link">Мои заказы</a> @endif
+                    @if(auth()->user()->hasRole('Seller'))
+                        @php $new_orders = auth()->user()->shop->orders()->where('is_new', true)->count(); @endphp
+                        <a href="{{ route('cabinet', 'selling') }}" class="log-ext__link">Мои заказы @if($new_orders){{ $new_orders }} @endif</a>
+                    @endif
                     <a href="" class="log-ext__link log-ext__link--in-js">Мой профиль</a>
                     <ul class="modal-header" style="display: none;">
                         @if(auth()->user() and auth()->user()->hasRole('Seller')) <li><a href="{{ route('cabinet', 'products') }}" class="modal-header-link">Мои товары</a></li> @endif

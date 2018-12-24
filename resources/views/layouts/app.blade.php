@@ -49,6 +49,32 @@
         @yield('content')
     @endif
 
+    <div style="background: rgba(0,0,0,0.3); width: 100%; height: 100%; position: fixed; z-index: 1000; top: 0; left: 0; display: none" id="order-message">
+        <div style="width: 300px; background: #fff; padding: 35px 35px 35px 35px; border-radius: 5px; margin: 0 auto; margin-top: 10%; position: relative">
+            <button style="right: 10px" title="Close (Esc)" type="button" class="mfp-close" id="order-message-close">×</button>
+            <form action="{{ route('message.create') }}" method="post" id="order-message-form">
+                @csrf
+                <input type="hidden" id="order-message-user-id" name="user_id">
+                <p>Сообщение</p>
+                <textarea required style="width: 100%;margin-bottom: 15px;font-family: Roboto,sans-serif; padding: 10px" name="text" cols="10" rows="5"></textarea>
+                <button class="mesenger__button" style="cursor: pointer;background: #333;color: #fff; border: none; margin: 0 auto">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <div style="background: rgba(0,0,0,0.3); width: 100%; height: 100%; position: fixed; z-index: 1000; top: 0; left: 0; display: none" id="order-cancel">
+        <div style="width: 300px; background: #fff; padding: 35px 35px 35px 35px; border-radius: 5px; margin: 0 auto; margin-top: 10%; position: relative">
+            <button style="right: 10px" title="Close (Esc)" type="button" class="mfp-close" id="order-cancel-close">×</button>
+            <form action="{{ route('order.cancel') }}" method="post" id="order-cancel-form">
+                @csrf
+                <input type="hidden" name="order_id" id="order_cancel_id">
+                <p>Причина отмены</p>
+                <textarea style="width: 100%;margin-bottom: 15px;font-family: Roboto,sans-serif; padding: 10px" name="text" cols="10" rows="5"></textarea>
+                <button class="mesenger__button" id="order-cancel-btn" style="cursor: pointer;background: #333;color: #fff; border: none; margin: 0 auto">Отправить</button>
+            </form>
+        </div>
+    </div>
+
     @include('blocks.footer')
 
     <!-- Scripts -->

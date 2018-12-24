@@ -59,6 +59,11 @@ Route::prefix('cart')->group(function () {
 
 Route::prefix('order')->group(function () {
     Route::post('create', 'OrderController@create')->name('order.create');
+    Route::post('cancel', 'OrderController@cancel')->name('order.cancel');
+    Route::post('accept', 'OrderController@accept')->name('order.accept');
+    Route::post('send', 'OrderController@accept')->name('order.send');
+    Route::post('completed', 'OrderController@completed')->name('order.completed');
+    Route::post('end', 'OrderController@end')->name('order.end');
 });
 
 Route::prefix('vacancy')->group(function () {

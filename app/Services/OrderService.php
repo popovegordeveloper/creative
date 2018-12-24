@@ -40,7 +40,10 @@ class OrderService
                     'user_id' => $user->id,
                     'shop_id' => $cart_item->model->shop->id,
                     'product' => serialize($cart_item),
-                    'comment' => $request->comment ?? ''
+                    'comment' => $request->comment ?? '',
+                    'address' => $request->address ?? '',
+                    'price' => $cart_item->model->getPrice() * $cart_item->qty,
+                    'delivery_price' => $cart_item->options['delivery']->pivot->price,
                 ]);
             }
 

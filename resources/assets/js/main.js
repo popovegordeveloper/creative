@@ -1,5 +1,53 @@
 $(document).ready(function () {
 
+    $('.order-cancel-message').click(function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var order_id = $this.parents('form').find('input[type="hidden"]').val();
+        $('#order_cancel_id').val(order_id);
+        $('#order-cancel').show();
+    });
+
+    $('#order-cancel-form').submit(function (e) {
+        e.preventDefault();
+        $.post($(this).attr('action'), $(this).serialize(), function (res) {
+            $('#order-cancel-close').click();
+        });
+    });
+
+    $('#order-cancel-close').click(function () {
+        $('#order-cancel').hide();
+        $('#order-cancel-form textarea').val('');
+    });
+
+    $('.js-order-message').click(function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        $('#order-message-user-id').val($this.data('seller'));
+        $('#order-message').show();
+    });
+
+    $('#order-message-form').submit(function (e) {
+        e.preventDefault();
+        $.post($(this).attr('action'), $(this).serialize(), function (res) {
+            $('#order-message-close').click();
+        });
+    });
+
+    $('#order-message-close').click(function () {
+        $('#order-message').hide();
+        $('#order-message-form textarea').val('');
+    });
+
+    $('.js-order-tab').click(function (e) {
+        e.preventDefault();
+        $('.js-order-tab').removeClass('order-tab-btn__active');
+        var $this = $(this);
+        $this.addClass('order-tab-btn__active');
+        $('.orders-body').hide();
+        $("." + $this.data('class')).show()
+    });
+
     $('#answer-button').click(function () {
         $(this).hide();
         $('#answer-form').slideDown();

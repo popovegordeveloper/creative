@@ -17,8 +17,8 @@ class CabinetController extends Controller
     {
         return view('pages.cabinet', [
             'section' => $section,
-            'user' => User::with(['shop', 'shop.products', 'favorite'])->find(auth()->id()),
-            'conversations' => Conversation::forUser(auth()->id())->with('messages')->get()
+            'user' => User::with(['orders','shop', 'shop.products', 'shop.orders', 'favorite'])->find(auth()->id()),
+            'conversations' => Conversation::forUser(auth()->id())->with('messages')->get(),
         ]);
     }
 }
