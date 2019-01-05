@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('file')->nullable();
             $table->string('filename')->nullable();
             $table->string('date');
+            $table->boolean('is_new')->default(true);
 
             $table->integer('conversation_id')->unsigned();
             $table->foreign('conversation_id')->references('id')->on('conversations')

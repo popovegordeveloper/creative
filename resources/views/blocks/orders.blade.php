@@ -56,7 +56,7 @@
                 @endif
                 <p style="margin-bottom: 1px;text-align: center;margin-top: 0;">Стоимость</p>
                 <p style="margin-top: 0;text-align: center;font-weight: 500;font-size: 20px;">{{ $order->price }} ₽</p>
-                @if($order->status_id != 5) <a href="" class="js-order-message" data-seller="{{ $order->user_id }}" style="cursor: pointer; font-weight: 500; border-bottom: 1px solid #9a9a9a;">{{ $seller ? 'Написать пользователю' : 'Написать продавцу' }}</a> @endif
+                @if($order->status_id != 5) <a href="" class="js-order-message" data-seller="{{ $seller ? $order->user_id : $shop->user_id }}" style="cursor: pointer; font-weight: 500; border-bottom: 1px solid #9a9a9a;">{{ $seller ? 'Написать пользователю' : 'Написать продавцу' }}</a> @endif
             </div>
         </div>
         @if($order->status_id != 5 or ($order->status_id == 5 and ($order->comment or $order->cancel)))

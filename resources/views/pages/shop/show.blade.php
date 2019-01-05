@@ -48,9 +48,9 @@
                 <div class="magazin__items">
                     @foreach($shop->products as $product)
                         <div class="slot">
-                            <div class="slot__wr-img">
-                                <img src="{{ asset($product->photos[0]) }}" alt="" class="slot__img">
-                            </div>
+                            <a href="{{ route('product.show', $product->id) }}">
+                                <div class="slot__wr-img" style="background-image: url({{ asset($product->photos[0]) }}); background-size: cover; background-position: center"></div>
+                            </a>
                             <a href="{{ route('product.show', $product->id) }}" class="slot__title">{{ $product->name }}</a>
                             <a href="{{ route('shop.show', $shop->slug) }}" class="slot__name-mag">{{ $shop->name }}</a>
                             <span class="slot__cash">{{ $product->getPrice() }} ₽</span>

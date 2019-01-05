@@ -148,7 +148,7 @@
                     <span class="settings-shop__sub-t">Адрес вашего магазина уникальный и закрепляется за вами навсегда</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <span class="settings-shop__domain">{{ env('APP_URL') }}/shop/</span><input type="text" required name="slug" class="settings-shop__ss" placeholder="название_вашего_магазина" @if(isset($shop)) value="{{ $shop->slug }}" @endif>
+                    <span class="settings-shop__domain">{{ env('APP_URL') }}/shop/</span><input type="text" required name="slug" class="settings-shop__ss js-shop-url" id="js-shop-url" placeholder="название_вашего_магазина" @if(isset($shop)) value="{{ $shop->slug }}" @endif>
                 </div>
             </div>
             <div class="settings-shop__group">

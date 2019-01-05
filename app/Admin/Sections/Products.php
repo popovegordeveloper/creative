@@ -37,6 +37,7 @@ class Products extends Section implements Initializable
         $display = AdminDisplay::datatables()
             ->setColumns([
                 AdminColumn::text('id', 'ID'),
+                AdminColumn::image('main_photo', 'Главная фотография'),
                 AdminColumn::text('name', 'Название'),
                 AdminColumn::text('composition', 'Состав'),
                 AdminColumn::text('price', 'Цена'),
@@ -62,6 +63,9 @@ class Products extends Section implements Initializable
 
         $shop = AdminForm::form()->addElement(
             new FormElements([
+                AdminFormElement::columns()->addColumn([
+                    AdminFormElement::images('photos', 'Фотографии')->required(),
+                ]),
                 AdminFormElement::columns()
                     ->addColumn([
                         AdminFormElement::text('name', 'Название')->required(),

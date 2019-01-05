@@ -62,6 +62,7 @@ class MessageController extends Controller
     {
         $conversation = Conversation::with('messages')->find($request->id);
         if ($conversation->user1_id == auth()->id() or $conversation->user2_id == auth()->id()){
+            $conversation->messages()->update(['is_new' => false]);
             return json_encode([
                 'conversation' => $conversation,
                 'messages' => $conversation->messages->groupBy('date'),

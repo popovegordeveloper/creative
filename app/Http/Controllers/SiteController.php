@@ -102,7 +102,8 @@ class SiteController extends Controller
     public function rulesUsing()
     {
         $page = Page::whereSlug('using')->first();
-        return view('pages.privacy-policy', ['page' => $page]);
+        $email = Setting::where('key','email')->first();
+        return view('pages.privacy-policy', ['page' => $page, 'email' => $email]);
     }
 
     /**

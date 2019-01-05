@@ -6020,6 +6020,15 @@ this._delay(function(){n===this.counter&&this.refreshPositions(!s)})},_clear:fun
 
 $(document).ready(function () {
 
+    $('#js-shop-url').keyup(function (e) {
+        var value = $(this).val();
+        var re = /а|б|в|г|д|е|ё|ж|з|и|й|ё|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ъ|ы|ь|э|ю|я/gi;
+        if (re.test(value)) {
+            value = value.replace(re, '');
+            $(this).val(value);
+        }
+    });
+
     $('.order-cancel-message').click(function (e) {
         e.preventDefault();
         var $this = $(this);

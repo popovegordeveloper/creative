@@ -29,11 +29,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Message extends Model
 {
-    protected $fillable = ['text', 'user_id', 'date', 'file', 'filename'];
+    protected $fillable = ['text', 'user_id', 'date', 'file', 'filename', 'is_new'];
 
     protected $dates = [
         'created_at',
         'updated_at'
     ];
+
+    /**
+     * диалог
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function conversation()
+    {
+        return $this->belongsTo(Conversation::class);
+    }
 
 }

@@ -186,7 +186,7 @@
                     <span class="settings-shop__sub-t">Опишите размеры товара. Необязательно поле</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <textarea type="text" class="settings-shop__textarea big" name="size" required placeholder="Опишите размер товара. Наример, размеры в наличии: 44-46-48. Длина - 60 см, рукав - 58 см">@if(isset($product)){{ $product->size }}@endif</textarea>
+                    <textarea type="text" class="settings-shop__textarea big" name="size" placeholder="Опишите размер товара. Наример, размеры в наличии: 44-46-48. Длина - 60 см, рукав - 58 см">@if(isset($product)){{ $product->size }}@endif</textarea>
                 </div>
             </div>
 
@@ -196,7 +196,7 @@
                     <span class="settings-shop__sub-t">Опишите сезон товара. Необязательно поле</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <textarea type="text" class="settings-shop__textarea big" name="season" required placeholder="Лето, зима ...">@if(isset($product)){{ $product->season }}@endif</textarea>
+                    <textarea type="text" class="settings-shop__textarea big" name="season" placeholder="Лето, зима ...">@if(isset($product)){{ $product->season }}@endif</textarea>
                 </div>
             </div>
 
@@ -206,7 +206,7 @@
                     <span class="settings-shop__sub-t">Опишите стиль товара. Необязательно поле</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <textarea type="text" class="settings-shop__textarea big" name="style" required placeholder="Молодежный ...">@if(isset($product)){{ $product->style }}@endif</textarea>
+                    <textarea type="text" class="settings-shop__textarea big" name="style" placeholder="Молодежный ...">@if(isset($product)){{ $product->style }}@endif</textarea>
                 </div>
             </div>
 
@@ -216,7 +216,7 @@
                     <span class="settings-shop__sub-t">Опишите вес товара. Необязательно поле</span>
                 </h3>
                 <div class="settings-shop__gr">
-                    <textarea type="text" class="settings-shop__textarea big" name="weight" required placeholder="Вес ...">@if(isset($product)){{ $product->weight }}@endif</textarea>
+                    <textarea type="text" class="settings-shop__textarea big" name="weight" placeholder="Вес ...">@if(isset($product)){{ $product->weight }}@endif</textarea>
                 </div>
             </div>
 

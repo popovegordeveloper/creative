@@ -19,6 +19,7 @@ class CabinetController extends Controller
             'section' => $section,
             'user' => User::with(['orders','shop', 'shop.products', 'shop.orders', 'favorite'])->find(auth()->id()),
             'conversations' => Conversation::forUser(auth()->id())->with('messages')->get(),
+            'new_messages' => auth()->user()->new_messages
         ]);
     }
 }

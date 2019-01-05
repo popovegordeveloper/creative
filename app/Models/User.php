@@ -236,4 +236,17 @@ class User extends Authenticatable
         return $this->orders->where('status_id', 6);
     }
 
+    /**
+     * Новые сообщения для пользователя
+     * @return Message[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getNewMessagesAttribute()
+    {
+        return Message::where('is_new', true)
+            ->where('user_id', '!=', $this->id)
+            ->whereHas('conversation', function ($query){
+            return $query->where('user1_id', $this->id)->orWhere('user2_id', $this->id);
+        })->get();
+    }
+
 }

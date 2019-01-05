@@ -182,4 +182,13 @@ class Product extends Model implements Buyable
     {
         return $query->whereIsActive(true);
     }
+
+    /**
+     * Главная фото
+     * @return mixed
+     */
+    public function getMainPhotoAttribute()
+    {
+        return $this->photos[0];
+    }
 }

@@ -11,10 +11,10 @@
                     <p style="font-weight: 500;">Продано товаров на сумму:</p>
                     <h3 style="text-align: center;">{{ $user->shop->purchased_sum }} ₽</h3>
                 </div>
-                <div>
-                    <p style="font-weight: 500;">Продано товаров:</p>
-                    <h3 style="text-align: center;">{{ $user->shop->purchased_count }}</h3>
-                </div>
+                {{--<div>--}}
+                    {{--<p style="font-weight: 500;">Продано товаров:</p>--}}
+                    {{--<h3 style="text-align: center;">{{ $user->shop->purchased_count }}</h3>--}}
+                {{--</div>--}}
             </div>
             <div style="display: flex; justify-content: center; margin-top: 50px; margin-bottom: 50px;">
                 <a href="" class="mesenger__button order-tab-btn order-tab-btn__active js-order-tab" data-class="orders-body1">Текущие</a>

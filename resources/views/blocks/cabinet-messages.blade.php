@@ -9,7 +9,13 @@
             <ul class="mesenger__list">
                 @foreach($conversations as $conversation)
                     @php $companion = $conversation->getCompanion(auth()->id()); @endphp
-                    <li class="mesenger__item"><input type="hidden" name="id" value="{{ $conversation->id }}"><a href="{{ route('cabinet', 'messages') }}?id={{ $conversation->id }}" class="mesenger__name-link">{{ $companion->full_name }}</a></li>
+                    <li class="mesenger__item">
+                        <input type="hidden" name="id" value="{{ $conversation->id }}">
+                        <a href="{{ route('cabinet', 'messages') }}?id={{ $conversation->id }}" class="mesenger__name-link"
+                           @if($new_messages->where('conversation_id', $conversation->id)->first()) style="color: #c36" @endif>
+                            {{ $companion->full_name }}
+                        </a>
+                    </li>
                 @endforeach
                 {{--<li class="mesenger__item"><a href="" class="mesenger__name-link mesenger__name-link_last">Антон Программист</a></li>--}}
             </ul>
